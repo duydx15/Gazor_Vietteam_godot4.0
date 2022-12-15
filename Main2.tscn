@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bvteo1d0ncq6f"]
+[gd_scene load_steps=70 format=3 uid="uid://bvteo1d0ncq6f"]
 
 [ext_resource type="Script" path="res://VietTeam_main_custome_input.gd" id="1_yew7v"]
 [ext_resource type="PackedScene" path="res://Off.tscn" id="2"]
@@ -891,6 +891,8 @@ animations = [{
 "name": &"talking_static",
 "speed": 5.0
 }]
+
+[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_jy0gh"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -1855,6 +1857,7 @@ animation = &"silence"
 playing = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamOggVorbis_jy0gh")
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="BlinkingTimer" to="." method="_on_BlinkingTimer_timeout"]

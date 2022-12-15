@@ -440,11 +440,11 @@ var start_ = 0
 func _physics_process(delta):
 #	var start_ = Ti.start()
 	count_frame +=1
-#	print(count_frame)
-	
+		
 	voice_cap_audio(delta)
-#	OS.native_video_unpause()
-#	print("Position in audio playing: ",music_player.get_pitch_scale())
+#	print(count_frame," - ",power)
+	#OS.native_video_unpause()
+#	print("Position in audio playing: ",music_player.get_playback_position())
 #		print("Position in audio playing: ",music_player.get_playback_position())
 	#(previous_time - music_player.get_playback_position()) > 0:
 	if (previous_time - music_player.get_playback_position()) > 0:
@@ -723,10 +723,13 @@ func voice_cap(_delta):
 			$Timer.start()
 			$Timer2.start()
 			is_timer = true
-
+#var min_power 
+#var max_power =
 func voice_cap_audio(_delta):
 	power = AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("music"),0) - sValue
+#	power = power*bit_scale
 #	print("Power :", power)
+	
 	$CanvasLayer/ToHide/LeftPanel/AudioMeter.value = power
 	if power > limiter and power < sLimiter:
 		
@@ -1146,23 +1149,27 @@ var music_player = AudioStreamPlayer.new()
 var stream_audio = AudioLoader.new()
 var pitch_scale = 1
 var music
+var bit_scale = 1
+
 func load_audio():
-	var buffer 
+#	var buffer 
 	
 	if "input_audio" in input_arg:
 		print("Audio: ",input_arg["input_audio"])
 		music_file = input_arg["input_audio"]
+		if music_file.ends_with('.wav'):
+			bit_scale = 2048
 		
 #	stream.set_loop(faklse)
 	if FileAccess.file_exists(music_file):
 	
 		music = stream_audio.loadfile(music_file)
-#		music.set_loop(false)
+		print("Length audio: ",music.get_length())
 		music_player.stream = music
 		
 #		music_player.volume_db =7 5
 		music_player.set_pitch_scale(pitch_scale)
-		# below are optional steps if you need more control
+		# below are optional steps if you need more control_por
 
 		var music_bus_id = AudioServer.get_bus_count()
 		AudioServer.add_bus()
@@ -1771,11 +1778,11 @@ func load_resolution():
 #	var file_y = FileAccess.new()
 	var file_x = FileAccess.open(res_file_x, FileAccess.READ)
 	var file_y= FileAccess.open(res_file_y, FileAccess.READ)
-	var val_x = file_x.get_var()
-	var val_y = file_y.get_var()
+#	var val_x = file_x.get_var()
+#	var val_y = file_y.get_var()
 	#print(val_x,val_y)
-	val_x = 1280
-	val_y = 720
+	var val_x = 1280
+	var val_y = 720
 	if val_x != null:
 		DisplayServer.window_set_size(Vector2(val_x,val_y))
 		print("ehe")
@@ -2408,7 +2415,7 @@ func load_png():
 					
 				else:
 					image.load(dir[0])
-					print("not gif import - talking A")
+#					print("not gif import - talking A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
 #					print(image_texture.get_property_list())
@@ -2892,7 +2899,7 @@ func load_png():
 					
 				else:
 					image.load(dir[0])
-					print("not gif import - silence A")
+#					print("not gif import - silence A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
 #					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
@@ -4945,7 +4952,7 @@ func load_sens():
 	#var file = FileAccess.new()
 	if FileAccess.file_exists(sens_file):
 		var file =FileAccess.open(sens_file, FileAccess.READ)
-		print("Limiter ",limiter)
+#		print("Limiter ",limiter)
 		limiter = file.get_float()
 		#file.close()
 		$CanvasLayer/ToHide/LeftPanel/MicSens.value = limiter
@@ -7518,7 +7525,7 @@ func _on_ScreemBtn_pressed():
 func _on_AmpSlider_value_changed(value):
 	var effect = AudioServer.get_bus_effect(1,2)
 	effect.volume_db = value
-	print("AmpSlider: ",value)
+#	print("AmpSlider: ",value)
 	#save
 	#var file = FileAccess.new()
 	var file =FileAccess.open(amp_file, FileAccess.WRITE)

@@ -54,37 +54,40 @@ func loadfile(filepath):
 ##		file.close()
 ##		return AudioStreamSample.new()
 #		return AudioStreamWAV.new()
-
+	var sample_rate
+	var byte_rate 
 	var bytes = file.get_buffer(file.get_length())
-	print("Type bytes audio: ", typeof(bytes))
-	### if File is wav
-#	if filepath.ends_with(".wav"):
-#		var newstream = AudioStreamWAV.new()
-#
-#		var bits_per_sample = 0
-#
-#		for i in range(0, 100):
-#			var those4bytes = str(char(bytes[i])+char(bytes[i+1])+char(bytes[i+2])+char(bytes[i+3]))
-#
+	
+	print("Type bytes audio: ", file.get_length())
+
+	if filepath.ends_with(".wav"):
+		var newstream = AudioStreamWAV.new()
+
+		var bits_per_sample = 0
+
+		for i in range(0, 100):
+			var those4bytes = str(char(bytes[i])+char(bytes[i+1])+char(bytes[i+2])+char(bytes[i+3]))
+##			print(those4bytes)
 #			if those4bytes == "RIFF": 
 #				print ("RIFF OK at bytes " + str(i) + "-" + str(i+3))
 #				#RIP bytes 4-7 integer for now
 #			if those4bytes == "WAVE": 
 #				print ("WAVE OK at bytes " + str(i) + "-" + str(i+3))
-#
-#			if those4bytes == "fmt ":
-#				print ("fmt OK at bytes " + str(i) + "-" + str(i+3))
-#
-#				#get format subchunk size, 4 bytes next to "fmt " are an int32
-#				var formatsubchunksize = bytes[i+4] + (bytes[i+5] << 8) + (bytes[i+6] << 16) + (bytes[i+7] << 24)
-#				print ("Format subchunk size: " + str(formatsubchunksize))
-#
-#				#using formatsubchunk index so it's easier to understand what's going on
-#				var fsc0 = i+8 #fsc0 is byte 8 after start of "fmt "
-#
-#				#get format code [Bytes 0-1]
+
+			if those4bytes == "fmt ":
+				print ("fmt OK at bytes " + str(i) + "-" + str(i+3))
+
+				#get format subchunk size, 4 bytes next to "fmt " are an int32
+				var formatsubchunksize = bytes[i+4] + (bytes[i+5] << 8) + (bytes[i+6] << 16) + (bytes[i+7] << 24)
+				print ("Format subchunk size: " + str(formatsubchunksize))
+
+				#using formatsubchunk index so it's easier to understand what's going on
+				var fsc0 = i+8 #fsc0 is byte 8 after start of "fmt "
+
+				#get format code [Bytes 0-1]
 #				var format_code = bytes[fsc0] + (bytes[fsc0+1] << 8)
 #				var format_name
+#				print ("Format: " + str(format_code))
 #				if format_code == 0: format_name = "8_BITS"
 #				elif format_code == 1: format_name = "16_BITS"
 #				elif format_code == 2: format_name = "IMA_ADPCM"
@@ -94,23 +97,23 @@ func loadfile(filepath):
 #				print ("Format: " + str(format_code) + " " + format_name)
 #				#assign format to our AudioStreamSample
 ##				newstream.format = format_code
-#
-#				#get channel num [Bytes 2-3]
-#				var channel_num = bytes[fsc0+2] + (bytes[fsc0+3] << 8)
-#				print ("Number of channels: " + str(channel_num))
-#				#set our AudioStreamSample to stereo if needed
-#				if channel_num == 2: newstream.stereo = true
-#
-#				#get sample rate [Bytes 4-7]
-#				var sample_rate = bytes[fsc0+4] + (bytes[fsc0+5] << 8) + (bytes[fsc0+6] << 16) + (bytes[fsc0+7] << 24)
-#				print ("Sample rate: " + str(sample_rate))
-#				#set our AudioStreamSample mixrate
-#				newstream.mix_rate = sample_rate
-#
-#				#get byte_rate [Bytes 8-11] because we can
-#				var byte_rate = bytes[fsc0+8] + (bytes[fsc0+9] << 8) + (bytes[fsc0+10] << 16) + (bytes[fsc0+11] << 24)
-#				print ("Byte rate: " + str(byte_rate))
-#
+
+				#get channel num [Bytes 2-3]
+				var channel_num = bytes[fsc0+2] + (bytes[fsc0+3] << 8)
+				print ("Number of channels: " + str(channel_num))
+				#set our AudioStreamSample to stereo if needed
+				if channel_num == 2: newstream.stereo = true
+
+				#get sample rate [Bytes 4-7]
+				sample_rate = bytes[fsc0+4] + (bytes[fsc0+5] << 8) + (bytes[fsc0+6] << 16) + (bytes[fsc0+7] << 24)
+				print ("Sample rate: " + str(sample_rate))
+				#set our AudioStreamSample mixrate
+				newstream.mix_rate = sample_rate
+
+				#get byte_rate [Bytes 8-11] because we can
+				byte_rate = bytes[fsc0+8] + (bytes[fsc0+9] << 8) + (bytes[fsc0+10] << 16) + (bytes[fsc0+11] << 24)
+				print ("Byte rate: " + str(byte_rate))
+
 #				#same with bits*sample*channel [Bytes 12-13]
 #				var bits_sample_channel = bytes[fsc0+12] + (bytes[fsc0+13] << 8)
 #				print ("BitsPerSample * Channel / 8: " + str(bits_sample_channel))
@@ -119,6 +122,12 @@ func loadfile(filepath):
 #				bits_per_sample = bytes[fsc0+14] + (bytes[fsc0+15] << 8)
 #				print ("Bits per sample: " + str(bits_per_sample))
 #
+		newstream.loop_mode = 0
+		newstream.data = bytes
+		newstream.mix_rate = byte_rate
+#		newstream.stereo = false
+		return newstream
+		
 #			if those4bytes == "data":
 #				assert(bits_per_sample != 0)
 #
@@ -135,26 +144,31 @@ func loadfile(filepath):
 #					newstream.data = convert_to_16bit(data, bits_per_sample)
 #				else:
 #					newstream.data = data
-#			# end of parsing
+##			# end of parsing
 #			#---------------------------
-#
-#		#get samples and set loop end
+#				newstream.loop_mode = 0 #set to false or delete this line if you don't want to loop
+		
+##		#get samples and set loop end
 #		var samplenum = newstream.data.size() / 4
+##		print(samplenum)
 #		newstream.loop_end = samplenum
 #		newstream.loop_mode = 0 #change to 0 or delete this line if you don't want loop, also check out modes 2 and 3 in the docs
 #		return newstream  #:D
 
-	if filepath.ends_with(".wav"):
-		var newstream = AudioStreamWAV.new()
-		newstream.format = AudioStreamWAV.FORMAT_16_BITS
-		newstream.loop_mode = 0 #set to false or delete this line if you don't want to loop
-		newstream.data = bytes
-		return newstream
+#	if filepath.ends_with(".wav"):
+#		var newstream = AudioStreamWAV.new()
+#
+##		newstream.format = AudioStreamWAV.FORMAT_16_BITS
+#		newstream.loop_mode = 0 #set to false or delete this line if you don't want to loop
+#		newstream.data = bytes
+##		newstream.mix_rate = 44100
+##		newstream.stereo = false
+#		return newstream
 
 	#if file is ogg
 	elif filepath.ends_with(".ogg"):
 		var newstream = AudioStreamOggVorbis.new()
-		newstream.loop = true #set to false or delete this line if you don't want to loop
+		newstream.loop = false #set to false or delete this line if you don't want to loop
 		newstream.data = bytes
 		return newstream
 
