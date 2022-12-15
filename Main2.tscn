@@ -1,0 +1,1912 @@
+[gd_scene load_steps=69 format=3 uid="uid://bvteo1d0ncq6f"]
+
+[ext_resource type="Script" path="res://VietTeam_main_custome_input.gd" id="1_yew7v"]
+[ext_resource type="PackedScene" path="res://Off.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://On.tscn" id="3"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://uk5y3on27it0" path="res://setting icon.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://iwvreirxlvqf" path="res://Arts/Gazo Bg.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cavhxkbuu52q3" path="res://Arts/Left Panel.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://xm5yia6nr0ah" path="res://Arts/TalkBtn.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dbmgf12e5vftp" path="res://Arts/SilenceBtn.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bao7hikuw5tp6" path="res://Arts/FlipBtn.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://dcdn8wfbbjk4p" path="res://Arts/PresetBtn.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://b22i7lk53hw7b" path="res://Arts/TransparentBtn.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://vhgytrie538e" path="res://Arts/GreenscreenBtn.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://dql0ck8m18ex" path="res://Arts/SilenceBtnClick.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://d0enhf7gpmh52" path="res://Arts/TalkBtnClick.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://dr1xwywv1ddkj" path="res://Arts/PropBtn.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://c8ku8s8vexols" path="res://Arts/PresetBtnClick.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://bylsj1a8job7u" path="res://Arts/GreenscreenBtnClick.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dnnr88ufowi0b" path="res://Arts/TransparentBtnClick.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://c0kx2lyy1icec" path="res://Arts/FileDialog_2.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://fjpba34qx8eu" path="res://Arts/Darken.png" id="23"]
+[ext_resource type="Script" path="res://Panel2.gd" id="25"]
+[ext_resource type="Texture2D" uid="uid://fi112ujjoqo8" path="res://Arts/Second Panel.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://hbiakh7c5l3w" path="res://Arts/SilenceBtnBlink.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://77pa7q2imhmn" path="res://Arts/SilenceBtnBlinkClick.png" id="28"]
+[ext_resource type="BitMap" uid="uid://dcvkb5nmueh1r" path="res://Arts/SilenceBtnMask.png" id="29"]
+[ext_resource type="BitMap" uid="uid://xp5l8vv7bd85" path="res://Arts/SilenceBtnBlinkMask.png" id="30"]
+[ext_resource type="BitMap" uid="uid://c04kisf7ljybw" path="res://Arts/TalkBtnMask.png" id="31"]
+[ext_resource type="Texture2D" uid="uid://bye35yhdcewg3" path="res://Arts/TalkBtnBlink.png" id="32"]
+[ext_resource type="Texture2D" uid="uid://y6eke7bi8hm3" path="res://Arts/TalkBtnBlinkClick.png" id="33"]
+[ext_resource type="BitMap" uid="uid://bxj0xu6tjia74" path="res://Arts/TalkBtnBlinkMask.png" id="34"]
+[ext_resource type="Texture2D" uid="uid://bnq5sd3v8t4ea" path="res://Arts/ImageFrame.png" id="35"]
+[ext_resource type="Texture2D" uid="uid://cvjfjv417y5x3" path="res://Arts/ImageContainer.png" id="36"]
+[ext_resource type="Script" path="res://AudioStreamRecord.gd" id="37"]
+[ext_resource type="Texture2D" uid="uid://7anebcn40fhk" path="res://Arts/FixedBtn.png" id="38"]
+[ext_resource type="Texture2D" uid="uid://rp251srcbsj4" path="res://Arts/FixedBtnClick.png" id="39"]
+[ext_resource type="Texture2D" uid="uid://dgwof1dh4cp2d" path="res://Arts/SelectedBtn.png" id="40"]
+[ext_resource type="Texture2D" uid="uid://ba4grwnqsih6g" path="res://Arts/BGBtnClick.png" id="41"]
+[ext_resource type="Texture2D" uid="uid://bxyut0xbhc148" path="res://Arts/Info.png" id="42"]
+[ext_resource type="Texture2D" uid="uid://bv3edccq3taul" path="res://Arts/ScreamBtnTall.png" id="44"]
+[ext_resource type="Texture2D" uid="uid://rb8s6wni2ahs" path="res://Arts/FlipBtnClick.png" id="45"]
+[ext_resource type="Texture2D" uid="uid://b5e7xeujc7a2i" path="res://Arts/Third Panel.png" id="46"]
+[ext_resource type="PackedScene" path="res://Prop.tscn" id="47"]
+[ext_resource type="Texture2D" uid="uid://tqnta1w64qpw" path="res://Arts/PropBtnClick.png" id="48"]
+[ext_resource type="Texture2D" uid="uid://ch6eh4svkgjqh" path="res://Arts/ScreamBtnTallClick.png" id="49"]
+
+[sub_resource type="AudioStreamMicrophone" id="1"]
+
+[sub_resource type="Animation" id="39"]
+resource_name = "Despawning"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PropContainer/Prop:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="34"]
+resource_name = "Idle"
+length = 12.0
+step = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Off:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Off:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="32"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scream:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scream:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(322.679, 208.252)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Off:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Off:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PropContainer/Prop:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Scream"
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("On:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Off:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("On:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.94, 0.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Off:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Scream:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.94, 0.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "ScreamNoShake"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("On:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0409663),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Off:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Scream:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="33"]
+resource_name = "ScreamTalk"
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("On:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Off:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("On:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.94, 0.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Off:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Scream:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.94, 0.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
+}
+
+[sub_resource type="Animation" id="4"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Off:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("On:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Off:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("On:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(330.238, 208.251)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="38"]
+resource_name = "Spawning"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PropContainer/Prop:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="5"]
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Off:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.00105478),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("On:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.00102663),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("On:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.90748e-05, 0.0379395, 0.137939, 0.278145),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(300, 223), Vector2(300, 218), Vector2(300, 218), Vector2(300, 228)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Off:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="6"]
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Off:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.00120292),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("On:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.00120292),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("On:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 228), Vector2(300, 228)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Off:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="31"]
+resource_name = "Triggered"
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("On:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0409663),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Off:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Off:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.06, 0.1, 0.14, 0.18, 0.22, 0.26, 0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.54, 0.58, 0.62, 0.66, 0.7, 0.74, 0.78, 0.82, 0.86, 0.9, 0.94, 0.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("On:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 228)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Scream:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23snd"]
+_data = {
+"Despawning": SubResource("39"),
+"Idle": SubResource("34"),
+"RESET": SubResource("32"),
+"Scream": SubResource("2"),
+"ScreamNoShake": SubResource("3"),
+"ScreamTalk": SubResource("33"),
+"Silence": SubResource("4"),
+"Spawning": SubResource("38"),
+"Talk": SubResource("5"),
+"TalkNoBounce": SubResource("6"),
+"Triggered": SubResource("31")
+}
+
+[sub_resource type="Theme" id="10"]
+BoxEdit/styles/Boxy = null
+
+[sub_resource type="Animation" id="26"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/LeftPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(120, 335), Vector2(-237.913, 335)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ToHide/PresetLbl:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ToHide/Ver:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ToHide/LeftPanel/BgBtn:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-760, 0)]
+}
+
+[sub_resource type="Animation" id="27"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(328, 1), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="35"]
+resource_name = "HidePanel3"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel3:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(337.666, 0), Vector2(0.66629, 0)]
+}
+
+[sub_resource type="Animation" id="36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel3:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.66629, 0)]
+}
+
+[sub_resource type="Animation" id="28"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/LeftPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-237.913, 335.072), Vector2(120.087, 335.072)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ToHide/Ver:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ToHide/PresetLbl:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/ToHide/LeftPanel/BgBtn:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-448, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="29"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(328, 1)]
+}
+
+[sub_resource type="Animation" id="37"]
+resource_name = "ShowPanel3"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel3:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.66629, 0), Vector2(337.666, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqe2d"]
+_data = {
+"HidePanel": SubResource("26"),
+"HidePanel2": SubResource("27"),
+"HidePanel3": SubResource("35"),
+"RESET": SubResource("36"),
+"ShowPanel": SubResource("28"),
+"ShowPanel2": SubResource("29"),
+"ShowPanel3": SubResource("37")
+}
+
+[sub_resource type="SpriteFrames" id="30"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"silence",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"silence_anim",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"silence_blink",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"silence_static",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"talking",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"talking_anim",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"talking_blink",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"talking_static",
+"speed": 5.0
+}]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_yew7v")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 131.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7")
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
+process_priority = -2
+stream = SubResource("1")
+autoplay = true
+bus = &"Record"
+script = ExtResource("37")
+
+[node name="PropContainer" type="Node2D" parent="."]
+visible = false
+position = Vector2(-320, -120)
+z_index = 5
+
+[node name="Prop" parent="PropContainer" instance=ExtResource("47")]
+
+[node name="On" parent="." instance=ExtResource("3")]
+position = Vector2(300, 225.51)
+scale = Vector2(0.999286, 0.972718)
+z_index = 1
+
+[node name="Off" parent="." instance=ExtResource("2")]
+scale = Vector2(1, 1)
+z_index = 1
+
+[node name="Scream" parent="." instance=ExtResource("2")]
+visible = true
+position = Vector2(322.679, 208.252)
+scale = Vector2(1, 1)
+z_index = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_23snd")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="BlinkingTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="BlinkingDelay" type="Timer" parent="."]
+wait_time = 0.07
+one_shot = true
+
+[node name="DoubleDelay" type="Timer" parent="."]
+wait_time = 0.07
+one_shot = true
+
+[node name="AfterDoubleDelay" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(50, 20)
+current = true
+script = ExtResource("4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Visibility" type="Button" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+flat = true
+
+[node name="ToHide" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.048
+anchor_right = 1.112
+anchor_bottom = 1.163
+offset_left = 0.512001
+offset_top = 25.0
+offset_right = -73.4722
+offset_bottom = -75.7341
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Panel2" type="Control" parent="CanvasLayer/ToHide"]
+layout_mode = 1
+anchor_right = 0.247
+anchor_bottom = 1.032
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 0.467987
+offset_bottom = 0.223938
+grow_vertical = 2
+script = ExtResource("25")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ToHide/Panel2"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 271.0
+offset_top = 4.0
+offset_right = 274.0
+offset_bottom = 4.0
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ToHide/Panel2"]
+position = Vector2(153.25, 336)
+scale = Vector2(0.987356, 1)
+z_index = -2
+texture = ExtResource("26")
+
+[node name="Default Mic" type="Label" parent="CanvasLayer/ToHide/Panel2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_top = -14.0
+offset_right = 221.0
+offset_bottom = 12.0
+grow_horizontal = 2
+text = "Default Mic is Selected by Default"
+
+[node name="ShowBtn" type="Button" parent="CanvasLayer/ToHide/Panel2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.028
+anchor_bottom = 1.0
+offset_left = 287.0
+offset_top = 0.304001
+offset_right = 323.0
+offset_bottom = -477.0
+grow_vertical = 2
+focus_mode = 0
+flat = true
+expand_icon = true
+
+[node name="Panel3" type="Control" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ToHide/Panel3"]
+visible = false
+position = Vector2(152, 338)
+z_index = -1
+texture = ExtResource("46")
+
+[node name="ShowBtn3" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="FixedBtn" type="TextureButton" parent="CanvasLayer/ToHide/Panel3"]
+visible = false
+modulate = Color(1, 1, 1, 0.603922)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("38")
+texture_pressed = ExtResource("39")
+
+[node name="Label2" type="Label" parent="CanvasLayer/ToHide/Panel3"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275013
+anchor_top = 0.927878
+anchor_right = 0.455003
+anchor_bottom = 1.02927
+text = "FPS"
+
+[node name="GlobalInterval" type="TextEdit" parent="CanvasLayer/ToHide/Panel3/Label2"]
+modulate = Color(1, 1, 1, 0.760784)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+theme = SubResource("10")
+text = "120"
+
+[node name="EditA" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditB" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditC" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditD" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditE" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditF" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditG" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditH" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditI" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_vertical = 2
+
+[node name="EditJ" type="Button" parent="CanvasLayer/ToHide/Panel3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 8.0
+offset_bottom = 2.0
+grow_vertical = 2
+
+[node name="LeftPanel" type="Sprite2D" parent="CanvasLayer/ToHide"]
+position = Vector2(120.087, 335.072)
+scale = Vector2(0.971264, 0.991667)
+texture = ExtResource("8")
+
+[node name="AnimSwitch" type="CheckButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 44.0
+offset_top = -318.0
+offset_right = 88.0
+offset_bottom = -294.0
+grow_vertical = 2
+focus_mode = 0
+
+[node name="ShakySwitch" type="CheckButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -286.0
+offset_right = 89.0
+offset_bottom = -262.0
+grow_vertical = 2
+focus_mode = 0
+
+[node name="DimSwitch" type="CheckButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 45.0
+offset_top = -257.0
+offset_right = 89.0
+offset_bottom = -233.0
+grow_vertical = 2
+focus_mode = 0
+
+[node name="SyncSwitch" type="CheckButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 44.0
+offset_top = -194.0
+offset_right = 88.0
+offset_bottom = -170.0
+grow_vertical = 2
+focus_mode = 0
+
+[node name="SpawnySwitch" type="CheckButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 44.0
+offset_top = -226.0
+offset_right = 88.0
+offset_bottom = -202.0
+grow_vertical = 2
+focus_mode = 0
+disabled = true
+
+[node name="Button" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 24.913
+offset_top = -302.072
+offset_right = 138.913
+offset_bottom = -193.072
+focus_mode = 0
+texture_normal = ExtResource("9")
+texture_pressed = ExtResource("17")
+texture_click_mask = ExtResource("31")
+
+[node name="BtnScream" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+texture_normal = ExtResource("9")
+texture_pressed = ExtResource("17")
+texture_click_mask = ExtResource("31")
+
+[node name="BtnTalkBlink" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 80.913
+offset_top = -265.072
+offset_right = 137.913
+offset_bottom = -191.072
+texture_normal = ExtResource("32")
+texture_pressed = ExtResource("33")
+texture_click_mask = ExtResource("34")
+
+[node name="Button2" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -159.087
+offset_top = -301.072
+offset_right = -45.087
+offset_bottom = -192.072
+focus_mode = 0
+texture_normal = ExtResource("11")
+texture_pressed = ExtResource("16")
+texture_click_mask = ExtResource("29")
+
+[node name="BtnSilenceBlink" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -103.087
+offset_top = -265.072
+offset_right = -46.087
+offset_bottom = -191.072
+texture_normal = ExtResource("27")
+texture_pressed = ExtResource("28")
+texture_click_mask = ExtResource("30")
+
+[node name="PresetBtnA" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 79.913
+offset_top = -130.072
+offset_right = 122.913
+offset_bottom = -86.072
+focus_mode = 0
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnB" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 25.913
+offset_top = -130.072
+offset_right = 68.913
+offset_bottom = -86.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnC" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -34.087
+offset_top = -129.072
+offset_right = 8.91299
+offset_bottom = -85.072
+focus_mode = 0
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnD" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -95.087
+offset_top = -129.072
+offset_right = -52.087
+offset_bottom = -85.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnE" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 79.913
+offset_top = -85.072
+offset_right = 122.913
+offset_bottom = -41.072
+focus_mode = 0
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnF" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 25.913
+offset_top = -85.072
+offset_right = 68.913
+offset_bottom = -41.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnG" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -34.087
+offset_top = -85.072
+offset_right = 8.91299
+offset_bottom = -41.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnH" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -94.087
+offset_top = -85.072
+offset_right = -51.087
+offset_bottom = -41.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnI" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -150.087
+offset_top = -84.072
+offset_right = -107.087
+offset_bottom = -40.072
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="PresetBtnJ" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -149.0
+offset_top = -129.0
+offset_right = -106.0
+offset_bottom = -85.0
+texture_normal = ExtResource("13")
+texture_pressed = ExtResource("19")
+
+[node name="ScreemBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -157.087
+offset_top = -190.072
+offset_right = -42.087
+offset_bottom = -147.072
+texture_normal = ExtResource("44")
+texture_pressed = ExtResource("49")
+
+[node name="PropBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 24.913
+offset_top = -192.072
+offset_right = 139.913
+offset_bottom = -150.072
+texture_normal = ExtResource("18")
+texture_pressed = ExtResource("48")
+
+[node name="PresetBtn4" type="Button" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+focus_mode = 0
+icon = ExtResource("6")
+flat = true
+expand_icon = true
+
+[node name="AudioMeter" type="ProgressBar" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 180.0
+offset_top = 275.0
+offset_right = 637.0
+offset_bottom = 302.0
+rotation = -1.5708
+min_value = -50.0
+max_value = 6.0
+step = 0.1
+value = -30.0
+
+[node name="MicSens" type="HSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = -1
+anchor_left = 1.094
+anchor_top = 0.247
+anchor_right = 1.094
+anchor_bottom = 0.858
+offset_left = -194.712
+offset_top = 63.16
+offset_right = -186.712
+offset_bottom = -360.76
+grow_vertical = 0
+focus_mode = 0
+min_value = -50.0
+max_value = 6.0
+step = 0.1
+value = -50.0
+scrollable = false
+
+[node name="ScreamSens" type="HSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+focus_mode = 0
+min_value = -50.0
+max_value = 0.0
+step = 0.1
+value = -5.0
+scrollable = false
+
+[node name="TransparentBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -423.0
+offset_right = 2.0
+offset_bottom = -376.0
+grow_vertical = 0
+focus_mode = 0
+texture_normal = ExtResource("14")
+texture_pressed = ExtResource("21")
+
+[node name="BgBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -473.0
+offset_right = 161.0
+offset_bottom = -379.0
+grow_vertical = 0
+texture_normal = ExtResource("41")
+texture_pressed = ExtResource("41")
+
+[node name="FlipBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = -32.087
+offset_top = -297.072
+offset_right = 14.913
+offset_bottom = -200.072
+focus_mode = 0
+texture_normal = ExtResource("12")
+texture_pressed = ExtResource("45")
+
+[node name="GreenScreenBtn" type="TextureButton" parent="CanvasLayer/ToHide/LeftPanel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -423.0
+offset_right = 167.0
+offset_bottom = -376.0
+grow_vertical = 0
+focus_mode = 0
+texture_normal = ExtResource("15")
+texture_pressed = ExtResource("20")
+
+[node name="SelectedA" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(-114.653, -90.7143)
+texture = ExtResource("40")
+
+[node name="SelectedB" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(-68.6657, -90.7143)
+texture = ExtResource("40")
+
+[node name="SelectedC" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(-25.5, -90.7143)
+texture = ExtResource("40")
+
+[node name="SelectedD" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(19.6462, -90.7143)
+texture = ExtResource("40")
+
+[node name="SelectedE" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(63.5, -90.7143)
+texture = ExtResource("40")
+
+[node name="SelectedZ" type="Sprite2D" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0.215686)
+position = Vector2(108.487, -90.7143)
+texture = ExtResource("40")
+
+[node name="BgLbl" type="Label" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+text = "BACKGROUND"
+
+[node name="VSlider" type="VSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
+offset_right = 16.0
+offset_bottom = 230.0
+min_value = -50.0
+max_value = 50.0
+step = 0.5
+
+[node name="AmpSlider" type="HSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 181.0
+offset_top = 271.0
+offset_right = 634.0
+offset_bottom = 287.0
+rotation = -1.5708
+min_value = -30.0
+max_value = 30.0
+
+[node name="PresetLbl" type="Label" parent="CanvasLayer/ToHide"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+text = "PRESET A"
+
+[node name="Ver" type="Label" parent="CanvasLayer/ToHide"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ver 2.8.2 by Risunz"
+
+[node name="Report" type="Label" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 0
+text = "Peak volume"
+
+[node name="Report2" type="Label" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 0
+text = "Peak volume"
+
+[node name="Report3" type="Label" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 0
+text = "Peak volume"
+
+[node name="ResetBusBtn" type="Button" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Info" type="TextureRect" parent="CanvasLayer/ToHide"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/ToHide/Info"]
+modulate = Color(1, 1, 1, 0.545098)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5684
+anchor_top = -0.844971
+anchor_right = 2.73738
+anchor_bottom = 1.89696
+
+[node name="MicChanged" type="Label" parent="CanvasLayer/ToHide/Info"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+text = "ATTENTION"
+
+[node name="Label" type="Label" parent="CanvasLayer/ToHide/Info/MicChanged"]
+layout_mode = 0
+text = "New Mic is Connected/Disconnected!"
+
+[node name="Label2" type="Label" parent="CanvasLayer/ToHide/Info/MicChanged"]
+layout_mode = 0
+text = "*Please reselect your prefered microphone in 
+the microphone selection setting."
+
+[node name="MicFirstTime" type="Label" parent="CanvasLayer/ToHide/Info"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+text = "ATTENTION"
+
+[node name="Label" type="Label" parent="CanvasLayer/ToHide/Info/MicFirstTime"]
+layout_mode = 0
+text = "*Please select your prefered microphone in 
+the microphone selection setting."
+
+[node name="InfoBtn" type="Button" parent="CanvasLayer/ToHide/Info"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.941
+anchor_right = 0.5
+anchor_bottom = 1.0
+text = "OK"
+
+[node name="ClickDelay" type="Timer" parent="CanvasLayer/ToHide"]
+wait_time = 0.3
+one_shot = true
+
+[node name="RoomNo" type="Label" parent="CanvasLayer"]
+visible = false
+text = "Room ID: "
+
+[node name="RoomNoEdit" type="TextEdit" parent="CanvasLayer"]
+visible = false
+
+[node name="HideBtn" type="Button" parent="CanvasLayer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 10.0
+offset_bottom = 101.0
+grow_vertical = 2
+focus_mode = 0
+mouse_filter = 1
+flat = true
+expand_icon = true
+
+[node name="JoinBtn" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+text = "Join"
+
+[node name="HostBtn" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+text = "Host"
+
+[node name="FileDialog" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 7.0
+offset_right = 127.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23")
+
+[node name="Window" type="TextureRect" parent="CanvasLayer/FileDialog"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -2.12
+offset_right = -1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22")
+
+[node name="TextureButton" type="Button" parent="CanvasLayer/FileDialog"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 67.0
+offset_top = 151.0
+offset_right = 164.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Browse File"
+
+[node name="PngLbl" type="Label" parent="CanvasLayer/FileDialog"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.217969
+anchor_top = 0.0861111
+anchor_right = 0.803906
+anchor_bottom = 0.244444
+offset_left = -65.0003
+offset_top = 42.0
+offset_right = -65.0003
+offset_bottom = 42.0
+text = "IMPORT YOUR PNG"
+
+[node name="BgLbl" type="Label" parent="CanvasLayer/FileDialog"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_top = 0.0861111
+anchor_right = 0.939062
+anchor_bottom = 0.244444
+offset_left = -22.0
+offset_top = -7.99999
+offset_right = -875.999
+offset_bottom = -84.9997
+text = "IMPORT YOUR BACKGROUND"
+
+[node name="ImageContainer" type="Sprite2D" parent="CanvasLayer/FileDialog"]
+position = Vector2(474.275, 395.594)
+texture = ExtResource("36")
+
+[node name="Preview" type="TextureRect" parent="CanvasLayer/FileDialog/ImageContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 156.0
+offset_top = 162.0
+offset_right = -156.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ImageFrame" type="Sprite2D" parent="CanvasLayer/FileDialog/ImageContainer"]
+position = Vector2(-0.828461, -0.242645)
+texture = ExtResource("35")
+
+[node name="Label" type="Label" parent="CanvasLayer/FileDialog/ImageContainer"]
+offset_left = 233.725
+offset_top = -38.594
+offset_right = 326.725
+offset_bottom = 13.406
+text = "Please Drop 
+PNG here"
+
+[node name="RemoveBtn" type="Button" parent="CanvasLayer/FileDialog/ImageContainer"]
+offset_left = 408.725
+offset_top = 121.406
+offset_right = 479.725
+offset_bottom = 152.406
+focus_mode = 0
+text = "Remove"
+flat = true
+
+[node name="Label" type="Label" parent="CanvasLayer/FileDialog"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+text = "Frame Interval:"
+
+[node name="IntervalVal" type="TextEdit" parent="CanvasLayer/FileDialog/Label"]
+layout_mode = 0
+text = "0.1"
+
+[node name="FixBtn" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="Noti" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uqe2d")
+}
+
+[node name="MainTimer" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+autostart = true
+
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[node name="AnimDelay" type="Timer" parent="."]
+process_priority = -6
+wait_time = 0.1
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-53, -81)
+frames = SubResource("30")
+animation = &"silence"
+playing = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="BlinkingTimer" to="." method="_on_BlinkingTimer_timeout"]
+[connection signal="timeout" from="BlinkingDelay" to="." method="_on_BlinkingDelay_timeout"]
+[connection signal="timeout" from="DoubleDelay" to="." method="_on_DoubleDelay_timeout"]
+[connection signal="timeout" from="AfterDoubleDelay" to="." method="_on_AfterDoubleDelay_timeout"]
+[connection signal="pressed" from="CanvasLayer/Visibility" to="." method="_on_Visibility_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/Panel2/ShowBtn" to="." method="_on_ShowBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/Panel3/ShowBtn3" to="." method="_on_ShowBtn3_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/Panel3/FixedBtn" to="." method="_on_FixedBtn_pressed"]
+[connection signal="text_changed" from="CanvasLayer/ToHide/Panel3/Label2/GlobalInterval" to="." method="_on_GlobalInterval_text_changed"]
+[connection signal="toggled" from="CanvasLayer/ToHide/LeftPanel/AnimSwitch" to="." method="_on_AnimSwitch_toggled"]
+[connection signal="toggled" from="CanvasLayer/ToHide/LeftPanel/ShakySwitch" to="." method="_on_ShakySwitch_toggled"]
+[connection signal="toggled" from="CanvasLayer/ToHide/LeftPanel/DimSwitch" to="." method="_on_DimSwitch_toggled"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/SyncSwitch" to="." method="_on_SyncSwitch_pressed"]
+[connection signal="toggled" from="CanvasLayer/ToHide/LeftPanel/SpawnySwitch" to="." method="_on_SpawnySwitch_toggled"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/BtnScream" to="." method="_on_BtnScream_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/BtnTalkBlink" to="." method="_on_BtnTalkBlink_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/BtnSilenceBlink" to="." method="_on_BtnSilenceBlink_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnA" to="." method="_on_PresetBtn1_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnB" to="." method="_on_PresetBtnB_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnC" to="." method="_on_PresetBtn2_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnD" to="." method="_on_PresetBtnD_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnE" to="." method="_on_PresetBtn3_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnF" to="." method="_on_PresetBtnF_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnG" to="." method="_on_PresetBtn5_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnH" to="." method="_on_PresetBtnH_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnI" to="." method="_on_PresetBtn6_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtnJ" to="." method="_on_PresetBtnJ_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/ScreemBtn" to="." method="_on_ScreemBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PropBtn" to="." method="_on_PropBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/PresetBtn4" to="." method="_on_PresetBtn4_pressed"]
+[connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/MicSens" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/ScreamSens" to="." method="_on_ScreamSens_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/TransparentBtn" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/BgBtn" to="." method="_on_BgBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/FlipBtn" to="." method="_on_FlipBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/GreenScreenBtn" to="." method="_on_GreenScreenBtn_pressed"]
+[connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/VSlider" to="." method="_on_VSlider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/AmpSlider" to="." method="_on_AmpSlider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/ResetBusBtn" to="." method="_on_ResetBusBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/ToHide/Info/InfoBtn" to="." method="_on_InfoBtn_pressed"]
+[connection signal="timeout" from="CanvasLayer/ToHide/ClickDelay" to="." method="_on_ClickDelay_timeout"]
+[connection signal="text_changed" from="CanvasLayer/RoomNoEdit" to="." method="_on_RoomNoEdit_text_changed"]
+[connection signal="pressed" from="CanvasLayer/HideBtn" to="." method="_on_HideBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinBtn" to="." method="_on_JoinBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/HostBtn" to="." method="_on_HostBtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/FileDialog/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/FileDialog/ImageContainer/RemoveBtn" to="." method="_on_RemoveBtn_pressed"]
+[connection signal="text_changed" from="CanvasLayer/FileDialog/Label/IntervalVal" to="." method="_on_IntervalVal_text_changed"]
+[connection signal="pressed" from="CanvasLayer/FixBtn" to="." method="_on_FixBtn_pressed"]
+[connection signal="animation_finished" from="AnimPlayer" to="." method="_on_AnimPlayer_animation_finished"]
+[connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_DelayTimer_timeout"]
+[connection signal="timeout" from="AnimDelay" to="." method="_on_AnimDelay_timeout"]

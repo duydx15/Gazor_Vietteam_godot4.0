@@ -1,0 +1,142 @@
+0b7126e0c6e86d3ec295a72f5aa6e0bd
+::res://::1671078349
+Area2D.gd::GDScript::-1::1669260858::0::1::::<>Area2D<>::
+AudioStreamRecord.gd::GDScript::-1::1669260859::0::1::::<>AudioStreamPlayer<>::
+Audio_bk_25Nov.gd::GDScript::-1::1669348204::0::1::::<>Control<>::
+Avatar.gd::GDScript::-1::1669260859::0::1::::<>Node2D<>::
+BG.ress.res::PackedScene::-1::1669260859::0::1::::<><>::res://Gazo Bg.png
+Body.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Risun Body.png
+Button.gd::GDScript::-1::1669260859::0::1::::<>Button<>::
+Camera2D.gd::GDScript::-1::1669261809::0::1::::<>Camera2D<>::
+CanvasLayer.gd::GDScript::-1::1669260859::0::1::::<>CanvasLayer<>::
+CanvasLayer.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://CanvasLayer.gd
+Client.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
+Client.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Client.gd
+default_bus_layout.tres::AudioBusLayout::9151933646992978182::1671068465::0::1::::<><>::
+export_presets.cfg::TextFile::-1::1670902806::0::1::::<><>::
+Gazo Bg.png::CompressedTexture2D::3574830658416476736::1669260859::1669260865::1::::<><>::
+Gazo Icon.png::Image::6672367892070965438::1669260859::1669260865::1::::<><>::
+GDscript_ImportAudio.gd::GDScript::-1::1671074358::0::1::::AudioLoader<>RefCounted<>::
+GifTest.gd::GDScript::-1::1669260859::0::1::::<>Sprite<>::
+GifTest.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://GifTest.gd<>res://eating-anime.gif
+global.gd::GDScript::-1::1669260859::0::1::::<>RefCounted<>::
+Grabber.png::CompressedTexture2D::5674893034400508385::1669260859::1669260865::1::::<><>::
+Guest.tscn::PackedScene::-1::1669260859::0::1::::<><>::
+Head.gd::GDScript::-1::1669260859::0::1::::<>RefCounted<>::
+Host.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
+Host.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Arts/FileDialog.png<>res://Networking.tscn<>res://Host.gd
+Join.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Networking.tscn
+KinematicBody2D.gd::GDScript::-1::1669260859::0::1::::<>KinematicBody2D<>::
+Main2.tscn::PackedScene::3899878817899524387::1671078349::0::1::::<><>::res://VietTeam_main_custome_input.gd<>res://Off.tscn<>res://On.tscn<>res://Camera2D.gd<>uid://uk5y3on27it0<>uid://iwvreirxlvqf<>uid://cavhxkbuu52q3<>uid://xm5yia6nr0ah<>uid://dbmgf12e5vftp<>uid://bao7hikuw5tp6<>uid://dcdn8wfbbjk4p<>uid://b22i7lk53hw7b<>uid://vhgytrie538e<>uid://dql0ck8m18ex<>uid://d0enhf7gpmh52<>uid://dr1xwywv1ddkj<>uid://c8ku8s8vexols<>uid://bylsj1a8job7u<>uid://dnnr88ufowi0b<>uid://c0kx2lyy1icec<>uid://fjpba34qx8eu<>res://Panel2.gd<>uid://fi112ujjoqo8<>uid://hbiakh7c5l3w<>uid://77pa7q2imhmn<>uid://dcvkb5nmueh1r<>uid://xp5l8vv7bd85<>uid://c04kisf7ljybw<>uid://bye35yhdcewg3<>uid://y6eke7bi8hm3<>uid://bxj0xu6tjia74<>uid://bnq5sd3v8t4ea<>uid://cvjfjv417y5x3<>res://AudioStreamRecord.gd<>uid://7anebcn40fhk<>uid://rp251srcbsj4<>uid://dgwof1dh4cp2d<>uid://ba4grwnqsih6g<>uid://bxyut0xbhc148<>uid://bv3edccq3taul<>uid://rb8s6wni2ahs<>uid://b5e7xeujc7a2i<>res://Prop.tscn<>uid://tqnta1w64qpw<>uid://ch6eh4svkgjqh
+Main.tscn::PackedScene::2247785952735092593::1670816744::0::1::::<><>::res://Mic.gd<>res://Off.tscn<>res://On.tscn<>res://Camera2D.gd<>uid://uk5y3on27it0<>uid://bq6w66c5h513a
+Mic.gd::GDScript::-1::1669265834::0::1::::<>Control<>::
+MicContainer.gd::GDScript::-1::1669260859::0::1::::<>TextureButton<>::
+MicContainer.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Arts/MicContainer.png<>res://sweet purple.ttf<>res://MicContainer.gd
+MicSens.tscn::PackedScene::-1::1669260859::0::1::::<><>::
+NeckJoin.gd::GDScript::-1::1669260859::0::1::::<>Node2D<>::
+NeckPoint.gd::GDScript::-1::1669260859::0::1::::<>Node2D<>::
+Networking.gd::GDScript::-1::1669260859::0::1::::<><>::
+Networking.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Networking.gd
+Node.gd::GDScript::-1::1669260859::0::1::::<>Node<>::
+NormalBtn.tres::StyleBoxFlat::-1::1669260859::0::1::::<><>::
+ObsStreamKit.tscn::PackedScene::-1::1669260859::0::1::::<><>::
+Off.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Risun Off.png
+On.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Risun On.png
+Panel2.gd::GDScript::-1::1670231694::0::1::::<>Control<>::
+PelvisPoint.gd::GDScript::-1::1669260859::0::1::::<>Node2D<>::
+Prop.gd::GDScript::-1::1669265260::0::1::::<>TextureButton<>::
+Prop.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Prop.gd
+PropCopy.gd::GDScript::-1::1669260859::0::1::::<><>::
+PropCopy.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://PropCopy.gd<>res://setting icon.png
+README.md::TextFile::-1::1669260859::0::1::::<><>::
+Rigger.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Prop.tscn
+Risun Body.png::CompressedTexture2D::3134240019655812144::1669260859::1669260866::1::::<><>::
+Risun Eye.png::CompressedTexture2D::6793561332402137673::1669260859::1669260866::1::::<><>::
+Risun Head.png::CompressedTexture2D::1863668056828066736::1669260859::1669260866::1::::<><>::
+Risun Off.png::CompressedTexture2D::4584944445043154735::1669260859::1669260866::1::::<><>::
+Risun On.png::CompressedTexture2D::6177630277485878673::1669260859::1669260866::1::::<><>::
+Risun White.png::CompressedTexture2D::7455109797548482386::1669260859::1669260866::1::::<><>::
+Server.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
+Server.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Server.gd
+setting icon.png::CompressedTexture2D::1426286512047031951::1669260859::1669260865::1::::<><>::
+Setting.tscn::PackedScene::-1::1669260859::0::1::::<><>::
+Sprite.gd::GDScript::-1::1669260859::0::1::::<>Sprite<>::
+Sprite.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Arts/tumblr_pc2h2xYC5D1qkz08qo1_540.gif<>res://Sprite.gd
+sweet purple.ttf::FontFile::8543670380999724135::1669260859::1669260865::1::::<><>::
+TempScene.gd::GDScript::-1::1669260859::0::1::::<>Node2D<>::
+TempScene.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Prop.tscn<>res://TempScene.gd
+TempSprite.gd::GDScript::-1::1669260859::0::1::::<>Area2D<>::
+TempSprite.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://TempSprite.gd<>res://setting icon.png
+Testing.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
+Testing.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Testing.gd<>res://AudioStreamRecord.gd
+TextureRect.gd::GDScript::-1::1669260859::0::1::::<>TextureRect<>::
+Ubuntu-B.ttf::FontFile::5641556276742546369::1669260859::1669260865::1::::<><>::
+VietTeam_main.gd::GDScript::-1::1670490826::0::1::::<>Control<>::
+VietTeam_main_custome_input.gd::GDScript::-1::1671078349::0::1::::<>Control<>::
+x icon.png::CompressedTexture2D::4174088302404400132::1669260859::1669260865::1::::<><>::
+::res://Arts/::1669261114
+BGBtnClick.png::CompressedTexture2D::2446683475361321568::1669260858::1669260865::1::::<><>::
+Darken.png::CompressedTexture2D::370436203256576376::1669260858::1669260865::1::::<><>::
+FileDialog.png::CompressedTexture2D::4421823812110360347::1669260858::1669261060::1::::<><>::
+FileDialog_2.png::CompressedTexture2D::6549651559104339698::1669260858::1669261114::1::::<><>::
+FixedBtn.png::CompressedTexture2D::2246839516741981764::1669260858::1669260865::1::::<><>::
+FixedBtnClick.png::CompressedTexture2D::1225870334968007135::1669260858::1669260865::1::::<><>::
+FlipBtn.png::CompressedTexture2D::2417277853149953849::1669260858::1669260865::1::::<><>::
+FlipBtnClick.png::CompressedTexture2D::1197312187464156024::1669260858::1669260865::1::::<><>::
+Gazo Bg.png::CompressedTexture2D::608232698293484129::1669260858::1669260865::1::::<><>::
+Gazo UI.png::CompressedTexture2D::4166978808988029029::1669260858::1669260865::1::::<><>::
+GreenscreenBtn.png::CompressedTexture2D::1488824546262783942::1669260858::1669260865::1::::<><>::
+GreenscreenBtnClick.png::CompressedTexture2D::4094771431434528504::1669260858::1669260865::1::::<><>::
+ImageContainer.png::CompressedTexture2D::6265707289695140194::1669260858::1669260865::1::::<><>::
+ImageFrame.png::CompressedTexture2D::3333759550949358020::1669260858::1669260865::1::::<><>::
+Info.png::CompressedTexture2D::4051558772073957443::1669260858::1669260865::1::::<><>::
+Left Panel - Copy.png::CompressedTexture2D::654366283450223426::1669260858::1669260865::1::::<><>::
+Left Panel Backup.png::CompressedTexture2D::1463417835987442388::1669260858::1669260865::1::::<><>::
+Left Panel.png::CompressedTexture2D::4816659920145587224::1669260858::1669260865::1::::<><>::
+Mic Selection.png::CompressedTexture2D::2665131786899300550::1669260858::1669260865::1::::<><>::
+MicContainer.png::CompressedTexture2D::2537605477046235016::1669260858::1669260865::1::::<><>::
+MicContainerOn.png::CompressedTexture2D::8309877544748193672::1669260858::1669260865::1::::<><>::
+PresetBtn.png::CompressedTexture2D::7306682287007236169::1669260858::1669260865::1::::<><>::
+PresetBtnAlt.png::CompressedTexture2D::4132737226037514952::1669260858::1669260865::1::::<><>::
+PresetBtnAltClick.png::CompressedTexture2D::782038130701859575::1669260858::1669260865::1::::<><>::
+PresetBtnAltMask.png::BitMap::7923643682098546417::1669260858::1669260865::1::::<><>::
+PresetBtnClick.png::CompressedTexture2D::7110991253395317528::1669260858::1669260865::1::::<><>::
+PresetBtnMask.png::BitMap::9116288558716291617::1669260858::1669260865::1::::<><>::
+PropBtn.png::CompressedTexture2D::8407583288366055233::1669260858::1669260865::1::::<><>::
+PropBtnClick.png::CompressedTexture2D::1367441365384808172::1669260858::1669260865::1::::<><>::
+ScreamBtn.png::CompressedTexture2D::2403838284688404818::1669260858::1669260865::1::::<><>::
+ScreamBtnClick.png::CompressedTexture2D::6687120950511193356::1669260858::1669260865::1::::<><>::
+ScreamBtnTall.png::CompressedTexture2D::3918437311459676171::1669260858::1669260865::1::::<><>::
+ScreamBtnTallClick.png::CompressedTexture2D::5328415903708069691::1669260858::1669260865::1::::<><>::
+Second Panel - Copy.png::CompressedTexture2D::8406115719847556229::1669260858::1669260865::1::::<><>::
+Second Panel.png::CompressedTexture2D::369085762124152797::1669260858::1669260865::1::::<><>::
+SelectedBtn.png::CompressedTexture2D::7626671760963483093::1669260859::1669260865::1::::<><>::
+SilenceBtn.png::CompressedTexture2D::7254598066231662705::1669260859::1669260865::1::::<><>::
+SilenceBtnBlink.png::CompressedTexture2D::493872556667349578::1669260859::1669260865::1::::<><>::
+SilenceBtnBlinkClick.png::CompressedTexture2D::2313015546140448641::1669260859::1669260865::1::::<><>::
+SilenceBtnBlinkMask.png::BitMap::1647151990209987316::1669260859::1669260865::1::::<><>::
+SilenceBtnClick.png::CompressedTexture2D::244309228758316755::1669260859::1669260865::1::::<><>::
+SilenceBtnMask.png::BitMap::7343602223267272513::1669260859::1669260865::1::::<><>::
+TalkBtn.png::CompressedTexture2D::1640980727173542307::1669260859::1669260865::1::::<><>::
+TalkBtnBlink.png::CompressedTexture2D::4080965363149921440::1669260859::1669260865::1::::<><>::
+TalkBtnBlinkClick.png::CompressedTexture2D::1748788943183318648::1669260859::1669260865::1::::<><>::
+TalkBtnBlinkMask.png::BitMap::4020903584464913485::1669260859::1669260865::1::::<><>::
+TalkBtnClick.png::CompressedTexture2D::8923042786853280579::1669260859::1669260865::1::::<><>::
+TalkBtnMask.png::BitMap::6588051824096988496::1669260859::1669260865::1::::<><>::
+Third Panel With Keys.png::CompressedTexture2D::2087066335819330989::1669260859::1669260865::1::::<><>::
+Third Panel.png::CompressedTexture2D::4502327762280990174::1669260859::1669260865::1::::<><>::
+TransparentBtn.png::CompressedTexture2D::4337801137232355281::1669260859::1669260865::1::::<><>::
+TransparentBtnClick.png::CompressedTexture2D::8099646813665796387::1669260859::1669260865::1::::<><>::
+::res://input_audio/::1671078340
+demo_0p30.wav::AudioStreamWAV::5332659958805994254::1663661915::1671071665::1::::<><>::
+test_0p18_spanish.mp3::AudioStreamMP3::1387699340015041112::1668574436::1670497540::1::::<><>::
+test_1p.mp3::AudioStreamMP3::7255705265163309641::1669028600::1670497554::1::::<><>::
+test_1p.wav::AudioStreamWAV::8011157150094243159::1667297478::1671078467::0::::<><>::
+test_1s_spanish.mp3::AudioStreamMP3::2754451276810563562::1668582875::1669264676::1::::<><>::
+test_spanish_20s.mp3::AudioStreamMP3::7228154120961915220::1668585560::1669264676::1::::<><>::
+::res://logs/::1669260859
+godot.log::TextFile::-1::1669260859::0::1::::<><>::
+godot_2021-12-12_23.13.36.log::TextFile::-1::1669260859::0::1::::<><>::
+godot_2021-12-12_23.17.02.log::TextFile::-1::1669260859::0::1::::<><>::
+godot_2021-12-12_23.17.14.log::TextFile::-1::1669260859::0::1::::<><>::
+::res://output_video/::1670903062

@@ -1,0 +1,19 @@
+[remap]
+
+importer="animated_texture"
+type="AnimatedTexture"
+path="res://.import/tumblr_pc2h2xYC5D1qkz08qo1_540.gif-2d0daa52d5c732bf99daf62656dbd8db.atex"
+
+[deps]
+
+source_file="res://tumblr_pc2h2xYC5D1qkz08qo1_540.gif"
+dest_files=[ "res://.import/tumblr_pc2h2xYC5D1qkz08qo1_540.gif-2d0daa52d5c732bf99daf62656dbd8db.atex" ]
+
+[params]
+
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=0
+max_frames=0

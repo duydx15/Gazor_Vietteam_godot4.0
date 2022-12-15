@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dk5jivm1qhesf"
+path="res://.godot/imported/PresetBtnAltMask.png-bb928621b6e5f52a99342e5cd5f75d37.res"
+
+[deps]
+
+source_file="res://Arts/PresetBtnAltMask.png"
+dest_files=["res://.godot/imported/PresetBtnAltMask.png-bb928621b6e5f52a99342e5cd5f75d37.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TempSprite.gd" type="Script" id=1]
+[ext_resource path="res://setting icon.png" type="Texture" id=2]
+
+[node name="TempSprite" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 32, -149.4, 37.7, -120, 39.5, -120, 57.5, -111, 60.3, -111, 86.8, -130.3, 89, -129.2, 89, -127.8, 130, -88.9, 130, -84.3, 114, -64.3, 114, -62.5, 111.8, -58, 119.4, -37, 121.2, -37, 150, -32, 150, 32, 146.4, 32, 120, 36.7, 120, 38.4, 111.7, 58.9, 130.3, 87.9, 129.2, 90, 127.8, 90, 88.8, 130, 85.4, 130, 58.7, 110.9, 37, 119.4, 37, 121.2, 31, 150, -31, 150, -31, 149.4, -36.7, 119, -38.4, 119, -57.5, 110, -60.4, 110, -87.8, 129.3, -90, 128.2, -90, 126.8, -130, 87.8, -130, 84.3, -111, 59.3, -111, 58, -119.4, 36, -125.2, 36, -150, 31, -150, -31, -149.4, -31, -119, -36.7, -119, -39.4, -110.6, -58.8, -129.3, -86.9, -128.2, -89, -126.8, -89, -87.9, -130, -84.4, -130, -57.6, -111.9, -37, -120.4, -37, -121.2, -32, -145.4, -32, -150, 32, -150 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_TempSprite_mouse_entered"]

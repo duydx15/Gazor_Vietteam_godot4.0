@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://xp5l8vv7bd85"
+path="res://.godot/imported/SilenceBtnBlinkMask.png-8f1a0cd6e6c0e66f061598408efc16fb.res"
+
+[deps]
+
+source_file="res://Arts/SilenceBtnBlinkMask.png"
+dest_files=["res://.godot/imported/SilenceBtnBlinkMask.png-8f1a0cd6e6c0e66f061598408efc16fb.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

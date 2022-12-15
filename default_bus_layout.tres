@@ -1,0 +1,31 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://d3njalvcq25qw"]
+
+[sub_resource type="AudioEffectRecord" id="1"]
+resource_name = "Record"
+
+[sub_resource type="AudioEffectBandPassFilter" id="3"]
+resource_name = "BandPassFilter"
+
+[sub_resource type="AudioEffectAmplify" id="5"]
+resource_name = "Amplify"
+
+[sub_resource type="AudioEffectPanner" id="6"]
+resource_name = "Panner"
+
+[resource]
+bus/0/mute = true
+bus/0/volume_db = -0.394915
+bus/1/name = &"Record"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 6.02
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("1")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("3")
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("5")
+bus/1/effect/2/enabled = true
+bus/1/effect/3/effect = SubResource("6")
+bus/1/effect/3/enabled = false

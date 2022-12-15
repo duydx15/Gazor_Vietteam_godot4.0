@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TempScene.gd" type="Script" id=2]
+
+[node name="TempScene" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Control"]
+margin_left = 234.0
+margin_top = 118.0
+margin_right = 889.0
+margin_bottom = 498.0
+
+[node name="Prop" parent="Control/Control" instance=ExtResource( 1 )]
+margin_left = 157.0
+margin_top = 41.0
+margin_right = 457.0
+margin_bottom = 341.0

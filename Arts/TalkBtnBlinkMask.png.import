@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bxj0xu6tjia74"
+path="res://.godot/imported/TalkBtnBlinkMask.png-7fd2bffe42f62c770108bedd496801a2.res"
+
+[deps]
+
+source_file="res://Arts/TalkBtnBlinkMask.png"
+dest_files=["res://.godot/imported/TalkBtnBlinkMask.png-7fd2bffe42f62c770108bedd496801a2.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
