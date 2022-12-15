@@ -404,7 +404,7 @@ func _ready():
 	load_png()
 	load_blink()
 	
-#	load_sens()
+	load_sens()
 	load_amp()
 	load_camzoom()
 	load_options()
@@ -471,7 +471,7 @@ func vibing(isVibing):
 			changeCount = 55
 		if(change):
 			rand = rng.randf() - .5
-			print(rand)
+#			print(rand)
 			vibeXmax = 10 + (rand * 4)
 			rand = rng.randf() - .5
 			vibeXmin = -10 - (rand * 4)
@@ -510,7 +510,7 @@ func vibing(isVibing):
 			changeCountY = 55
 		if(changeY):
 			rand = rng.randf() - .5
-			print(rand)
+#			print(rand)
 			vibeYmax = 7 + (rand * 4)
 			rand = rng.randf() - .5
 			vibeYmin = -7 - (rand * 4)
@@ -726,7 +726,7 @@ func voice_cap(_delta):
 
 func voice_cap_audio(_delta):
 	power = AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("music"),0) - sValue
-	print("Power :", power)
+#	print("Power :", power)
 	$CanvasLayer/ToHide/LeftPanel/AudioMeter.value = power
 	if power > limiter and power < sLimiter:
 		
@@ -1160,7 +1160,7 @@ func load_audio():
 #		music.set_loop(false)
 		music_player.stream = music
 		
-		music_player.volume_db = 5
+#		music_player.volume_db =7 5
 		music_player.set_pitch_scale(pitch_scale)
 		# below are optional steps if you need more control
 
@@ -1373,7 +1373,7 @@ func _on_Button3_pressed():
 		is_transparent = false
 
 func save_talking(path):
-	print("Types      ", typeof(path))
+#	print("Types      ", typeof(path))
 	if is_preset_A == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_file_A, FileAccess.WRITE)
@@ -7463,14 +7463,14 @@ func _on_VSlider_value_changed(val):
 	sValue = val
 	var bus_effect = AudioServer.get_bus_effect(1,2)
 	bus_effect.volume_db = val
-	print(sValue)
+#	print("Amp effect",sValue)
 	
 	#save
 	#var file = FileAccess.new()
 	var file =FileAccess.open(amp_file, FileAccess.WRITE)
 	file.store_float(bus_effect.volume_db)
 	#file.close()
-	print("amp saved", bus_effect.volume_db)
+#	print("amp saved", bus_effect.volume_db)
 
 
 func _on_ClickDelay_timeout():
@@ -7518,7 +7518,7 @@ func _on_ScreemBtn_pressed():
 func _on_AmpSlider_value_changed(value):
 	var effect = AudioServer.get_bus_effect(1,2)
 	effect.volume_db = value
-	print(value)
+	print("AmpSlider: ",value)
 	#save
 	#var file = FileAccess.new()
 	var file =FileAccess.open(amp_file, FileAccess.WRITE)
