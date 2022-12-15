@@ -1160,7 +1160,7 @@ func load_audio():
 #		music.set_loop(false)
 		music_player.stream = music
 		
-#		music_player.volume_db = 5
+		music_player.volume_db = 5
 		music_player.set_pitch_scale(pitch_scale)
 		# below are optional steps if you need more control
 
