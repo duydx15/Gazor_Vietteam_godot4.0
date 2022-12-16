@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Gazō Tuber"
+config/name="Gazo Tuber godot4"
 config/description="A simple software to use as PNG Tuber"
 run/main_scene="res://Main2.tscn"
 config/features=PackedStringArray("4.0")
@@ -40,9 +40,10 @@ settings/fps/force_fps=30
 
 [display]
 
-window/size/viewport_width=1156
-window/size/viewport_height=618
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/per_pixel_transparency/allowed=true
+window/stretch/mode="viewport"
 window/size/width=1280
 window/size/height=720
 window/per_pixel_transparency/enabled=true

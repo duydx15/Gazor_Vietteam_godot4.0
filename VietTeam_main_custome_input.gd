@@ -418,11 +418,13 @@ func _ready():
 	load_hotkeys()
 
 	load_audio()
-
+	
 	#print(AudioServer.capture_get_device())
 	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
+	$CanvasLayer.hide()
 	
-	#network
+#	_on_GreenScreenBtn_pressed()
+		#network
 	
 #	get_tree().connect("connected_to_server", self, "enter_room")
 #	get_tree().connect("network_peer_connected", self, "user_entered")
@@ -436,11 +438,13 @@ var count_frame = 0
 var fps_output =30
 var previous_time = 0
 var start_ = 0
+var path_video = "/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi"
 
-func _physics_process(delta):
+
+func _process(delta):
 #	var start_ = Ti.start()
 	count_frame +=1
-		
+
 	voice_cap_audio(delta)
 #	print(count_frame," - ",power)
 	#OS.native_video_unpause()
@@ -449,6 +453,9 @@ func _physics_process(delta):
 	#(previous_time - music_player.get_playback_position()) > 0:
 	if (previous_time - music_player.get_playback_position()) > 0:
 		get_tree().quit()
+		print("Out mode")
+		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15","-map","0:v:0","-map","1:a:0",input_arg["output_mp4"]])
+#		DirAccess.remove_absolute(path_video)
 	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
 #	if music_player.finished:
@@ -630,7 +637,18 @@ func nervous(isNervous):
 var input_arg = {}
 func load_cmd_input():
 	
+#	for argument in OS.get_cmdline_args():
+#		print(argument)
+#		if argument.find("=") > -1:
+#			var key_value = argument.split("=")
+#			input_arg[key_value[0].lstrip("--")] = key_value[1]
+#		else:
+#			# Options without an argument will be present in the dictionary,
+#			# with the value set to an empty string.
+#			input_arg[argument.lstrip("--")] = ""
+
 	for argument in OS.get_cmdline_args():
+		print(argument)
 		if argument.find("=") > -1:
 			var key_value = argument.split("=")
 			input_arg[key_value[0].lstrip("--")] = key_value[1]
@@ -638,7 +656,8 @@ func load_cmd_input():
 			# Options without an argument will be present in the dictionary,
 			# with the value set to an empty string.
 			input_arg[argument.lstrip("--")] = ""
-	
+
+#	print(input_arg)
 	if "image_talk" in input_arg:
 		print("get image_talk")
 		var images_talk = [input_arg["image_talk"]]
@@ -786,15 +805,15 @@ func _input(event):
 		if event.is_action_pressed("scroll up") and Input.is_action_pressed("control") == false:
 			#if $Camera2D.zoom > Vector2(0.1,0.1):
 #			print("Get scroll event")
-			$Camera2D.zoom = $Camera2D.zoom + Vector2(0.5, 0.5)
+			$Camera2D.zoom = $Camera2D.zoom - Vector2(0.1, 0.1)
 			camzoom = $Camera2D.zoom
-#			print("UP - Camzoom - ",camzoom)
+			print("UP - Camzoom - ",camzoom)
 			save_camzoom(camzoom)
 		elif event.is_action_pressed("scroll down") and Input.is_action_pressed("control") == false:
 			#if $Camera2D.zoom > Vector2(0.75,0.75):
-			$Camera2D.zoom = $Camera2D.zoom - Vector2(0.5, 0.5)
+			$Camera2D.zoom = $Camera2D.zoom + Vector2(0.1, 0.1)
 			camzoom = $Camera2D.zoom
-#			print("DOWN - Camzoom - ",camzoom)
+			print("DOWN - Camzoom - ",camzoom)
 			save_camzoom(camzoom)
 		elif event.is_action_pressed("scroll up") and Input.is_action_pressed("control"):
 			$PropContainer/Prop.rect_scale =$PropContainer/Prop.rect_scale + Vector2(0.1, 0.1)
@@ -1157,8 +1176,8 @@ func load_audio():
 	if "input_audio" in input_arg:
 		print("Audio: ",input_arg["input_audio"])
 		music_file = input_arg["input_audio"]
-		if music_file.ends_with('.wav'):
-			bit_scale = 2048
+#		if music_file.ends_with('.wav'):
+#			bit_scale = 2048
 		
 #	stream.set_loop(faklse)
 	if FileAccess.file_exists(music_file):
@@ -1167,7 +1186,7 @@ func load_audio():
 		print("Length audio: ",music.get_length())
 		music_player.stream = music
 		
-#		music_player.volume_db =7 5
+#		music_player.volume_db =7 
 		music_player.set_pitch_scale(pitch_scale)
 		# below are optional steps if you need more control_por
 
@@ -2131,21 +2150,23 @@ func load_prop_pos():
 #			save_camzoom(camzoom)
 func load_prop_zoom():
 	#var file = FileAccess.new()
-
+#	save_prop_zoom(prop_zoom[0])
 	if is_preset_A:
 		if FileAccess.file_exists(prop_zoom_file[0]):
 			var file =FileAccess.open(prop_zoom_file[0], FileAccess.READ)
 			prop_zoom[0] = file.get_var()
 			#file.close()
-			$PropContainer/Prop.rect_scale = prop_zoom[0]
-			save_prop_zoom(prop_zoom[0])
 			print(prop_zoom[0])
+			$PropContainer/Prop.rect_scale = prop_zoom[0]
+			
+			save_prop_zoom(prop_zoom[0])
+#			print(prop_zoom[0])
 		
 	elif is_preset_B:
 		if FileAccess.file_exists(prop_zoom_file[1]):
 			var file =FileAccess.open(prop_zoom_file[1], FileAccess.READ)
 			prop_zoom[1] = file.get_var()
-			#file.close()
+#			#file.close()
 			$PropContainer/Prop.rect_scale = prop_zoom[1]
 			save_prop_zoom(prop_zoom[1])
 
@@ -2419,7 +2440,7 @@ func load_png():
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
 #					print(image_texture.get_property_list())
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					talk_png_A = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -2467,8 +2488,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					talk_png_B = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2515,7 +2536,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_C = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2563,7 +2585,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_D = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2610,7 +2633,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_E = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2658,7 +2682,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_F = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -2706,7 +2731,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_G = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2722,7 +2748,7 @@ func load_png():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				talk_png_G = animated_texture
-			file_G.close()
+#			file_G.close()
 	
 
 	if FileAccess.file_exists(talking_file_H):
@@ -2754,7 +2780,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_H = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2770,7 +2797,7 @@ func load_png():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				talk_png_H = animated_texture
-			file_H.close()
+#			file_H.close()
 	
 	
 	if FileAccess.file_exists(talking_file_I):
@@ -2802,7 +2829,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_I = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2850,7 +2878,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					talk_png_J = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -2902,7 +2931,8 @@ func load_png():
 #					print("not gif import - silence A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_A = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -2950,7 +2980,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_B = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -2999,7 +3030,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_C = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3047,7 +3079,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_D = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3095,7 +3128,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_E = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3144,7 +3178,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_F = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3195,7 +3230,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_G = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3212,7 +3248,7 @@ func load_png():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				silence_png_G = animated_texture
-			file_G.close()
+#			file_G.close()
 	
 	
 	if FileAccess.file_exists(silence_file_H):
@@ -3244,7 +3280,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_H = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3261,7 +3298,7 @@ func load_png():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				silence_png_H = animated_texture
-			file_H.close()
+#			file_H.close()
 	
 	if FileAccess.file_exists(silence_file_I):
 		var file_I = FileAccess.open(silence_file_I, FileAccess.READ)
@@ -3292,7 +3329,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_I = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3340,7 +3378,8 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					silence_png_J = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3398,7 +3437,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_A = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3451,7 +3491,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_B = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3501,7 +3542,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_C = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3550,7 +3592,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_D = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3600,7 +3643,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_E = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -3649,7 +3693,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_F = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3703,7 +3748,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_G = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3719,7 +3765,7 @@ func load_scream():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				scream_png_G = animated_texture
-			file_G.close()
+#			file_G.close()
 	
 	
 	
@@ -3754,7 +3800,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_H = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3770,7 +3817,7 @@ func load_scream():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				scream_png_H = animated_texture
-			file_H.close()
+#			file_H.close()
 	
 	
 	if FileAccess.file_exists(scream_file_I):
@@ -3804,7 +3851,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_I = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -3854,7 +3902,8 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+					image_texture.set_image(image)
 					scream_png_J = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -3911,7 +3960,7 @@ func load_prop():
 					print("not gif import prop_A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_A = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -3965,7 +4014,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_B = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4016,7 +4065,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_C = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4066,7 +4115,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_D = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4117,7 +4166,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_E = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -4167,7 +4216,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_F = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -4221,7 +4270,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_G = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4237,7 +4286,7 @@ func load_prop():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				prop_png_G = animated_texture
-			file_G.close()
+#			file_G.close()
 	
 	
 	
@@ -4272,7 +4321,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_H = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4288,7 +4337,7 @@ func load_prop():
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
 #				animated_texture.fps = 120
 #				prop_png_H = animated_texture
-			file_H.close()
+#			file_H.close()
 	
 	
 	if FileAccess.file_exists(prop_file_I):
@@ -4322,7 +4371,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_I = image_texture
 #
 #			elif  dir[0].get_extension() == "gif":
@@ -4373,7 +4422,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-#					image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
 					prop_png_J = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -4519,7 +4568,7 @@ func load_blink():
 			image_G.load(dir)
 			image_texture_G.create_from_image(image_G)
 			image_texture_G.set_flags(image_texture_G.get_flags() & ~(1 << 1))
-			file_G.close()
+#			file_G.close()
 			
 			talk_blink_G = image_texture_G
 		
@@ -4537,7 +4586,7 @@ func load_blink():
 			image_H.load(dir)
 			image_texture_H.create_from_image(image_H)
 			image_texture_H.set_flags(image_texture_H.get_flags() & ~(1 << 1))
-			file_H.close()
+#			file_H.close()
 			
 			talk_blink_H = image_texture_H
 	
@@ -4693,7 +4742,7 @@ func load_blink():
 			image_G.load(dir)
 			image_texture_G.create_from_image(image_G)
 			image_texture_G.set_flags(image_texture_G.get_flags() & ~(1 << 1))
-			file_G.close()
+#			file_G.close()
 			
 			silence_blink_G = image_texture_G
 	
@@ -4709,7 +4758,7 @@ func load_blink():
 			image_H.load(dir)
 			image_texture_H.create_from_image(image_H)
 			image_texture_H.set_flags(image_texture_H.get_flags() & ~(1 << 1))
-			file_H.close()
+#			file_H.close()
 			
 			silence_blink_H = image_texture_H
 	
@@ -4966,7 +5015,7 @@ func load_delay():
 		delay = file.get_float()
 		$Timer.wait_time = delay
 		print("Delay ",limiter)
-		file.close()
+#		file.close()
 		$CanvasLayer/ToHide/LeftPanel/DelaySens.value = delay
 		$Timer.wait_time = delay
 	else:
@@ -6395,7 +6444,8 @@ func _on_files_dropped(files):
 		var image_texture = ImageTexture.new()
 		image.load(files[0])
 		image_texture.create_from_image(image)
-		image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#		image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+		image_texture.set_image(image)
 		$CanvasLayer/FileDialog.hide()
 		can_change_bg = false
 		if is_preset_A:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bvteo1d0ncq6f"]
+[gd_scene load_steps=69 format=3 uid="uid://bvteo1d0ncq6f"]
 
 [ext_resource type="Script" path="res://VietTeam_main_custome_input.gd" id="1_yew7v"]
 [ext_resource type="PackedScene" path="res://Off.tscn" id="2"]
@@ -892,8 +892,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_jy0gh"]
-
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 8
@@ -919,7 +917,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3.0
 offset_top = -1.0
-offset_right = 131.0
+offset_right = 127.0
 offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -933,7 +931,6 @@ bus = &"Record"
 script = ExtResource("37")
 
 [node name="PropContainer" type="Node2D" parent="."]
-visible = false
 position = Vector2(-320, -120)
 z_index = 5
 
@@ -945,6 +942,7 @@ scale = Vector2(0.999286, 0.972718)
 z_index = 1
 
 [node name="Off" parent="." instance=ExtResource("2")]
+visible = true
 scale = Vector2(1, 1)
 z_index = 1
 
@@ -985,7 +983,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(50, 20)
+position = Vector2(1, 2)
 current = true
 script = ExtResource("4")
 
@@ -1855,9 +1853,6 @@ position = Vector2(-53, -81)
 frames = SubResource("30")
 animation = &"silence"
 playing = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamOggVorbis_jy0gh")
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="BlinkingTimer" to="." method="_on_BlinkingTimer_timeout"]
