@@ -58,7 +58,7 @@ func loadfile(filepath):
 	var byte_rate 
 	var bytes = file.get_buffer(file.get_length())
 	
-	print("Type bytes audio: ", file.get_length())
+#	print("Type bytes audio: ", file.get_length())
 
 	if filepath.ends_with(".wav"):
 		var newstream = AudioStreamWAV.new()

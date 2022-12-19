@@ -47,8 +47,8 @@ func _ready():
 		else:
 			micC[i].texture_normal = container_on
 	
-#	if mic_sel == null:
-#		micC[0].texture_normal = container_on
+	if mic_sel == null:
+		micC[0].texture_normal = container_on
 			
 	#micC[0].texture_normal = container_on
 

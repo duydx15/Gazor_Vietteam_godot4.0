@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bvteo1d0ncq6f"]
+[gd_scene load_steps=71 format=3 uid="uid://bvteo1d0ncq6f"]
 
 [ext_resource type="Script" path="res://VietTeam_main_custome_input.gd" id="1_yew7v"]
 [ext_resource type="PackedScene" path="res://Off.tscn" id="2"]
@@ -30,6 +30,7 @@
 [ext_resource type="BitMap" uid="uid://c04kisf7ljybw" path="res://Arts/TalkBtnMask.png" id="31"]
 [ext_resource type="Texture2D" uid="uid://bye35yhdcewg3" path="res://Arts/TalkBtnBlink.png" id="32"]
 [ext_resource type="Texture2D" uid="uid://y6eke7bi8hm3" path="res://Arts/TalkBtnBlinkClick.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://cm37wn82aykn6" path="res://Grabber.png" id="33_od1p3"]
 [ext_resource type="BitMap" uid="uid://bxj0xu6tjia74" path="res://Arts/TalkBtnBlinkMask.png" id="34"]
 [ext_resource type="Texture2D" uid="uid://bnq5sd3v8t4ea" path="res://Arts/ImageFrame.png" id="35"]
 [ext_resource type="Texture2D" uid="uid://cvjfjv417y5x3" path="res://Arts/ImageContainer.png" id="36"]
@@ -635,6 +636,8 @@ _data = {
 [sub_resource type="Theme" id="10"]
 BoxEdit/styles/Boxy = null
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6d14"]
+
 [sub_resource type="Animation" id="26"]
 length = 0.3
 tracks/0/type = "value"
@@ -647,7 +650,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(120, 335), Vector2(-237.913, 335)]
+"values": [Vector2(108, 335), Vector2(-237.913, 335)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -675,7 +678,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("CanvasLayer/ToHide/LeftPanel/BgBtn:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -683,19 +686,19 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-760, 0)]
+"values": [Vector2(0, 0), Vector2(-400, 0)]
 }
 
 [sub_resource type="Animation" id="27"]
@@ -703,7 +706,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -756,7 +759,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-237.913, 335.072), Vector2(120.087, 335.072)]
+"values": [Vector2(-235.913, 335.072), Vector2(111.087, 335.072)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -792,12 +795,12 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/4/path = NodePath("CanvasLayer/ToHide/Panel2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -812,7 +815,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:rect_position")
+tracks/0/path = NodePath("CanvasLayer/ToHide/Panel2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -937,6 +940,7 @@ z_index = 5
 [node name="Prop" parent="PropContainer" instance=ExtResource("47")]
 
 [node name="On" parent="." instance=ExtResource("3")]
+visible = false
 position = Vector2(300, 225.51)
 scale = Vector2(0.999286, 0.972718)
 z_index = 1
@@ -1018,40 +1022,44 @@ mouse_filter = 2
 
 [node name="Panel2" type="Control" parent="CanvasLayer/ToHide"]
 layout_mode = 1
+anchor_left = -0.037
+anchor_top = -0.03
 anchor_right = 0.247
 anchor_bottom = 1.032
-offset_left = -2.0
-offset_top = -3.0
-offset_right = 0.467987
-offset_bottom = 0.223938
+offset_left = 47.6536
+offset_top = 22.0988
+offset_right = 2.87991
+offset_bottom = -64.1978
 grow_vertical = 2
 script = ExtResource("25")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ToHide/Panel2"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
+anchor_top = 0.076
 anchor_bottom = 1.0
-offset_left = 271.0
-offset_top = 4.0
+offset_left = -26.0
+offset_top = 0.103996
 offset_right = 274.0
-offset_bottom = 4.0
+offset_bottom = 30.0
 grow_vertical = 2
 
 [node name="Sprite" type="Sprite2D" parent="CanvasLayer/ToHide/Panel2"]
-position = Vector2(153.25, 336)
+position = Vector2(145, 336)
 scale = Vector2(0.987356, 1)
 z_index = -2
 texture = ExtResource("26")
 
 [node name="Default Mic" type="Label" parent="CanvasLayer/ToHide/Panel2"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -37.0
-offset_top = -14.0
+offset_top = 35.0
 offset_right = 221.0
-offset_bottom = 12.0
+offset_bottom = 61.0
 grow_horizontal = 2
 text = "Default Mic is Selected by Default"
 
@@ -1060,10 +1068,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.028
 anchor_bottom = 1.0
-offset_left = 287.0
-offset_top = 0.304001
+offset_left = 272.0
+offset_top = 0.488001
 offset_right = 323.0
-offset_bottom = -477.0
+offset_bottom = -549.0
 grow_vertical = 2
 focus_mode = 0
 flat = true
@@ -1193,7 +1201,7 @@ offset_bottom = 2.0
 grow_vertical = 2
 
 [node name="LeftPanel" type="Sprite2D" parent="CanvasLayer/ToHide"]
-position = Vector2(120.087, 335.072)
+position = Vector2(111.087, 335.072)
 scale = Vector2(0.971264, 0.991667)
 texture = ExtResource("8")
 
@@ -1419,14 +1427,18 @@ anchors_preset = -1
 anchor_left = 1.094
 anchor_top = 0.247
 anchor_right = 1.094
-anchor_bottom = 0.858
-offset_left = -173.712
-offset_top = 103.16
-offset_right = 286.288
-offset_bottom = -319.76
-grow_vertical = 0
-rotation = -1.5708
+anchor_bottom = 0.866
+offset_left = -212.906
+offset_top = 102.065
+offset_right = 248.094
+offset_bottom = -299.615
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 4.71239
 focus_mode = 0
+theme_override_icons/grabber = ExtResource("33_od1p3")
+theme_override_icons/grabber_highlight = ExtResource("33_od1p3")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_j6d14")
 min_value = -50.0
 max_value = 6.0
 step = 0.1
@@ -1535,6 +1547,7 @@ visible = false
 text = "BACKGROUND"
 
 [node name="VSlider" type="VSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+visible = false
 offset_left = 244.952
 offset_top = -175.535
 offset_right = 260.952
@@ -1544,10 +1557,11 @@ max_value = 50.0
 step = 0.5
 
 [node name="AmpSlider" type="HSlider" parent="CanvasLayer/ToHide/LeftPanel"]
-offset_left = 225.41
-offset_top = 270.108
-offset_right = 678.41
-offset_bottom = 286.108
+visible = false
+offset_left = 270.784
+offset_top = 274.471
+offset_right = 723.784
+offset_bottom = 290.471
 rotation = -1.5708
 min_value = -30.0
 max_value = 30.0
@@ -1617,7 +1631,6 @@ anchor_right = 2.73738
 anchor_bottom = 1.89696
 
 [node name="MicChanged" type="Label" parent="CanvasLayer/ToHide/Info"]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1626,10 +1639,12 @@ grow_horizontal = 2
 text = "ATTENTION"
 
 [node name="Label" type="Label" parent="CanvasLayer/ToHide/Info/MicChanged"]
+visible = false
 layout_mode = 0
 text = "New Mic is Connected/Disconnected!"
 
 [node name="Label2" type="Label" parent="CanvasLayer/ToHide/Info/MicChanged"]
+visible = false
 layout_mode = 0
 text = "*Please reselect your prefered microphone in 
 the microphone selection setting."
@@ -1644,6 +1659,7 @@ grow_horizontal = 2
 text = "ATTENTION"
 
 [node name="Label" type="Label" parent="CanvasLayer/ToHide/Info/MicFirstTime"]
+visible = false
 layout_mode = 0
 text = "*Please select your prefered microphone in 
 the microphone selection setting."
@@ -1724,6 +1740,7 @@ grow_vertical = 2
 texture = ExtResource("22")
 
 [node name="TextureButton" type="Button" parent="CanvasLayer/FileDialog"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

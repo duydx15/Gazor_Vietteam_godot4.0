@@ -438,10 +438,11 @@ var count_frame = 0
 var fps_output =30
 var previous_time = 0
 var start_ = 0
-var path_video = "/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi"
+
+# "/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi"
 
 
-func _process(delta):
+func _physics_process(delta):
 #	var start_ = Ti.start()
 	count_frame +=1
 
@@ -453,9 +454,13 @@ func _process(delta):
 	#(previous_time - music_player.get_playback_position()) > 0:
 	if (previous_time - music_player.get_playback_position()) > 0:
 		get_tree().quit()
-		print("Out mode")
+		
+		var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
+		var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
+		print("Export mp4: ",path_video )
+		
 		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15","-map","0:v:0","-map","1:a:0",input_arg["output_mp4"]])
-#		DirAccess.remove_absolute(path_video)
+		remove_avi.remove(path_video)
 	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
 #	if music_player.finished:
@@ -1212,7 +1217,9 @@ func load_mic():
 			var file =FileAccess.open(mic_file, FileAccess.READ)
 			mic_sel = file.get_var()
 			if mic_sel <= micCount:
+				print("Mic available")
 				AudioServer.capture_set_device(AudioServer.capture_get_device_list()[mic_sel])
+				
 				#file.close()
 #				print(AudioServer.capture_get_device())
 #				print(mic_sel)
@@ -1221,6 +1228,7 @@ func load_mic():
 				$CanvasLayer/ToHide/Info/MicChanged.show()
 				print("not enought mic")
 		else:
+			print("Mic first time")
 			AudioServer.capture_set_device(AudioServer.capture_get_device_list()[1])
 			$CanvasLayer/ToHide/Info.show()
 			$CanvasLayer/ToHide/Info/MicFirstTime.show()
@@ -1301,7 +1309,7 @@ func load_hotkeys():
 	var ev
 	for action in InputMap.action_get_events("key_preset_a"):
 		ev= action
-		
+		print(ev)
 	$CanvasLayer/ToHide/Panel3/EditA.text = str(ev)
 
 func _on_Button2_pressed():
@@ -6552,8 +6560,6 @@ func _on_ShowBtn_pressed():
 		$AnimPlayer.play("ShowPanel2")
 		is_panel2_shown = true
 		$CanvasLayer/ToHide/Panel2/VBoxContainer.show() 
-
-
 
 
 func _on_AnimPlayer_animation_finished(anim_name):
