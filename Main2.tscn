@@ -1802,6 +1802,7 @@ position = Vector2(-0.828461, -0.242645)
 texture = ExtResource("35")
 
 [node name="Label" type="Label" parent="CanvasLayer/FileDialog/ImageContainer"]
+visible = false
 offset_left = 233.725
 offset_top = -38.594
 offset_right = 326.725
@@ -1810,10 +1811,10 @@ text = "Please Drop
 PNG here"
 
 [node name="RemoveBtn" type="Button" parent="CanvasLayer/FileDialog/ImageContainer"]
-offset_left = 408.725
-offset_top = 121.406
-offset_right = 479.725
-offset_bottom = 152.406
+offset_left = -147.275
+offset_top = 116.406
+offset_right = -76.275
+offset_bottom = 147.406
 focus_mode = 0
 text = "Remove"
 flat = true

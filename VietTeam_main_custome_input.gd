@@ -422,6 +422,7 @@ func _ready():
 	#print(AudioServer.capture_get_device())
 	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
 	$CanvasLayer.hide()
+
 	
 #	_on_GreenScreenBtn_pressed()
 		#network
@@ -454,13 +455,12 @@ func _physics_process(delta):
 	#(previous_time - music_player.get_playback_position()) > 0:
 	if (previous_time - music_player.get_playback_position()) > 0:
 		get_tree().quit()
-		
 		var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
 		var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
 		print("Export mp4: ",path_video )
-		
 		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15","-map","0:v:0","-map","1:a:0",input_arg["output_mp4"]])
 		remove_avi.remove(path_video)
+		
 	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
 #	if music_player.finished:
@@ -664,17 +664,17 @@ func load_cmd_input():
 
 #	print(input_arg)
 	if "image_talk" in input_arg:
-		print("get image_talk")
+#		print("get image_talk")
 		var images_talk = [input_arg["image_talk"]]
-		print("File talk: ", images_talk)
+#		print("File talk: ", images_talk)
 		save_talking(images_talk)
 		save_scream(images_talk)
 	else:
 		print("Invalid arg: --image_talk")	
 	if "image_silence" in input_arg:
-		print("get image_silence")
+#		print("get image_silence")
 		var images_silence = [input_arg["image_silence"]]
-		print("File silence: ", images_silence)
+#		print("File silence: ", images_silence)
 		save_silence(images_silence)		
 	else:
 		print("Invalid arg: --image_Silence")
@@ -1309,7 +1309,7 @@ func load_hotkeys():
 	var ev
 	for action in InputMap.action_get_events("key_preset_a"):
 		ev= action
-		print(ev)
+#		print(ev)
 	$CanvasLayer/ToHide/Panel3/EditA.text = str(ev)
 
 func _on_Button2_pressed():
@@ -6508,6 +6508,8 @@ func dragndrop():
 	get_tree().get_root().files_dropped.connect(self._on_files_dropped)
 func escape():
 	if Input.is_action_just_pressed("ui_cancel"):
+#	if event is InputEventKey:
+#		if event.pressed and event.scancode == KEY_ESCAPE:
 		print("Press ESC")
 		$CanvasLayer/FileDialog.hide()
 		#$CanvasLayer/FileDialogOff.hide()
