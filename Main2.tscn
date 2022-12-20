@@ -929,8 +929,6 @@ texture = ExtResource("7")
 [node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
 process_priority = -2
 stream = SubResource("1")
-autoplay = true
-bus = &"Record"
 script = ExtResource("37")
 
 [node name="PropContainer" type="Node2D" parent="."]

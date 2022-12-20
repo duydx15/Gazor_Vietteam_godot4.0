@@ -663,18 +663,18 @@ func load_cmd_input():
 			input_arg[argument.lstrip("--")] = ""
 
 #	print(input_arg)
-	if "image_talk" in input_arg:
+	if "image" in input_arg:
 #		print("get image_talk")
-		var images_talk = [input_arg["image_talk"]]
-#		print("File talk: ", images_talk)
+		var images_talk = [input_arg["image"].split(",")[1]]
+		print("File talk: ", images_talk)
 		save_talking(images_talk)
 		save_scream(images_talk)
 	else:
-		print("Invalid arg: --image_talk")	
-	if "image_silence" in input_arg:
+		print("Invalid arg: --images_talk")	
+	if "image" in input_arg:
 #		print("get image_silence")
-		var images_silence = [input_arg["image_silence"]]
-#		print("File silence: ", images_silence)
+		var images_silence = [input_arg["image"].split(",")[0]]
+		print("File silence: ", images_silence)
 		save_silence(images_silence)		
 	else:
 		print("Invalid arg: --image_Silence")
