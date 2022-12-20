@@ -15,8 +15,7 @@ Download godot 4.0 beta 4 in: [https://downloads.tuxfamily.org/godotengine/4.0/b
 %Example:
 ./Downloads/gazosource-20221115T023621Z-001/Godot_4.x86_64 \
 --path ~/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/ \
---image_talk=/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/Risun\ On.png \
---image_silence=/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/Risun\ Off.png \
+--image=/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/Risun\ On.png,/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/Risun\ Off.png \
 --input_audio=/home/anlab/Downloads/audio_file/test_1p_pure.wav \
 --output_mp4=/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.mp4 \
 --write-movie /home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi \
