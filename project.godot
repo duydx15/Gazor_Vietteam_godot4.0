@@ -50,8 +50,8 @@ window/per_pixel_transparency/enabled=true
 
 [editor]
 
+movie_writer/mix_rate=44100
 movie_writer/movie_file="/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output_test.avi"
-movie_writer/disable_vsync=true
 movie_writer/fps=30
 
 [global]

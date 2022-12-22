@@ -421,7 +421,7 @@ func _ready():
 	
 	#print(AudioServer.capture_get_device())
 	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
-	$CanvasLayer.hide()
+#	$CanvasLayer.hide()
 
 	
 #	_on_GreenScreenBtn_pressed()
@@ -458,8 +458,8 @@ func _physics_process(delta):
 		var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
 		var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
 		print("Export mp4: ",path_video )
-		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15","-map","0:v:0","-map","1:a:0",input_arg["output_mp4"]])
-		remove_avi.remove(path_video)
+		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
+		remove_avi.remove_absolute(path_video)
 		
 	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
@@ -651,8 +651,9 @@ func load_cmd_input():
 #			# Options without an argument will be present in the dictionary,
 #			# with the value set to an empty string.
 #			input_arg[argument.lstrip("--")] = ""
-
+	print("Arg CMD")
 	for argument in OS.get_cmdline_args():
+		
 		print(argument)
 		if argument.find("=") > -1:
 			var key_value = argument.split("=")
@@ -661,7 +662,7 @@ func load_cmd_input():
 			# Options without an argument will be present in the dictionary,
 			# with the value set to an empty string.
 			input_arg[argument.lstrip("--")] = ""
-
+	
 #	print(input_arg)
 	if "image" in input_arg:
 #		print("get image_talk")
@@ -680,7 +681,13 @@ func load_cmd_input():
 		print("Invalid arg: --image_Silence")
 	
 	if "input_audio" in input_arg:
-		pass
+		if  input_arg["input_audio"].ends_with('.mp3'):
+			pass
+		else:
+			var path_mp3_converted = input_arg["input_audio"].get_basename() + ".mp3"
+			OS.execute("ffmpeg",["-y","-i",input_arg["input_audio"],"-vn", "-ar", "44100", "-ac", "2", "-b:a", "192k",path_mp3_converted],[],true)
+			input_arg["input_audio"] = path_mp3_converted
+			print("Audio converted: ",input_arg["input_audio"])
 	else:
 		print("Invalid arg: --input_audio")	
 	
@@ -1168,7 +1175,7 @@ func _on_Timer_timeout():
 		stopped_talking = true
 		$Timer.wait_time = 0.3
 	
-var music_file = "/home/anlab/Downloads/audio_file/test_1p.mp3"
+var music_file = "res://input_audio/test_1p_pure.mp3"
 var music_player = AudioStreamPlayer.new()
 var stream_audio = AudioLoader.new()
 var pitch_scale = 1
@@ -1181,7 +1188,7 @@ func load_audio():
 	if "input_audio" in input_arg:
 		print("Audio: ",input_arg["input_audio"])
 		music_file = input_arg["input_audio"]
-#		if music_file.ends_with('.wav'):
+		
 #			bit_scale = 2048
 		
 #	stream.set_loop(faklse)
@@ -1200,6 +1207,8 @@ func load_audio():
 		AudioServer.set_bus_name(music_bus_id,"music")
 		# connects music to master bus
 		AudioServer.set_bus_send(music_bus_id,"Master")
+		AudioServer.set_bus_mute(0,false)
+		AudioServer.get_bus_effect(1,2).volume_db = 14
 		add_child(music_player)
 		music_player.bus = "music"
 		music_player.play()
