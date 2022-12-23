@@ -40,7 +40,7 @@ var is_blinking = false
 var can_bounce = true
 var can_blink = true
 var can_shake = true
-var can_dim = true
+var can_dim 
 var is_talking = false
 var is_timer = false
 var limiter = 0
@@ -64,7 +64,7 @@ var is_preset_H = false
 var is_preset_I = false
 var is_preset_J = false
 
-var cam_all = false
+var cam_all = true
 
 var res_file_x = "user://res_x.save"
 var res_file_y = "user://res_y.save"
@@ -402,11 +402,13 @@ func _ready():
 	load_bg()
 #	load_binding()
 	load_png()
+	
+#	print("Cam ALL: ", cam_all)
 	load_blink()
 	
 	load_sens()
 	load_amp()
-	load_camzoom()
+#	load_camzoom()
 	load_options()
 	load_flip()
 	dragndrop()
@@ -418,11 +420,11 @@ func _ready():
 	load_hotkeys()
 
 	load_audio()
+#	var h_ = $On.texture.get_height()
 	
 	#print(AudioServer.capture_get_device())
 	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
-#	$CanvasLayer.hide()
-
+	$CanvasLayer.hide()
 	
 #	_on_GreenScreenBtn_pressed()
 		#network
@@ -2006,8 +2008,20 @@ func load_camzoom():
 		if FileAccess.file_exists(camzoom_file_Z):
 			var file =FileAccess.open(camzoom_file_Z, FileAccess.READ)
 			$Camera2D.zoom = file.get_var()
+#
+			var img_h = $On.texture.get_size()
+			var win_h = DisplayServer.window_get_size()
+			var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.1),snapped(float(win_h[1])/float(img_h[1]),0.1))
+			if auto_focus > 1:
+				auto_focus = snapped(float(1)/auto_focus,0.1)
+#			print("auto_focus: ", auto_focus)
+#			var auto_zoom = snapped(float(1)/auto_focus,0.1)
+#			print("auto_zoom: ", auto_zoom)
+			$Camera2D.zoom = Vector2(auto_focus,auto_focus)
+			
 			#file.close()
 			camzoom = $Camera2D.zoom
+			print("CAM ZOOM: ", camzoom)
 			save_camzoom(camzoom)
 	elif is_preset_A:
 		if FileAccess.file_exists(camzoom_file_A):
@@ -2015,6 +2029,7 @@ func load_camzoom():
 			$Camera2D.zoom = file.get_var()
 			#file.close()
 			camzoom = $Camera2D.zoom
+			print("CAMZOOM: ", camzoom)
 			save_camzoom(camzoom)
 	elif is_preset_B:
 		if FileAccess.file_exists(camzoom_file_B):
@@ -2173,7 +2188,7 @@ func load_prop_zoom():
 			var file =FileAccess.open(prop_zoom_file[0], FileAccess.READ)
 			prop_zoom[0] = file.get_var()
 			#file.close()
-			print(prop_zoom[0])
+			
 			$PropContainer/Prop.rect_scale = prop_zoom[0]
 			
 			save_prop_zoom(prop_zoom[0])
@@ -2207,6 +2222,7 @@ func load_prop_zoom():
 		if FileAccess.file_exists(prop_zoom_file[4]):
 			var file =FileAccess.open(prop_zoom_file[4], FileAccess.READ)
 			prop_zoom[4] = file.get_var()
+			print("Prop zoom:",prop_zoom[4])
 			#file.close()
 			$PropContainer/Prop.rect_scale = prop_zoom[4]
 			save_prop_zoom(prop_zoom[4])
@@ -2453,6 +2469,7 @@ func load_png():
 					
 				else:
 					image.load(dir[0])
+					
 #					print("not gif import - talking A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
@@ -2475,7 +2492,6 @@ func load_png():
 #				animated_texture.fps = 120
 #				talk_png_A = animated_texture
 			#file_A.close()
-			
 
 	if FileAccess.file_exists(talking_file_B):
 		var file_B = FileAccess.open(talking_file_B, FileAccess.READ)
@@ -5220,7 +5236,7 @@ func load_options():
 	if FileAccess.file_exists(dim_file):
 		var file =FileAccess.open(dim_file, FileAccess.READ)
 		can_dim = file.get_var()
-		#file.close()
+#		file.close()
 	else:
 		pass
 	
