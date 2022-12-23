@@ -424,7 +424,7 @@ func _ready():
 	
 	#print(AudioServer.capture_get_device())
 	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
-	$CanvasLayer.hide()
+#	$CanvasLayer.hide()
 	
 #	_on_GreenScreenBtn_pressed()
 		#network
@@ -2008,16 +2008,16 @@ func load_camzoom():
 		if FileAccess.file_exists(camzoom_file_Z):
 			var file =FileAccess.open(camzoom_file_Z, FileAccess.READ)
 			$Camera2D.zoom = file.get_var()
-#
-			var img_h = $On.texture.get_size()
-			var win_h = DisplayServer.window_get_size()
-			var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.1),snapped(float(win_h[1])/float(img_h[1]),0.1))
-			if auto_focus > 1:
-				auto_focus = snapped(float(1)/auto_focus,0.1)
-#			print("auto_focus: ", auto_focus)
-#			var auto_zoom = snapped(float(1)/auto_focus,0.1)
-#			print("auto_zoom: ", auto_zoom)
-			$Camera2D.zoom = Vector2(auto_focus,auto_focus)
+			if $Off.texture != null:
+				var img_h = $Off.texture.get_size()
+				var win_h = DisplayServer.window_get_size()
+				var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.0001),snapped(float(win_h[1])/float(img_h[1]),0.0001))
+				if auto_focus > 1:
+					auto_focus = snapped(float(1)/auto_focus,0.0001)
+				print("auto_focus: ", auto_focus)
+#				var auto_zoom = snapped(float(1)/auto_focus,0.1)
+#				print("auto_zoom: ", auto_zoom)
+				$Camera2D.zoom = Vector2(auto_focus,auto_focus)
 			
 			#file.close()
 			camzoom = $Camera2D.zoom
@@ -2461,10 +2461,11 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
+#						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_A = animated_texture
 					
 				else:
@@ -2489,7 +2490,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_A = animated_texture
 			#file_A.close()
 
@@ -2513,8 +2514,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					talk_png_B = animated_texture
 					
 				else:
@@ -2536,7 +2537,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_B = animated_texture
 			#file_B.close()
 	
@@ -2561,8 +2562,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_C = animated_texture
 					
 				else:
@@ -2584,7 +2585,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_C = animated_texture
 			#file_C.close()
 	
@@ -2610,8 +2611,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_D = animated_texture
 					
 				else:
@@ -2633,7 +2634,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_D = animated_texture
 			#file_D.close()
 	
@@ -2658,8 +2659,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_E = animated_texture
 					
 				else:
@@ -2681,7 +2682,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_E = animated_texture
 			#file_E.close()
 		
@@ -2707,8 +2708,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_F = animated_texture
 					
 				else:
@@ -2731,7 +2732,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_F = animated_texture
 			#file_F.close()
 			
@@ -2756,8 +2757,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					talk_png_G = animated_texture
 					
 				else:
@@ -2779,7 +2780,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_G = animated_texture
 #			file_G.close()
 	
@@ -2805,8 +2806,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_H = animated_texture
 					
 				else:
@@ -2828,7 +2829,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_H = animated_texture
 #			file_H.close()
 	
@@ -2854,8 +2855,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_I = animated_texture
 					
 				else:
@@ -2877,7 +2878,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_I = animated_texture
 			#file_I.close()
 	
@@ -2903,8 +2904,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)	
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)	
+					animated_texture.speed_scale = 1
 					talk_png_J = animated_texture
 					
 				else:
@@ -2926,7 +2927,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_J = animated_texture
 			#file_J.close()
 	else:
@@ -2953,10 +2954,10 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+#						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_A = animated_texture
 					
 				else:
@@ -2980,7 +2981,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_A = animated_texture
 			#file_A.close()
 			
@@ -3005,8 +3006,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_B = animated_texture
 					
 				else:
@@ -3029,7 +3030,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_B = animated_texture
 			#file_B.close()
 	
@@ -3055,8 +3056,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_C = animated_texture
 					
 				else:
@@ -3079,7 +3080,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_C = animated_texture
 			#file_C.close()
 	
@@ -3104,8 +3105,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_D = animated_texture
 					
 				else:
@@ -3128,7 +3129,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_D = animated_texture
 			#file_D.close()
 	
@@ -3153,8 +3154,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_E = animated_texture
 					
 				else:
@@ -3177,7 +3178,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_E = animated_texture
 			#file_E.close()
 			
@@ -3203,8 +3204,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_F = animated_texture
 					
 				else:
@@ -3227,7 +3228,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_F = animated_texture
 			#file_F.close()
 			
@@ -3255,8 +3256,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_G = animated_texture
 					
 				else:
@@ -3279,7 +3280,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_G = animated_texture
 #			file_G.close()
 	
@@ -3305,8 +3306,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_H = animated_texture
 					
 				else:
@@ -3329,7 +3330,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_H = animated_texture
 #			file_H.close()
 	
@@ -3354,8 +3355,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_I = animated_texture
 					
 				else:
@@ -3378,7 +3379,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_I = animated_texture
 			#file_I.close()
 	
@@ -3403,8 +3404,8 @@ func load_png():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					silence_png_J = animated_texture
 					
 				else:
@@ -3427,7 +3428,7 @@ func load_png():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				silence_png_J = animated_texture
 			#file_J.close()
 
@@ -3462,8 +3463,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_A = animated_texture
 					
 				else:
@@ -3486,7 +3487,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_A = animated_texture
 			#file_A.close()
 			
@@ -3516,8 +3517,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_B = animated_texture
 					
 				else:
@@ -3539,7 +3540,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_B = animated_texture
 			#file_B.close()
 	
@@ -3567,8 +3568,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_C = animated_texture
 					
 				else:
@@ -3590,7 +3591,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_C = animated_texture
 			#file_C.close()
 	
@@ -3617,8 +3618,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_D = animated_texture
 					
 				else:
@@ -3640,7 +3641,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_D = animated_texture
 			#file_D.close()
 	
@@ -3668,8 +3669,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_E = animated_texture
 					
 				else:
@@ -3691,7 +3692,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_E = animated_texture
 			#file_E.close()
 	
@@ -3718,8 +3719,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_F = animated_texture
 					
 				else:
@@ -3742,7 +3743,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_F = animated_texture
 			#file_F.close()
 			
@@ -3773,8 +3774,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_G = animated_texture
 					
 				else:
@@ -3796,7 +3797,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_G = animated_texture
 #			file_G.close()
 	
@@ -3825,8 +3826,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_H = animated_texture
 					
 				else:
@@ -3848,7 +3849,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_H = animated_texture
 #			file_H.close()
 	
@@ -3876,8 +3877,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_I = animated_texture
 					
 				else:
@@ -3899,7 +3900,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_I = animated_texture
 			#file_I.close()
 	
@@ -3927,8 +3928,8 @@ func load_scream():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					scream_png_J = animated_texture
 					
 				else:
@@ -3950,7 +3951,7 @@ func load_scream():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				scream_png_J = animated_texture
 			#file_J.close()
 	else:
@@ -3984,8 +3985,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_A = animated_texture
 					
 				else:
@@ -4008,7 +4009,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_A = animated_texture
 			#file_A.close()
 			
@@ -4038,8 +4039,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_B = animated_texture
 					
 				else:
@@ -4061,7 +4062,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_B = animated_texture
 			#file_B.close()
 	
@@ -4089,8 +4090,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_C = animated_texture
 					
 				else:
@@ -4112,7 +4113,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_C = animated_texture
 			#file_C.close()
 	
@@ -4139,8 +4140,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_D = animated_texture
 					
 				else:
@@ -4162,7 +4163,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_D = animated_texture
 			#file_D.close()
 	
@@ -4190,8 +4191,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_E = animated_texture
 					
 				else:
@@ -4213,7 +4214,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_E = animated_texture
 			#file_E.close()
 	
@@ -4240,8 +4241,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_F = animated_texture
 					
 				else:
@@ -4264,7 +4265,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_F = animated_texture
 			#file_F.close()
 			
@@ -4294,8 +4295,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_G = animated_texture
 					
 				else:
@@ -4317,7 +4318,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_G = animated_texture
 #			file_G.close()
 	
@@ -4345,8 +4346,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_H = animated_texture
 					
 				else:
@@ -4368,7 +4369,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_H = animated_texture
 #			file_H.close()
 	
@@ -4395,8 +4396,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_I = animated_texture
 					
 				else:
@@ -4418,7 +4419,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_I = animated_texture
 			#file_I.close()
 	
@@ -4446,8 +4447,8 @@ func load_prop():
 						tex.create_from_image(im)
 						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 						animated_texture.set_frame_texture(i, tex)
-						animated_texture.set_frame_delay(i, 0.1)
-					animated_texture.fps = 120
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
 					prop_png_J = animated_texture
 					
 				else:
@@ -4469,7 +4470,7 @@ func load_prop():
 #					tex.set_flags(tex.get_flags() & ~(1 << 1))
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				prop_png_J = animated_texture
 			#file_J.close()
 	else:
@@ -5785,10 +5786,11 @@ func _on_files_dropped(files):
 					var tex = ImageTexture.new()
 					im.load(files[i])
 					tex.create_from_image(im)
-					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+					tex.set_image(im)
+#					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 					animated_texture.set_frame_texture(i, tex)
-					animated_texture.set_frame_delay(i, 0.1)
-				animated_texture.fps = 120
+					animated_texture.set_frame_duration(i, 0.5)
+				animated_texture.speed_scale = 1
 				
 				if is_preset_A:
 					talk_png_A = animated_texture
@@ -5850,7 +5852,7 @@ func _on_files_dropped(files):
 #				tex.set_flags(tex.get_flags() & ~(1 << 1))
 #				animated_texture.set_frame_texture(i, tex)
 #				animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#			animated_texture.fps = 120
+#			animated_texture.speed_scale = 1
 #
 #			if is_preset_A:
 #				talk_png_A = animated_texture
@@ -5903,7 +5905,7 @@ func _on_files_dropped(files):
 #
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_A = animated_texture
 #
 #			save_talking(files[0])
@@ -5935,7 +5937,7 @@ func _on_files_dropped(files):
 #
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_B = animated_texture
 #
 #			save_talking(files[0])
@@ -5967,7 +5969,7 @@ func _on_files_dropped(files):
 #
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_C = animated_texture
 #
 #			save_talking(files[0])
@@ -5999,7 +6001,7 @@ func _on_files_dropped(files):
 #
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_D = animated_texture
 #
 #			save_talking(files[0])
@@ -6031,7 +6033,7 @@ func _on_files_dropped(files):
 #
 #					animated_texture.set_frame_texture(i, tex)
 #					animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#				animated_texture.fps = 120
+#				animated_texture.speed_scale = 1
 #				talk_png_E = animated_texture
 #
 #			save_talking(files[0])
@@ -6104,10 +6106,11 @@ func _on_files_dropped(files):
 					var tex = ImageTexture.new()
 					im.load(files[i])
 					tex.create_from_image(im)
-					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+					tex.set_image(im)
+#					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 					animated_texture.set_frame_texture(i, tex)
-					animated_texture.set_frame_delay(i, 0.1)	
-				animated_texture.fps = 120
+					animated_texture.set_frame_duration(i, 0.5)	
+				animated_texture.speed_scale = 1
 				
 				if is_preset_A:
 					silence_png_A = animated_texture
@@ -6166,7 +6169,7 @@ func _on_files_dropped(files):
 #				tex.set_flags(tex.get_flags() & ~(1 << 1))
 #				animated_texture.set_frame_texture(i, tex)
 #				animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#			animated_texture.fps = 120
+#			animated_texture.speed_scale = 1
 #
 #			if is_preset_A:
 #				silence_png_A = animated_texture
@@ -6257,8 +6260,8 @@ func _on_files_dropped(files):
 					tex.create_from_image(im)
 					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 					animated_texture.set_frame_texture(i, tex)
-					animated_texture.set_frame_delay(i, 0.1)	
-				animated_texture.fps = 120
+					animated_texture.set_frame_duration(i, 0.5)	
+				animated_texture.speed_scale = 1
 				if is_preset_A:
 					scream_png_A = animated_texture
 				elif is_preset_B:
@@ -6316,7 +6319,7 @@ func _on_files_dropped(files):
 #				tex.set_flags(tex.get_flags() & ~(1 << 1))
 #				animated_texture.set_frame_texture(i, tex)
 #				animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#			animated_texture.fps = 120
+#			animated_texture.speed_scale = 1
 #
 #			if is_preset_A:
 #				scream_png_A = animated_texture
@@ -6363,8 +6366,8 @@ func _on_files_dropped(files):
 					tex.create_from_image(im)
 					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
 					animated_texture.set_frame_texture(i, tex)
-					animated_texture.set_frame_delay(i, 0.1)	
-				animated_texture.fps = 120
+					animated_texture.set_frame_duration(i, 0.5)	
+				animated_texture.speed_scale = 1
 				if is_preset_A:
 					prop_png_A = animated_texture
 				elif is_preset_B:
@@ -6422,7 +6425,7 @@ func _on_files_dropped(files):
 #				tex.set_flags(tex.get_flags() & ~(1 << 1))
 #				animated_texture.set_frame_texture(i, tex)
 #				animated_texture.set_frame_delay(i, image_frames.get_frame_delay(i))
-#			animated_texture.fps = 120
+#			animated_texture.speed_scale = 1
 #
 #			if is_preset_A:
 #				prop_png_A = animated_texture
