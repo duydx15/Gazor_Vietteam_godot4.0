@@ -939,6 +939,7 @@ z_index = 5
 [node name="Prop" parent="PropContainer" instance=ExtResource("47")]
 
 [node name="On" parent="." instance=ExtResource("3")]
+visible = false
 scale = Vector2(0.999286, 0.972718)
 z_index = 1
 

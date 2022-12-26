@@ -442,7 +442,7 @@ var count_frame = 0
 var fps_output =30
 var previous_time = 0
 var start_ = 0
-
+var delay_count = 0
 # "/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi"
 
 
@@ -452,18 +452,19 @@ func _physics_process(delta):
 	voice_cap_audio(delta)
 #	print(count_frame," - ",power)
 	#OS.native_video_unpause()
-#	print("Position in audio playing: ",music_player.get_playback_position())
 #		print("Position in audio playing: ",music_player.get_playback_position())
 	#(previous_time - music_player.get_playback_position()) > 0:
-	if (previous_time - music_player.get_playback_position()) > 0:
-		get_tree().quit()
-		var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
-		var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
-		print("Export mp4: ",path_video )
-		OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
-		remove_avi.remove_absolute(path_video)
-		
-	previous_time = music_player.get_playback_position()
+	if music_player.get_playback_position() == 0 and (not music_player.is_playing()) :
+		delay_count +=1
+		if delay_count >= 3:
+			get_tree().quit()
+			var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
+			var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
+			print("Export mp4: ",path_video )
+			OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
+			remove_avi.remove_absolute(path_video)
+
+#	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
 #	if music_player.finished:
 #		get_tree().quit()
@@ -2025,14 +2026,14 @@ func load_camzoom():
 				var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.0001),snapped(float(win_h[1])/float(img_h[1]),0.0001))
 				if auto_focus > 1:
 					auto_focus = snapped(float(1)/auto_focus,0.0001)
-				print("auto_focus: ", auto_focus)
+#				print("auto_focus: ", auto_focus)
 #				var auto_zoom = snapped(float(1)/auto_focus,0.1)
 #				print("auto_zoom: ", auto_zoom)
 				$Camera2D.zoom = Vector2(auto_focus,auto_focus)
 			
 			#file.close()
 			camzoom = $Camera2D.zoom
-			print("CAM ZOOM: ", camzoom)
+#			print("CAM ZOOM: ", camzoom)
 			save_camzoom(camzoom)
 	elif is_preset_A:
 		if FileAccess.file_exists(camzoom_file_A):
@@ -5059,7 +5060,7 @@ func load_delay():
 		var file = FileAccess.open(delay_file, FileAccess.READ)
 		delay = file.get_float()
 		$Timer.wait_time = delay
-		print("Delay ",limiter)
+		print("Delay ",delay)
 #		file.close()
 #		$CanvasLayer/ToHide/LeftPanel/DelaySens.value = delay
 		$Timer.wait_time = delay
