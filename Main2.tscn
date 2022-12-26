@@ -349,6 +349,7 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id="4"]
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -428,7 +429,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="5"]
-loop_mode = 1
+length = 10.0
 step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -461,7 +462,7 @@ tracks/2/path = NodePath("On:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.90748e-05, 0.0379395, 0.137939, 0.278145),
+"times": PackedFloat32Array(2.90748e-05, 0.0379395, 0.137939, 0.28),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(300, 223), Vector2(300, 218), Vector2(300, 218), Vector2(300, 228)]
@@ -938,7 +939,6 @@ z_index = 5
 [node name="Prop" parent="PropContainer" instance=ExtResource("47")]
 
 [node name="On" parent="." instance=ExtResource("3")]
-position = Vector2(300, 225.147)
 scale = Vector2(0.999286, 0.972718)
 z_index = 1
 
@@ -1024,7 +1024,7 @@ anchor_right = 0.247
 anchor_bottom = 1.032
 offset_left = 47.6536
 offset_top = 22.0988
-offset_right = 2.87991
+offset_right = 2.87997
 offset_bottom = -64.1978
 grow_vertical = 2
 script = ExtResource("25")
@@ -1197,7 +1197,7 @@ offset_bottom = 2.0
 grow_vertical = 2
 
 [node name="LeftPanel" type="Sprite2D" parent="CanvasLayer/ToHide"]
-position = Vector2(111.087, 335.072)
+position = Vector2(108, 335)
 scale = Vector2(0.971264, 0.991667)
 texture = ExtResource("8")
 
@@ -1446,6 +1446,10 @@ visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = 90.653
+offset_top = -504.202
+offset_right = 98.653
+offset_bottom = -488.202
 grow_vertical = 0
 focus_mode = 0
 min_value = -50.0
@@ -1561,6 +1565,15 @@ offset_bottom = 290.471
 rotation = -1.5708
 min_value = -30.0
 max_value = 30.0
+
+[node name="DelaySens" type="VSlider" parent="CanvasLayer/ToHide/LeftPanel"]
+offset_left = 134.0
+offset_top = 19.0
+offset_right = 150.0
+offset_bottom = 212.0
+max_value = 1.0
+step = 0.01
+scrollable = false
 
 [node name="PresetLbl" type="Label" parent="CanvasLayer/ToHide"]
 layout_mode = 1
@@ -1909,6 +1922,7 @@ playing = true
 [connection signal="pressed" from="CanvasLayer/ToHide/LeftPanel/GreenScreenBtn" to="." method="_on_GreenScreenBtn_pressed"]
 [connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/VSlider" to="." method="_on_VSlider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/AmpSlider" to="." method="_on_AmpSlider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/ToHide/LeftPanel/DelaySens" to="." method="_on_Delaysens_value_changed"]
 [connection signal="pressed" from="CanvasLayer/ToHide/ResetBusBtn" to="." method="_on_ResetBusBtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/ToHide/Info/InfoBtn" to="." method="_on_InfoBtn_pressed"]
 [connection signal="timeout" from="CanvasLayer/ToHide/ClickDelay" to="." method="_on_ClickDelay_timeout"]

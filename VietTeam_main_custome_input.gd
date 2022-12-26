@@ -369,7 +369,7 @@ var viewport_path = null
 
 
 func _ready():
-	
+#	print("Delay set to: ", $Timer.wait_time)
 #	var image = Image.new()
 #	image.load("image path")
 #	var t = ImageTexture.new()
@@ -407,8 +407,9 @@ func _ready():
 	load_blink()
 	
 	load_sens()
+	load_delay()
 	load_amp()
-#	load_camzoom()
+	load_camzoom()
 	load_options()
 	load_flip()
 	dragndrop()
@@ -446,7 +447,6 @@ var start_ = 0
 
 
 func _physics_process(delta):
-#	var start_ = Ti.start()
 	count_frame +=1
 
 	voice_cap_audio(delta)
@@ -706,6 +706,8 @@ func winsize():
 	save_resolution_x(DisplayServer.window_get_size())
 	save_resolution_y(DisplayServer.window_get_size())
 	print("size changed bruh",DisplayServer.window_get_size())
+
+
 
 func voice_cap(_delta):
 	power = AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("Record"),0) - sValue
@@ -1175,7 +1177,7 @@ func _on_Timer_timeout():
 		is_timer = false
 		$Timer.stop()
 		stopped_talking = true
-		$Timer.wait_time = 0.3
+#		$Timer.wait_time = 0.3
 	
 var music_file = "res://input_audio/test_1p_pure.mp3"
 var music_player = AudioStreamPlayer.new()
@@ -1210,7 +1212,7 @@ func load_audio():
 		# connects music to master bus
 		AudioServer.set_bus_send(music_bus_id,"Master")
 		AudioServer.set_bus_mute(0,false)
-		AudioServer.get_bus_effect(1,2).volume_db = 14
+#		AudioServer.get_bus_effect(1,2).volume_db = 14
 		add_child(music_player)
 		music_player.bus = "music"
 		music_player.play()
@@ -1402,6 +1404,15 @@ func _on_HSlider_value_changed(value):
 	var file =FileAccess.open(sens_file, FileAccess.WRITE)
 	file.store_float(limiter)
 	#file.close()
+
+#func _on_DelaySens_value_changed(value):
+#	delay = value
+#	$Timer.wait_time = delay
+#	print("Delay set to: ", $Timer.wait_time)
+#	#save
+#	var	file = FileAccess.open(delay_file, FileAccess.WRITE)
+#	file.store_float(delay)
+#	file.close()
 
 func _on_Button3_pressed():
 	if is_transparent == false:
@@ -5050,7 +5061,7 @@ func load_delay():
 		$Timer.wait_time = delay
 		print("Delay ",limiter)
 #		file.close()
-		$CanvasLayer/ToHide/LeftPanel/DelaySens.value = delay
+#		$CanvasLayer/ToHide/LeftPanel/DelaySens.value = delay
 		$Timer.wait_time = delay
 	else:
 		print("delay file doesnt exist")
@@ -5245,7 +5256,7 @@ func load_options():
 	if can_dim == true:
 		$Off/CanvasModulate.visible = true
 	elif can_dim == false:
-		$Off/CanvasModulate.visible = true
+		$Off/CanvasModulate.visible = false
 #	$CanvasLayer/ToHide/LeftPanel/DimSwitch.pressed = can_dim
 	$CanvasLayer/ToHide/LeftPanel/DimSwitch.button_pressed = can_dim
 	
@@ -7778,3 +7789,12 @@ func _on_PropBtn_pressed():
 
 func _on_SpawnySwitch_toggled(button_pressed):
 	is_spawny = button_pressed
+
+
+func _on_Delaysens_value_changed(value):
+	delay = value
+	$Timer.wait_time = delay
+	print("Delay set to: ", $Timer.wait_time)
+	#save
+	var	file = FileAccess.open(delay_file, FileAccess.WRITE)
+	file.store_float(delay)
