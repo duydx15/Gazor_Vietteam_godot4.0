@@ -87,71 +87,71 @@ var bg_file_J = "user://bg_J.save"
 
 var talking_file_A = "user://talking_A.json"
 var silence_file_A = "user://silence_A.json"
-var talking_blink_file_A = "user://talking_blink_A.save"
-var silence_blink_file_A = "user://silence_blink_A.save"
+var talking_blink_file_A = "user://talking_blink_A.json"
+var silence_blink_file_A = "user://silence_blink_A.json"
 var scream_file_A = "user://scream_png_A.json"
 var prop_file_A = "user://prop_png_A.json"
 
 var talking_file_B = "user://talking_B.json"
 var silence_file_B = "user://silence_B.json"
-var talking_blink_file_B = "user://talking_blink_B.save"
-var silence_blink_file_B = "user://silence_blink_B.save"
+var talking_blink_file_B = "user://talking_blink_B.json"
+var silence_blink_file_B = "user://silence_blink_B.json"
 var scream_file_B = "user://scream_png_B.json"
 var prop_file_B = "user://prop_png_B.json"
 
 var talking_file_C = "user://talking_C.json"
 var silence_file_C = "user://silence_C.json"
-var talking_blink_file_C = "user://talking_blink_C.save"
-var silence_blink_file_C = "user://silence_blink_C.save"
+var talking_blink_file_C = "user://talking_blink_C.json"
+var silence_blink_file_C = "user://silence_blink_C.json"
 var scream_file_C = "user://scream_png_C.json"
 var prop_file_C = "user://prop_png_C.json"
 
 var talking_file_D = "user://talking_D.json"
 var silence_file_D = "user://silence_D.json"
-var talking_blink_file_D = "user://talking_blink_D.save"
-var silence_blink_file_D = "user://silence_blink_D.save"
+var talking_blink_file_D = "user://talking_blink_D.json"
+var silence_blink_file_D = "user://silence_blink_D.json"
 var scream_file_D = "user://scream_png_D.json"
 var prop_file_D = "user://prop_png_D.json"
 
 var talking_file_E = "user://talking_E.json"
 var silence_file_E = "user://silence_E.json"
-var talking_blink_file_E = "user://talking_blink_E.save"
-var silence_blink_file_E = "user://silence_blink_E.save"
+var talking_blink_file_E = "user://talking_blink_E.json"
+var silence_blink_file_E = "user://silence_blink_E.json"
 var scream_file_E = "user://scream_png_E.json"
 var prop_file_E = "user://prop_png_E.json"
 
 var talking_file_F = "user://talking_F.json"
 var silence_file_F = "user://silence_F.json"
-var talking_blink_file_F = "user://talking_blink_F.save"
-var silence_blink_file_F = "user://silence_blink_F.save"
+var talking_blink_file_F = "user://talking_blink_F.json"
+var silence_blink_file_F = "user://silence_blink_F.json"
 var scream_file_F = "user://scream_png_F.json"
 var prop_file_F = "user://prop_png_F.json"
 
 var talking_file_G = "user://talking_G.json"
 var silence_file_G = "user://silence_G.json"
-var talking_blink_file_G = "user://talking_blink_G.save"
-var silence_blink_file_G = "user://silence_blink_G.save"
+var talking_blink_file_G = "user://talking_blink_G.json"
+var silence_blink_file_G = "user://silence_blink_G.json"
 var scream_file_G = "user://scream_png_G.json"
 var prop_file_G = "user://prop_png_G.json"
 
 var talking_file_H = "user://talking_H.json"
 var silence_file_H = "user://silence_H.json"
-var talking_blink_file_H = "user://talking_blink_H.save"
-var silence_blink_file_H = "user://silence_blink_H.save"
+var talking_blink_file_H = "user://talking_blink_H.json"
+var silence_blink_file_H = "user://silence_blink_H.json"
 var scream_file_H = "user://scream_png_H.json"
 var prop_file_H = "user://prop_png_H.json"
 
 var talking_file_I = "user://talking_I.json"
 var silence_file_I = "user://silence_I.json"
-var talking_blink_file_I = "user://talking_blink_I.save"
-var silence_blink_file_I = "user://silence_blink_I.save"
+var talking_blink_file_I = "user://talking_blink_I.json"
+var silence_blink_file_I = "user://silence_blink_I.json"
 var scream_file_I = "user://scream_png_I.json"
 var prop_file_I = "user://prop_png_I.json"
 
 var talking_file_J = "user://talking_J.json"
 var silence_file_J = "user://silence_J.json"
-var talking_blink_file_J = "user://talking_blink_J.save"
-var silence_blink_file_J = "user://silence_blink_J.save"
+var talking_blink_file_J = "user://talking_blink_J.json"
+var silence_blink_file_J = "user://silence_blink_J.json"
 var scream_file_J = "user://scream_png_J.json"
 var prop_file_J = "user://prop_png_J.json"
 
@@ -443,12 +443,10 @@ var fps_output =30
 var previous_time = 0
 var start_ = 0
 var delay_count = 0
-# "/home/anlab/Downloads/gazosource-20221115T023621Z-001/gazo_Vietteam_4.0_covertgodot_only/output_video/output.avi"
-
 
 func _physics_process(delta):
 	count_frame +=1
-
+#	print("blinking : ", can_blink)
 	voice_cap_audio(delta)
 #	print(count_frame," - ",power)
 	#OS.native_video_unpause()
@@ -1434,7 +1432,7 @@ func save_talking(path):
 	if is_preset_A == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_file_A, FileAccess.WRITE)
-#		file.store_string(path)
+#		file.store_line(str(path))
 #		print(path)
 		file.store_line(str(path))
 		
@@ -1463,7 +1461,7 @@ func save_talking(path):
 	elif is_preset_F == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_file_F, FileAccess.WRITE)
-#		file.store_string(path)
+#		file.store_line(str(path))
 		file.store_line(str(path))
 #		print(file)
 		#file.close()
@@ -1485,7 +1483,6 @@ func save_talking(path):
 	elif is_preset_J == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_file_J, FileAccess.WRITE)
-		print(path)
 		file.store_line(str(path))
 		#file.close()
 	
@@ -1493,52 +1490,52 @@ func save_talking_blink(path):
 	if is_preset_A == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_A, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_B == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_B, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_C == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_C, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_D == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_D, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_E == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_E, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_G == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_G, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_H == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_H, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_I == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_I, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_J == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_J, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_F == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(talking_blink_file_F, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	
 func save_silence(path):
@@ -1608,54 +1605,55 @@ func save_silence(path):
 	
 func save_silence_blink(path):
 	if is_preset_A == true:
+#		print("Save SL Blink A: ", path)
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_A, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_B == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_B, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_C == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_C, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_D == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_D, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_E == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_E, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_F == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_F, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_G == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_G, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_H == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_H, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_I == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_I, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_J == true:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(silence_blink_file_J, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 
 func save_scream(path):
@@ -2026,7 +2024,8 @@ func load_camzoom():
 				var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.0001),snapped(float(win_h[1])/float(img_h[1]),0.0001))
 				if auto_focus > 1:
 					auto_focus = snapped(float(1)/auto_focus,0.0001)
-#				print("auto_focus: ", auto_focus)
+				auto_focus = auto_focus*1.26
+				print("auto_focus: ", auto_focus)
 #				var auto_zoom = snapped(float(1)/auto_focus,0.1)
 #				print("auto_zoom: ", auto_zoom)
 				$Camera2D.zoom = Vector2(auto_focus,auto_focus)
@@ -2401,52 +2400,52 @@ func save_bg(path):
 	if is_preset_A:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_A, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_B:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_B, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_C:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_C, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_D:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_D, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_E:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_E, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_F:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_F, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_G:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_G, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_H:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_H, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_I:
 		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_I, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 	elif is_preset_J:
 #		#var file = FileAccess.new()
 		var file =FileAccess.open(bg_file_J, FileAccess.WRITE)
-		file.store_string(path)
+		file.store_line(str(path))
 		#file.close()
 
 func load_png():
@@ -2458,7 +2457,7 @@ func load_png():
 		var file_A = FileAccess.open(talking_file_A, FileAccess.READ)
 		dir = str_to_var(file_A.get_as_text())
 #		dir = str_to_var_json(file_A.get_line())
-#		print("Dir xample: ",dir)
+		print("Dir xample: ",dir)
 		#Load Image
 		var image = Image.new()
 #		#var image_frames = ImageFrames.new()
@@ -2474,7 +2473,7 @@ func load_png():
 						im.load(dir[i])
 						tex.create_from_image(im)
 						tex.set_image(im)
-#						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+#						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2487,7 +2486,7 @@ func load_png():
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
 #					print(image_texture.get_property_list())
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					talk_png_A = image_texture
 			
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -2524,7 +2523,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -2534,7 +2533,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					image_texture.set_image(image)
 					talk_png_B = image_texture
 				
@@ -2572,7 +2571,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2582,7 +2581,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_C = image_texture
 				
@@ -2621,7 +2620,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2631,7 +2630,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_D = image_texture
 				
@@ -2669,7 +2668,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2679,7 +2678,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_E = image_texture
 				
@@ -2718,7 +2717,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2728,7 +2727,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_F = image_texture
 			
@@ -2767,7 +2766,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -2777,7 +2776,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_G = image_texture
 				
@@ -2816,7 +2815,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2826,7 +2825,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_H = image_texture
 				
@@ -2865,7 +2864,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2875,7 +2874,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_I = image_texture
 				
@@ -2914,7 +2913,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)	
 					animated_texture.speed_scale = 1
@@ -2924,7 +2923,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					talk_png_J = image_texture
 				
@@ -2966,7 +2965,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-#						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+#						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -2977,7 +2976,7 @@ func load_png():
 #					print("not gif import - silence A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					image_texture.set_image(image)
 					silence_png_A = image_texture
 			
@@ -3016,7 +3015,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3026,7 +3025,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_B = image_texture
 			
@@ -3066,7 +3065,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3076,7 +3075,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_C = image_texture
 			
@@ -3115,7 +3114,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3125,7 +3124,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_D = image_texture
 			
@@ -3164,7 +3163,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3174,7 +3173,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_E = image_texture
 			
@@ -3214,7 +3213,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3224,7 +3223,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_F = image_texture
 			
@@ -3266,7 +3265,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3276,7 +3275,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_G = image_texture
 			
@@ -3316,7 +3315,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3326,7 +3325,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_H = image_texture
 			
@@ -3365,7 +3364,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3375,7 +3374,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_I = image_texture
 			
@@ -3414,7 +3413,7 @@ func load_png():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3424,7 +3423,7 @@ func load_png():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					silence_png_J = image_texture
 			
@@ -3473,7 +3472,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3483,7 +3482,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_A = image_texture
 		
@@ -3527,7 +3526,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3537,7 +3536,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_B = image_texture
 			
@@ -3578,7 +3577,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3588,7 +3587,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_C = image_texture
 			
@@ -3628,7 +3627,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3638,7 +3637,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_D = image_texture
 			
@@ -3679,7 +3678,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3689,7 +3688,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_E = image_texture
 				
@@ -3729,7 +3728,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3739,7 +3738,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_F = image_texture
 		
@@ -3784,7 +3783,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3794,7 +3793,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_G = image_texture
 			
@@ -3836,7 +3835,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3846,7 +3845,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_H = image_texture
 			
@@ -3887,7 +3886,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3897,7 +3896,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_I = image_texture
 			
@@ -3938,7 +3937,7 @@ func load_scream():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -3948,7 +3947,7 @@ func load_scream():
 					image.load(dir[0])
 					print("not gif import")
 					image_texture.create_from_image(image)
-#image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					image_texture.set_image(image)
 					scream_png_J = image_texture
 				
@@ -3995,7 +3994,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4006,7 +4005,7 @@ func load_prop():
 					print("not gif import prop_A")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_A = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -4049,7 +4048,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4060,7 +4059,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_B = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4100,7 +4099,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4111,7 +4110,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_C = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4150,7 +4149,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4161,7 +4160,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_D = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4201,7 +4200,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4212,7 +4211,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_E = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -4251,7 +4250,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4262,7 +4261,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_F = image_texture
 		
 #			elif  dir[0].get_file().get_extension() == "gif":
@@ -4305,7 +4304,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4316,7 +4315,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_G = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4356,7 +4355,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4367,7 +4366,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_H = image_texture
 			
 #			elif  dir[0].get_extension() == "gif":
@@ -4406,7 +4405,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4417,7 +4416,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_I = image_texture
 #
 #			elif  dir[0].get_extension() == "gif":
@@ -4457,7 +4456,7 @@ func load_prop():
 						var tex = ImageTexture.new()
 						im.load(dir[i])
 						tex.create_from_image(im)
-						tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+						tex.set_image(im)
 						animated_texture.set_frame_texture(i, tex)
 						animated_texture.set_frame_duration(i, 0.5)
 					animated_texture.speed_scale = 1
@@ -4468,7 +4467,7 @@ func load_prop():
 					print("not gif import")
 					image_texture.create_from_image(image)
 					image_texture.set_image(image)
-##image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+#
 					prop_png_J = image_texture
 				
 #			elif  dir[0].get_extension() == "gif":
@@ -4490,23 +4489,20 @@ func load_prop():
 
 func load_blink():
 	var dir
-	var dir_str
-	var directory = DirAccess.open("res://")
 	#load talking blink
 	#var file_A = FileAccess.new()
 	if FileAccess.file_exists(talking_blink_file_A):
 		var file_A = FileAccess.open(talking_blink_file_A, FileAccess.READ)
 		dir = str_to_var(file_A.get_as_text())
-		dir_str = var_to_str(dir)
-		
-		
+
 		#Load Image
-		if dir != "" and directory.dir_exists(dir_str):
+		if dir != null:
 			var image_A = Image.new()
 			var image_texture_A = ImageTexture.new()
-			image_A.load(dir)
+			image_A.load(dir[0])
 			image_texture_A.create_from_image(image_A)
-			image_texture_A.set_flags(image_texture_A.get_flags() & ~(1 << 1))
+			image_texture_A.set_image(image_A)
+#			image_texture_A.set_flags(image_texture_A.get_flags() & ~(1 << 1))
 			#file_A.close()
 			
 			talk_blink_A = image_texture_A
@@ -4515,16 +4511,16 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_B):
 		var file_B = FileAccess.open(talking_blink_file_B, FileAccess.READ)
 		dir = str_to_var(file_B.get_as_text())
-		dir_str = var_to_str(dir)
+		#dir_str = var_to_str(dir)
 #		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(dir_str):
+		if dir != null:
 			var image_B = Image.new()
 			var image_texture_B = ImageTexture.new()
-			image_B.load(dir)
+			image_B.load(dir[0])
 			image_texture_B.create_from_image(image_B)
-			image_texture_B.set_flags(image_texture_B.get_flags() & ~(1 << 1))
+			image_texture_B.set_image(image_B)
 			#file_B.close()
 			
 			talk_blink_B = image_texture_B
@@ -4533,16 +4529,16 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_C):
 		var file_C = FileAccess.open(talking_blink_file_C, FileAccess.READ)
 		dir = str_to_var(file_C.get_as_text())
-		dir_str = var_to_str(dir)
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_C = Image.new()
 			var image_texture_C = ImageTexture.new()
-			image_C.load(dir)
+			image_C.load(dir[0])
 			image_texture_C.create_from_image(image_C)
-			image_texture_C.set_flags(image_texture_C.get_flags() & ~(1 << 1))
+			image_texture_C.set_image(image_C)
 			#file_C.close()
 			
 			talk_blink_C = image_texture_C
@@ -4554,12 +4550,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_D = Image.new()
 			var image_texture_D = ImageTexture.new()
-			image_D.load(dir)
+			image_D.load(dir[0])
 			image_texture_D.create_from_image(image_D)
-			image_texture_D.set_flags(image_texture_D.get_flags() & ~(1 << 1))
+			image_texture_D.set_image(image_D)
 			#file_D.close()
 			
 			talk_blink_D = image_texture_D
@@ -4568,16 +4564,16 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_E):
 		var file_E = FileAccess.open(talking_blink_file_E, FileAccess.READ)
 		dir = str_to_var(file_E.get_as_text())
-		dir_str = var_to_str(dir)
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_E = Image.new()
 			var image_texture_E = ImageTexture.new()
-			image_E.load(dir)
+			image_E.load(dir[0])
 			image_texture_E.create_from_image(image_E)
-			image_texture_E.set_flags(image_texture_E.get_flags() & ~(1 << 1))
+			image_texture_E.set_image(image_E)
 			#file_E.close()
 			
 			talk_blink_E = image_texture_E
@@ -4585,17 +4581,17 @@ func load_blink():
 	
 	if FileAccess.file_exists(talking_blink_file_F):
 		var file_F = FileAccess.open(talking_blink_file_F, FileAccess.READ)
-		dir = file_F.get_as_text()
-		dir_str = var_to_str(dir)
+		dir = str_to_var(file_F.get_as_text())
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_F = Image.new()
 			var image_texture_F = ImageTexture.new()
-			image_F.load(dir)
+			image_F.load(dir[0])
 			image_texture_F.create_from_image(image_F)
-			image_texture_F.set_flags(image_texture_F.get_flags() & ~(1 << 1))
+			image_texture_F.set_image(image_F)
 			#file_F.close()
 			
 			talk_blink_F = image_texture_F
@@ -4603,17 +4599,17 @@ func load_blink():
 	
 	if FileAccess.file_exists(talking_blink_file_G):
 		var file_G = FileAccess.open(talking_blink_file_G, FileAccess.READ)
-		dir = file_G.get_as_text()
-		dir_str = var_to_str(dir)
+		dir = str_to_var(file_G.get_as_text())
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_G = Image.new()
 			var image_texture_G = ImageTexture.new()
-			image_G.load(dir)
+			image_G.load(dir[0])
 			image_texture_G.create_from_image(image_G)
-			image_texture_G.set_flags(image_texture_G.get_flags() & ~(1 << 1))
+			image_texture_G.set_image(image_G)
 #			file_G.close()
 			
 			talk_blink_G = image_texture_G
@@ -4622,16 +4618,16 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_H):
 		var file_H = FileAccess.open(talking_blink_file_H, FileAccess.READ)
 		dir = str_to_var(file_H.get_as_text())
-		dir_str = var_to_str(dir)
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_H = Image.new()
 			var image_texture_H = ImageTexture.new()
-			image_H.load(dir)
+			image_H.load(dir[0])
 			image_texture_H.create_from_image(image_H)
-			image_texture_H.set_flags(image_texture_H.get_flags() & ~(1 << 1))
+			image_texture_H.set_image(image_H)
 #			file_H.close()
 			
 			talk_blink_H = image_texture_H
@@ -4640,16 +4636,16 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_I):
 		var file_I = FileAccess.open(talking_blink_file_I, FileAccess.READ)
 		dir = str_to_var(file_I.get_as_text())
-		dir_str = var_to_str(dir)
+		#dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_I = Image.new()
 			var image_texture_I = ImageTexture.new()
-			image_I.load(dir)
+			image_I.load(dir[0])
 			image_texture_I.create_from_image(image_I)
-			image_texture_I.set_flags(image_texture_I.get_flags() & ~(1 << 1))
+			image_texture_I.set_image(image_I)
 			#file_I.close()
 			
 			talk_blink_I = image_texture_I
@@ -4658,16 +4654,15 @@ func load_blink():
 	if FileAccess.file_exists(talking_blink_file_J):
 		var file_J = FileAccess.open(talking_blink_file_J, FileAccess.READ)
 		dir = str_to_var(file_J.get_as_text())
-		dir_str = var_to_str(dir)
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_J = Image.new()
 			var image_texture_J = ImageTexture.new()
-			image_J.load(dir)
+			image_J.load(dir[0])
 			image_texture_J.create_from_image(image_J)
-			image_texture_J.set_flags(image_texture_J.get_flags() & ~(1 << 1))
+			image_texture_J.set_image(image_J)
 			#file_J.close()
 			
 			talk_blink_J = image_texture_J
@@ -4682,19 +4677,21 @@ func load_blink():
 	if FileAccess.file_exists(silence_blink_file_A):
 		var file_A = FileAccess.open(silence_blink_file_A, FileAccess.READ)
 		dir = str_to_var(file_A.get_as_text())
+#		print("Check save silence blink", dir)
 		#var directory = DirAccess.new()
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_A = Image.new()
 			var image_texture_A = ImageTexture.new()
-			image_A.load(dir)
+			image_A.load(dir[0])
 			image_texture_A.create_from_image(image_A)
-			image_texture_A.set_flags(image_texture_A.get_flags() & ~(1 << 1))
+			image_texture_A.set_image(image_A)
+#			image_texture_A.set_flags(image_texture_A.get_flags() & ~(1 << 1))
 			#file_A.close()
 			
 			silence_blink_A = image_texture_A
-#		else:
-#			print("dir not exist:", silence_blink_file_A)
+		else:
+			print("dir not exist:", silence_blink_file_A)
 		
 	if FileAccess.file_exists(silence_blink_file_B):
 		var file_B = FileAccess.open(silence_blink_file_B, FileAccess.READ)
@@ -4702,12 +4699,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_B = Image.new()
 			var image_texture_B = ImageTexture.new()
-			image_B.load(dir)
+			image_B.load(dir[0])
 			image_texture_B.create_from_image(image_B)
-			image_texture_B.set_flags(image_texture_B.get_flags() & ~(1 << 1))
+			image_texture_B.set_image(image_B)
 			#file_B.close()
 			
 			silence_blink_B = image_texture_B
@@ -4718,12 +4715,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_C = Image.new()
 			var image_texture_C = ImageTexture.new()
-			image_C.load(dir)
+			image_C.load(dir[0])
 			image_texture_C.create_from_image(image_C)
-			image_texture_C.set_flags(image_texture_C.get_flags() & ~(1 << 1))
+			image_texture_C.set_image(image_C)
 			#file_C.close()
 			
 			silence_blink_C = image_texture_C
@@ -4734,12 +4731,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_D = Image.new()
 			var image_texture_D = ImageTexture.new()
-			image_D.load(dir)
+			image_D.load(dir[0])
 			image_texture_D.create_from_image(image_D)
-			image_texture_D.set_flags(image_texture_D.get_flags() & ~(1 << 1))
+			image_texture_D.set_image(image_D)
 			#file_D.close()
 			
 			silence_blink_D = image_texture_D
@@ -4750,44 +4747,44 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_E = Image.new()
 			var image_texture_E = ImageTexture.new()
-			image_E.load(dir)
+			image_E.load(dir[0])
 			image_texture_E.create_from_image(image_E)
-			image_texture_E.set_flags(image_texture_E.get_flags() & ~(1 << 1))
+			image_texture_E.set_image(image_E)
 			#file_E.close()
 			
 			silence_blink_E = image_texture_E
 			
 	if FileAccess.file_exists(silence_blink_file_F):
 		var file_F = FileAccess.open(silence_blink_file_F, FileAccess.READ)
-		dir = file_F.get_as_text()
+		dir = str_to_var(file_F.get_as_text())
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_F = Image.new()
 			var image_texture_F = ImageTexture.new()
-			image_F.load(dir)
+			image_F.load(dir[0])
 			image_texture_F.create_from_image(image_F)
-			image_texture_F.set_flags(image_texture_F.get_flags() & ~(1 << 1))
+			image_texture_F.set_image(image_F)
 			#file_F.close()
 			
 			silence_blink_F = image_texture_F
 		
 	if FileAccess.file_exists(silence_blink_file_G):
 		var file_G = FileAccess.open(silence_blink_file_G, FileAccess.READ)
-		dir = file_G.get_as_text()
+		dir = str_to_var(file_G.get_as_text())
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_G = Image.new()
 			var image_texture_G = ImageTexture.new()
-			image_G.load(dir)
+			image_G.load(dir[0])
 			image_texture_G.create_from_image(image_G)
-			image_texture_G.set_flags(image_texture_G.get_flags() & ~(1 << 1))
+			image_texture_G.set_image(image_G)
 #			file_G.close()
 			
 			silence_blink_G = image_texture_G
@@ -4798,12 +4795,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_H = Image.new()
 			var image_texture_H = ImageTexture.new()
-			image_H.load(dir)
+			image_H.load(dir[0])
 			image_texture_H.create_from_image(image_H)
-			image_texture_H.set_flags(image_texture_H.get_flags() & ~(1 << 1))
+			image_texture_H.set_image(image_H)
 #			file_H.close()
 			
 			silence_blink_H = image_texture_H
@@ -4814,12 +4811,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_I = Image.new()
 			var image_texture_I = ImageTexture.new()
-			image_I.load(dir)
+			image_I.load(dir[0])
 			image_texture_I.create_from_image(image_I)
-			image_texture_I.set_flags(image_texture_I.get_flags() & ~(1 << 1))
+			image_texture_I.set_image(image_I)
 			#file_I.close()
 			
 			silence_blink_I = image_texture_I
@@ -4830,12 +4827,12 @@ func load_blink():
 		#var directory = DirAccess.new()
 		
 		#Load Image
-		if dir != "" and directory.dir_exists(var_to_str(dir)):
+		if dir != null:
 			var image_J = Image.new()
 			var image_texture_J = ImageTexture.new()
-			image_J.load(dir)
+			image_J.load(dir[0])
 			image_texture_J.create_from_image(image_J)
-			image_texture_J.set_flags(image_texture_J.get_flags() & ~(1 << 1))
+			image_texture_J.set_image(image_J)
 			#file_J.close()
 			
 			silence_blink_J = image_texture_J
@@ -4852,16 +4849,16 @@ func load_bg():
 	if FileAccess.file_exists(bg_file_A):
 		var file_A = FileAccess.open(bg_file_A, FileAccess.READ)
 		dir = str_to_var(file_A.get_as_text())
-		
+#		print("BG link: ", dir)
 		#Load Image
 		var bg_A_dir = Image.new()
 		var bg_texture_A = ImageTexture.new()
-		bg_A_dir.load(dir)
+		bg_A_dir.load(dir[0])
 		bg_texture_A.create_from_image(bg_A_dir)
+		bg_texture_A.set_image(bg_A_dir)
 		#file_A.close()
 		
 		bg_A = bg_texture_A
-		print(bg_A)
 	
 	#load bg B
 #	
@@ -4872,8 +4869,9 @@ func load_bg():
 		#Load Image
 		var bg_B_dir = Image.new()
 		var bg_texture_B = ImageTexture.new()
-		bg_B_dir.load(dir)
+		bg_B_dir.load(dir[0])
 		bg_texture_B.create_from_image(bg_B_dir)
+		bg_texture_B.set_image(bg_B_dir)
 		#file_B.close()
 		
 		bg_B = bg_texture_B
@@ -4887,8 +4885,9 @@ func load_bg():
 		#Load Image
 		var bg_C_dir = Image.new()
 		var bg_texture_C = ImageTexture.new()
-		bg_C_dir.load(dir)
+		bg_C_dir.load(dir[0])
 		bg_texture_C.create_from_image(bg_C_dir)
+		bg_texture_C.set_image(bg_C_dir)
 		#file_C.close()
 		
 		bg_C = bg_texture_C
@@ -4902,8 +4901,9 @@ func load_bg():
 		#Load Image
 		var bg_D_dir = Image.new()
 		var bg_texture_D = ImageTexture.new()
-		bg_D_dir.load(dir)
+		bg_D_dir.load(dir[0])
 		bg_texture_D.create_from_image(bg_D_dir)
+		bg_texture_D.set_image(bg_D_dir)
 		#file_D.close()
 		
 		bg_D = bg_texture_D
@@ -4917,8 +4917,9 @@ func load_bg():
 		#Load Image
 		var bg_E_dir = Image.new()
 		var bg_texture_E = ImageTexture.new()
-		bg_E_dir.load(dir)
+		bg_E_dir.load(dir[0])
 		bg_texture_E.create_from_image(bg_E_dir)
+		bg_texture_E.set_image(bg_E_dir)
 		#file_E.close()
 		
 		bg_E = bg_texture_E
@@ -4927,13 +4928,14 @@ func load_bg():
 #	
 	if FileAccess.file_exists(bg_file_F):
 		var file_F =FileAccess.open(bg_file_F, FileAccess.READ)
-		dir = file_F.get_as_text()
+		dir = str_to_var(file_F.get_as_text())
 		
 		#Load Image
 		var bg_F_dir = Image.new()
 		var bg_texture_F = ImageTexture.new()
-		bg_F_dir.load(dir)
+		bg_F_dir.load(dir[0])
 		bg_texture_F.create_from_image(bg_F_dir)
+		bg_texture_F.set_image(bg_F_dir)
 		#file_F.close()
 		
 		bg_F = bg_texture_F
@@ -4941,17 +4943,18 @@ func load_bg():
 #	
 	if FileAccess.file_exists(bg_file_G):
 		var file_G = FileAccess.open(bg_file_G, FileAccess.READ)
-		dir = file_G.get_as_text()
+		dir = str_to_var(file_G.get_as_text())
 		
 		#Load Image
 		var bg_G_dir = Image.new()
 		var bg_texture_G = ImageTexture.new()
-		bg_G_dir.load(dir)
+		bg_G_dir.load(dir[0])
 		bg_texture_G.create_from_image(bg_G_dir)
-		file_G.close()
+		bg_texture_G.set_image(bg_G_dir)
+#		file_G.close()
 		
 		bg_G = bg_texture_G
-		print(bg_G)
+#		print(bg_G)
 	
 	#load bg H
 #	
@@ -4962,9 +4965,10 @@ func load_bg():
 		#Load Image
 		var bg_H_dir = Image.new()
 		var bg_texture_H = ImageTexture.new()
-		bg_H_dir.load(dir)
+		bg_H_dir.load(dir[0])
 		bg_texture_H.create_from_image(bg_H_dir)
-		file_H.close()
+		bg_texture_H.set_image(bg_H_dir)
+#		file_H.close()
 		
 		bg_H = bg_texture_H
 	
@@ -4977,8 +4981,9 @@ func load_bg():
 		#Load Image
 		var bg_I_dir = Image.new()
 		var bg_texture_I = ImageTexture.new()
-		bg_I_dir.load(dir)
+		bg_I_dir.load(dir[0])
 		bg_texture_I.create_from_image(bg_I_dir)
+		bg_texture_I.set_image(bg_I_dir)
 		#file_I.close()
 		
 		bg_I = bg_texture_I
@@ -4992,8 +4997,9 @@ func load_bg():
 		#Load Image
 		var bg_J_dir = Image.new()
 		var bg_texture_J = ImageTexture.new()
-		bg_J_dir.load(dir)
+		bg_J_dir.load(dir[0])
 		bg_texture_J.create_from_image(bg_J_dir)
+		bg_texture_J.set_image(bg_J_dir)
 		#file_J.close()
 		
 		bg_J = bg_texture_J
@@ -5799,7 +5805,7 @@ func _on_files_dropped(files):
 					im.load(files[i])
 					tex.create_from_image(im)
 					tex.set_image(im)
-#					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					animated_texture.set_frame_texture(i, tex)
 					animated_texture.set_frame_duration(i, 0.5)
 				animated_texture.speed_scale = 1
@@ -5831,7 +5837,7 @@ func _on_files_dropped(files):
 				print("not gif import")
 				image_texture.create_from_image(image)
 				image_texture.set_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 				if is_preset_A:
 					talk_png_A = image_texture
 				elif is_preset_B:
@@ -5904,7 +5910,7 @@ func _on_files_dropped(files):
 #			if files[0].get_extension() != "gif":
 #				image.load(files[0])
 #				image_texture.create_from_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 #				talk_png_A = image_texture
 #			elif  files[0].get_extension() == "gif":
 #				image_frames.load(files[0])
@@ -5936,7 +5942,7 @@ func _on_files_dropped(files):
 #			if files[0].get_extension() != "gif":
 #				image.load(files[0])
 #				image_texture.create_from_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 #				talk_png_B = image_texture
 #			elif  files[0].get_extension() == "gif":
 #				image_frames.load(files[0])
@@ -5968,7 +5974,7 @@ func _on_files_dropped(files):
 #			if files[0].get_extension() != "gif":
 #				image.load(files[0])
 #				image_texture.create_from_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 #				talk_png_C = image_texture
 #			elif  files[0].get_extension() == "gif":
 #				image_frames.load(files[0])
@@ -6000,7 +6006,7 @@ func _on_files_dropped(files):
 #			if files[0].get_extension() != "gif":
 #				image.load(files[0])
 #				image_texture.create_from_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 #				talk_png_D = image_texture
 #			elif  files[0].get_extension() == "gif":
 #				image_frames.load(files[0])
@@ -6032,7 +6038,7 @@ func _on_files_dropped(files):
 #			if files[0].get_extension() != "gif":
 #				image.load(files[0])
 #				image_texture.create_from_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 #				talk_png_E = image_texture
 #			elif  files[0].get_extension() == "gif":
 #				image_frames.load(files[0])
@@ -6066,7 +6072,7 @@ func _on_files_dropped(files):
 			image.load(files[0])
 			image_texture.create_from_image(image)
 			image_texture.set_image(image)
-#			image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 			
 			if is_preset_A:
 				talk_blink_A = image_texture
@@ -6092,15 +6098,15 @@ func _on_files_dropped(files):
 			#$On.texture =image_texture 
 			
 			#Save
-			save_talking_blink(files[0])
-			switch_preset()
-			$CanvasLayer/FileDialog.hide()
-			is_filedialog_talk = false
-			is_filedialog_talk_blink = false
-			is_blinking = false
-			can_scroll = true
-			#$CanvasLayer/FileDialogOff.hide()
-			#$CanvasLayer/FileDialogOn.hide()
+		save_talking_blink(files)
+		switch_preset()
+		$CanvasLayer/FileDialog.hide()
+		is_filedialog_talk = false
+		is_filedialog_talk_blink = false
+		is_blinking = false
+		can_scroll = true
+		#$CanvasLayer/FileDialogOff.hide()
+		#$CanvasLayer/FileDialogOn.hide()
 		
 	elif is_filedialog_silence and is_blinking == false  and is_filedialog_scream == false and is_filedialog_prop == false:
 		print("Silence mode")
@@ -6119,7 +6125,7 @@ func _on_files_dropped(files):
 					im.load(files[i])
 					tex.create_from_image(im)
 					tex.set_image(im)
-#					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 					animated_texture.set_frame_texture(i, tex)
 					animated_texture.set_frame_duration(i, 0.5)	
 				animated_texture.speed_scale = 1
@@ -6149,7 +6155,7 @@ func _on_files_dropped(files):
 				image.load(files[0])
 #				image_texture.create_from_image(image)
 				image_texture.set_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 				if is_preset_A:
 					silence_png_A = image_texture
 				elif is_preset_B:
@@ -6220,7 +6226,7 @@ func _on_files_dropped(files):
 			image.load(files[0])
 			image_texture.create_from_image(image)
 			image_texture.set_image(image)
-#			image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 			
 			if is_preset_A:
 				silence_blink_A = image_texture
@@ -6244,15 +6250,15 @@ func _on_files_dropped(files):
 				silence_blink_J = image_texture
 			#$Off.texture =image_texture 
 			#Save
-			save_silence_blink(files[0])
-			switch_preset()
-			$CanvasLayer/FileDialog.hide()
-	#		$CanvasLayer/FileDialogOff.hide()
-	#		$CanvasLayer/FileDialogOn.hide()
-			is_filedialog_talk = false
-			is_filedialog_silence_blink = false
-			is_blinking = false
-			can_scroll = true
+		save_silence_blink(files)
+		switch_preset()
+		$CanvasLayer/FileDialog.hide()
+#		$CanvasLayer/FileDialogOff.hide()
+#		$CanvasLayer/FileDialogOn.hide()
+		is_filedialog_talk = false
+		is_filedialog_silence_blink = false
+		is_blinking = false
+		can_scroll = true
 	
 	elif is_filedialog_talk == false and is_blinking == false and is_filedialog_scream == true and is_filedialog_prop == false:
 		print("Scream status")
@@ -6270,7 +6276,7 @@ func _on_files_dropped(files):
 					var tex = ImageTexture.new()
 					im.load(files[i])
 					tex.create_from_image(im)
-					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+					tex.set_image(im)
 					animated_texture.set_frame_texture(i, tex)
 					animated_texture.set_frame_duration(i, 0.5)	
 				animated_texture.speed_scale = 1
@@ -6298,7 +6304,7 @@ func _on_files_dropped(files):
 				image.load(files[0])
 				image_texture.create_from_image(image)
 				image_texture.set_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 				if is_preset_A:
 					scream_png_A = image_texture
 				elif is_preset_B:
@@ -6376,7 +6382,7 @@ func _on_files_dropped(files):
 					var tex = ImageTexture.new()
 					im.load(files[i])
 					tex.create_from_image(im)
-					tex.set_flags(image_texture.get_flags() & ~(1 << 1))
+					tex.set_image(im)
 					animated_texture.set_frame_texture(i, tex)
 					animated_texture.set_frame_duration(i, 0.5)	
 				animated_texture.speed_scale = 1
@@ -6404,7 +6410,7 @@ func _on_files_dropped(files):
 				image.load(files[0])
 				image_texture.create_from_image(image)
 				image_texture.set_image(image)
-#				image_texture.set_flags(image_texture.get_flags() & ~(1 << 1))
+
 				if is_preset_A:
 					prop_png_A = image_texture
 				elif is_preset_B:

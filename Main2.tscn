@@ -940,10 +940,12 @@ z_index = 5
 
 [node name="On" parent="." instance=ExtResource("3")]
 visible = false
+position = Vector2(300, 223)
 scale = Vector2(0.999286, 0.972718)
 z_index = 1
 
 [node name="Off" parent="." instance=ExtResource("2")]
+visible = true
 scale = Vector2(1, 1)
 z_index = 1
 

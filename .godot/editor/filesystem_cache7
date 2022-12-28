@@ -1,5 +1,5 @@
 0b7126e0c6e86d3ec295a72f5aa6e0bd
-::res://::1672043095
+::res://::1672211966
 Area2D.gd::GDScript::-1::1669260858::0::1::::<>Area2D<>::
 AudioStreamRecord.gd::GDScript::-1::1669260859::0::1::::<>AudioStreamPlayer<>::
 Audio_bk_25Nov.gd::GDScript::-1::1669348204::0::1::::<>Control<>::
@@ -12,7 +12,7 @@ CanvasLayer.gd::GDScript::-1::1669260859::0::1::::<>CanvasLayer<>::
 CanvasLayer.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://CanvasLayer.gd
 Client.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
 Client.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Client.gd
-default_bus_layout.tres::AudioBusLayout::9151933646992978182::1672022647::0::1::::<><>::
+default_bus_layout.tres::AudioBusLayout::9151933646992978182::1672201906::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1671442829::0::1::::<><>::
 Gazo Bg.png::CompressedTexture2D::3574830658416476736::1669260859::1669260865::1::::<><>::
 Gazo Icon.png::Image::6672367892070965438::1669260859::1669260865::1::::<><>::
@@ -27,7 +27,7 @@ Host.gd::GDScript::-1::1669260859::0::1::::<>Control<>::
 Host.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Arts/FileDialog.png<>res://Networking.tscn<>res://Host.gd
 Join.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Networking.tscn
 KinematicBody2D.gd::GDScript::-1::1669260859::0::1::::<>KinematicBody2D<>::
-Main2.tscn::PackedScene::3899878817899524387::1672043095::0::1::::<><>::res://VietTeam_main_custome_input.gd<>res://Off.tscn<>res://On.tscn<>res://Camera2D.gd<>uid://uk5y3on27it0<>uid://iwvreirxlvqf<>uid://cavhxkbuu52q3<>uid://xm5yia6nr0ah<>uid://dbmgf12e5vftp<>uid://bao7hikuw5tp6<>uid://dcdn8wfbbjk4p<>uid://b22i7lk53hw7b<>uid://vhgytrie538e<>uid://dql0ck8m18ex<>uid://d0enhf7gpmh52<>uid://dr1xwywv1ddkj<>uid://c8ku8s8vexols<>uid://bylsj1a8job7u<>uid://dnnr88ufowi0b<>uid://c0kx2lyy1icec<>uid://fjpba34qx8eu<>res://Panel2.gd<>uid://fi112ujjoqo8<>uid://hbiakh7c5l3w<>uid://77pa7q2imhmn<>uid://dcvkb5nmueh1r<>uid://xp5l8vv7bd85<>uid://c04kisf7ljybw<>uid://bye35yhdcewg3<>uid://y6eke7bi8hm3<>uid://cm37wn82aykn6<>uid://bxj0xu6tjia74<>uid://bnq5sd3v8t4ea<>uid://cvjfjv417y5x3<>res://AudioStreamRecord.gd<>uid://7anebcn40fhk<>uid://rp251srcbsj4<>uid://dgwof1dh4cp2d<>uid://ba4grwnqsih6g<>uid://bxyut0xbhc148<>uid://bv3edccq3taul<>uid://rb8s6wni2ahs<>uid://b5e7xeujc7a2i<>res://Prop.tscn<>uid://tqnta1w64qpw<>uid://ch6eh4svkgjqh
+Main2.tscn::PackedScene::3899878817899524387::1672211966::0::1::::<><>::res://VietTeam_main_custome_input.gd<>res://Off.tscn<>res://On.tscn<>res://Camera2D.gd<>uid://uk5y3on27it0<>uid://iwvreirxlvqf<>uid://cavhxkbuu52q3<>uid://xm5yia6nr0ah<>uid://dbmgf12e5vftp<>uid://bao7hikuw5tp6<>uid://dcdn8wfbbjk4p<>uid://b22i7lk53hw7b<>uid://vhgytrie538e<>uid://dql0ck8m18ex<>uid://d0enhf7gpmh52<>uid://dr1xwywv1ddkj<>uid://c8ku8s8vexols<>uid://bylsj1a8job7u<>uid://dnnr88ufowi0b<>uid://c0kx2lyy1icec<>uid://fjpba34qx8eu<>res://Panel2.gd<>uid://fi112ujjoqo8<>uid://hbiakh7c5l3w<>uid://77pa7q2imhmn<>uid://dcvkb5nmueh1r<>uid://xp5l8vv7bd85<>uid://c04kisf7ljybw<>uid://bye35yhdcewg3<>uid://y6eke7bi8hm3<>uid://cm37wn82aykn6<>uid://bxj0xu6tjia74<>uid://bnq5sd3v8t4ea<>uid://cvjfjv417y5x3<>res://AudioStreamRecord.gd<>uid://7anebcn40fhk<>uid://rp251srcbsj4<>uid://dgwof1dh4cp2d<>uid://ba4grwnqsih6g<>uid://bxyut0xbhc148<>uid://bv3edccq3taul<>uid://rb8s6wni2ahs<>uid://b5e7xeujc7a2i<>res://Prop.tscn<>uid://tqnta1w64qpw<>uid://ch6eh4svkgjqh
 Main.tscn::PackedScene::2247785952735092593::1670816744::0::1::::<><>::res://Mic.gd<>res://Off.tscn<>res://On.tscn<>res://Camera2D.gd<>uid://uk5y3on27it0<>uid://bq6w66c5h513a
 Mic.gd::GDScript::-1::1669265834::0::1::::<>Control<>::
 MicContainer.gd::GDScript::-1::1669260859::0::1::::<>TextureButton<>::
@@ -72,7 +72,7 @@ Testing.tscn::PackedScene::-1::1669260859::0::1::::<><>::res://Testing.gd<>res:/
 TextureRect.gd::GDScript::-1::1669260859::0::1::::<>TextureRect<>::
 Ubuntu-B.ttf::FontFile::5641556276742546369::1669260859::1669260865::1::::<><>::
 VietTeam_main.gd::GDScript::-1::1670490826::0::1::::<>Control<>::
-VietTeam_main_custome_input.gd::GDScript::-1::1672043087::0::1::::<>Control<>::
+VietTeam_main_custome_input.gd::GDScript::-1::1672211962::0::1::::<>Control<>::
 x icon.png::CompressedTexture2D::4174088302404400132::1669260859::1669260865::1::::<><>::
 ::res://Arts/::1669261114
 BGBtnClick.png::CompressedTexture2D::2446683475361321568::1669260858::1669260865::1::::<><>::
@@ -127,7 +127,7 @@ Third Panel With Keys.png::CompressedTexture2D::2087066335819330989::1669260859:
 Third Panel.png::CompressedTexture2D::4502327762280990174::1669260859::1669260865::1::::<><>::
 TransparentBtn.png::CompressedTexture2D::4337801137232355281::1669260859::1669260865::1::::<><>::
 TransparentBtnClick.png::CompressedTexture2D::8099646813665796387::1669260859::1669260865::1::::<><>::
-::res://input_audio/::1672043185
+::res://input_audio/::1672211737
 converted_mp3.mp3::::-1::0::0::0::::<><>::
 demo_0p30.mp3::::-1::0::0::0::::<><>::
 demo_0p30.wav::AudioStreamWAV::5332659958805994254::1663661915::1671071665::1::::<><>::
@@ -135,7 +135,7 @@ output-file.mp3::::-1::0::0::0::::<><>::
 test_0p18_spanish.mp3::AudioStreamMP3::3989331760310582836::1668574436::1671445645::1::::<><>::
 test_1p.mp3::AudioStreamMP3::7255705265163309641::1669028600::1670497554::1::::<><>::
 test_1p.ogg::::-1::0::0::0::::<><>::
-test_1p.wav::AudioStreamWAV::8011157150094243159::1667297478::1672043252::0::::<><>::
+test_1p.wav::AudioStreamWAV::8011157150094243159::1667297478::1672211968::0::::<><>::
 test_1p_pure.mp3::::-1::0::0::0::::<><>::
 test_1s_spanish.mp3::AudioStreamMP3::2754451276810563562::1668582875::1669264676::1::::<><>::
 test_spanish_20s.mp3::AudioStreamMP3::7228154120961915220::1668585560::1669264676::1::::<><>::
