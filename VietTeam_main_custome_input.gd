@@ -85,6 +85,9 @@ var bg_file_H = "user://bg_H.save"
 var bg_file_I = "user://bg_I.save"
 var bg_file_J = "user://bg_J.save"
 
+var smile_file = "user://smile_file.json"
+var smile_talk_file = "user://smile_talk_file.json"
+
 var talking_file_A = "user://talking_A.json"
 var silence_file_A = "user://silence_A.json"
 var talking_blink_file_A = "user://talking_blink_A.json"
@@ -227,6 +230,9 @@ var camzoom_file_Z = "user://camzoom_Z.save"
 #var bind_file_A = "user://binding_A.save"
 #var bind_file_B = "user://binding_B.save"
 #var bind_file_C = "user://binding_C.save"
+
+var smile_png
+var smile_talk_png
 
 var talk_png_A
 var talk_blink_A
@@ -402,8 +408,8 @@ func _ready():
 	load_bg()
 #	load_binding()
 	load_png()
-	
-#	print("Cam ALL: ", cam_all)
+	load_smile_img()
+	print("Cam ALL: ", cam_all)
 	load_blink()
 	
 	load_sens()
@@ -643,15 +649,6 @@ func nervous(isNervous):
 var input_arg = {}
 func load_cmd_input():
 	
-#	for argument in OS.get_cmdline_args():
-#		print(argument)
-#		if argument.find("=") > -1:
-#			var key_value = argument.split("=")
-#			input_arg[key_value[0].lstrip("--")] = key_value[1]
-#		else:
-#			# Options without an argument will be present in the dictionary,
-#			# with the value set to an empty string.
-#			input_arg[argument.lstrip("--")] = ""
 	print("Arg CMD")
 	for argument in OS.get_cmdline_args():
 		
@@ -671,15 +668,21 @@ func load_cmd_input():
 		print("File talk: ", images_talk)
 		save_talking(images_talk)
 		save_scream(images_talk)
-	else:
-		print("Invalid arg: --images_talk")	
-	if "image" in input_arg:
-#		print("get image_silence")
 		var images_silence = [input_arg["image"].split(",")[0]]
 		print("File silence: ", images_silence)
-		save_silence(images_silence)		
+		save_silence(images_silence)
 	else:
-		print("Invalid arg: --image_Silence")
+		print("Invalid arg: --images_talk")	
+	
+	if "image_smile" in input_arg:
+#		print("get image_silence")
+		var images_smile = [input_arg["image_smile"].split(",")[0]]
+		var images_smile_talk = [input_arg["image_smile"].split(",")[1]]
+		print("File smile: ", images_smile, images_smile_talk)
+		save_smile(images_smile)
+		save_smile_talk(images_smile_talk)
+	else:
+		print("Invalid arg: --image_smile")
 	
 	if "input_audio" in input_arg:
 		if  input_arg["input_audio"].ends_with('.mp3'):
@@ -770,7 +773,7 @@ func voice_cap_audio(_delta):
 		stopped_talking = false
 		if is_talking == false and can_bounce == true:
 #			print("Talk")
-			$AnimationPlayer.play("Talk")
+			$AnimationPlayer.play("Smile_Talk")
 			is_talking = true
 			is_timer = false
 			$Timer.stop()
@@ -918,7 +921,7 @@ func _input(event):
 		$AnimationPlayer.play("Triggered")
 
 	elif not Input.is_action_pressed("shakes") and is_talking == false:
-		$AnimationPlayer.play("Silence")
+		$AnimationPlayer.play("Smile")
 	
 	
 	#Preset Key
@@ -1171,7 +1174,7 @@ func _input(event):
 func _on_Timer_timeout():
 	
 	if stopped_talking == false:
-		$AnimationPlayer.play("Silence")
+		$AnimationPlayer.play("Smile")
 		is_talking = false
 		is_timer = false
 		$Timer.stop()
@@ -1602,7 +1605,17 @@ func save_silence(path):
 		#file.store_string(str(path))
 		file.store_line(str(path))
 		#file.close()
+
+func save_smile(path):
 	
+	var file =FileAccess.open(smile_file, FileAccess.WRITE)
+	file.store_line(str(path))
+
+func save_smile_talk(path):
+	
+	var file =FileAccess.open(smile_talk_file, FileAccess.WRITE)
+	file.store_line(str(path))
+
 func save_silence_blink(path):
 	if is_preset_A == true:
 #		print("Save SL Blink A: ", path)
@@ -2021,6 +2034,7 @@ func load_camzoom():
 			if $Off.texture != null:
 				var img_h = $Off.texture.get_size()
 				var win_h = DisplayServer.window_get_size()
+#				print("auto_focus: ", img_h,win_h)
 				var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.0001),snapped(float(win_h[1])/float(img_h[1]),0.0001))
 				if auto_focus > 1:
 					auto_focus = snapped(float(1)/auto_focus,0.0001)
@@ -2281,6 +2295,8 @@ func load_prop_zoom():
 func switch_preset():
 #	print("Switch preset"
 	if can_switch_preset:
+		$Smile_Talk.texture = smile_talk_png
+		$Smile.texture = smile_png
 #		print("Switch preset",can_switch_preset)
 		if is_preset_A == true:
 			#$AnimDelay.start()
@@ -2457,7 +2473,7 @@ func load_png():
 		var file_A = FileAccess.open(talking_file_A, FileAccess.READ)
 		dir = str_to_var(file_A.get_as_text())
 #		dir = str_to_var_json(file_A.get_line())
-		print("Dir xample: ",dir)
+#		print("Dir xample: ",dir)
 		#Load Image
 		var image = Image.new()
 #		#var image_frames = ImageFrames.new()
@@ -3445,6 +3461,73 @@ func load_png():
 
 	else:
 		pass
+
+func load_smile_img():
+	var dir
+	if FileAccess.file_exists(smile_file):
+		var file_smile = FileAccess.open(smile_file, FileAccess.READ)
+		dir = str_to_var(file_smile.get_as_text())
+#		#dir = str_to_var(file_G.get_line())
+		
+		#Load Image
+		var image = Image.new()
+		#var image_frames = ImageFrames.new()
+		var image_texture = ImageTexture.new()
+		var animated_texture = AnimatedTexture.new()
+		if dir != null:
+			if dir[0].get_file().get_extension() != "gif":
+				if dir.size() > 1:
+					animated_texture.frames = dir.size()
+					for i in dir.size():
+						var im = Image.new()
+						var tex = ImageTexture.new()
+						im.load(dir[i])
+						tex.create_from_image(im)
+						tex.set_image(im)
+						animated_texture.set_frame_texture(i, tex)
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
+					smile_png = animated_texture
+					
+				else:
+					image.load(dir[0])
+#					print("Load smile image", dir[0])
+					image_texture.create_from_image(image)
+					image_texture.set_image(image)
+					smile_png = image_texture
+			
+	if FileAccess.file_exists(smile_talk_file):
+		var file_smile_talk = FileAccess.open(smile_talk_file, FileAccess.READ)
+		dir = str_to_var(file_smile_talk.get_as_text())
+#		#dir = str_to_var(file_G.get_line())
+		
+		#Load Image
+		var image = Image.new()
+		#var image_frames = ImageFrames.new()
+		var image_texture = ImageTexture.new()
+		var animated_texture = AnimatedTexture.new()
+		if dir != null:
+			if dir[0].get_file().get_extension() != "gif":
+				if dir.size() > 1:
+					animated_texture.frames = dir.size()
+					for i in dir.size():
+						var im = Image.new()
+						var tex = ImageTexture.new()
+						im.load(dir[i])
+						tex.create_from_image(im)
+						tex.set_image(im)
+						animated_texture.set_frame_texture(i, tex)
+						animated_texture.set_frame_duration(i, 0.5)
+					animated_texture.speed_scale = 1
+					smile_talk_png = animated_texture
+					
+				else:
+					image.load(dir[0])
+#					print("Load smile image", dir[0])
+					image_texture.create_from_image(image)
+					image_texture.set_image(image)
+					smile_talk_png = image_texture
+			
 
 func load_scream():
 	var dir
@@ -5470,6 +5553,7 @@ func _on_DimSwitch_toggled(button_pressed):
 		can_dim = true
 	elif button_pressed == false:
 		$Off/CanvasModulate.visible = false
+		
 		can_dim = false
 		
 	save_dim(can_dim)

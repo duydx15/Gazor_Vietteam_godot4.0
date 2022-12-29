@@ -1,11 +1,13 @@
-[gd_scene load_steps=71 format=3 uid="uid://bvteo1d0ncq6f"]
+[gd_scene load_steps=75 format=3 uid="uid://bvteo1d0ncq6f"]
 
 [ext_resource type="Script" path="res://VietTeam_main_custome_input.gd" id="1_yew7v"]
 [ext_resource type="PackedScene" path="res://Off.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://On.tscn" id="3"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://uk5y3on27it0" path="res://setting icon.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bkwiqflqi5wx1" path="res://Risun Body.png" id="6_v7cmt"]
 [ext_resource type="Texture2D" uid="uid://iwvreirxlvqf" path="res://Arts/Gazo Bg.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://1s1lt0mjgnwq" path="res://Risun Head.png" id="7_ywd35"]
 [ext_resource type="Texture2D" uid="uid://cavhxkbuu52q3" path="res://Arts/Left Panel.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://xm5yia6nr0ah" path="res://Arts/TalkBtn.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://dbmgf12e5vftp" path="res://Arts/SilenceBtn.png" id="11"]
@@ -183,7 +185,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("On:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -229,6 +231,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile_Talk:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Smile:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="3"]
 resource_name = "ScreamNoShake"
@@ -269,6 +295,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Smile_Talk:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Smile:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="33"]
@@ -347,6 +397,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181), Vector2(322.679, 187.463), Vector2(300, 207.622), Vector2(355.437, 222.741), Vector2(332.758, 215.181)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile_Talk:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Smile:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="4"]
 loop_mode = 1
@@ -410,6 +484,30 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Smile_Talk:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="38"]
 resource_name = "Spawning"
@@ -438,10 +536,10 @@ tracks/0/path = NodePath("Off:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.00105478),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -486,6 +584,30 @@ tracks/4/path = NodePath("Scream:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Smile_Talk:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -549,6 +671,30 @@ tracks/4/path = NodePath("Scream:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Smile_Talk:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -618,6 +764,196 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Smile_Talk:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_71wlv"]
+resource_name = "Smile_Talk"
+length = 10.0
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Smile_Talk:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Smile_Talk:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 223)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Smile:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("On:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Off:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Scream:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qnc00"]
+resource_name = "Smile"
+length = 10.0
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Smile_Talk:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Smile_Talk:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 223)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Smile:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("On:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Off:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Scream:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Smile:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 223)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23snd"]
 _data = {
@@ -628,6 +964,8 @@ _data = {
 "ScreamNoShake": SubResource("3"),
 "ScreamTalk": SubResource("33"),
 "Silence": SubResource("4"),
+"Smile": SubResource("Animation_qnc00"),
+"Smile_Talk": SubResource("Animation_71wlv"),
 "Spawning": SubResource("38"),
 "Talk": SubResource("5"),
 "TalkNoBounce": SubResource("6"),
@@ -940,12 +1278,24 @@ z_index = 5
 
 [node name="On" parent="." instance=ExtResource("3")]
 visible = false
-position = Vector2(300, 223)
+position = Vector2(330.238, 208.252)
 scale = Vector2(0.999286, 0.972718)
 z_index = 1
 
+[node name="Smile_Talk" parent="." instance=ExtResource("3")]
+visible = false
+position = Vector2(300, 223)
+scale = Vector2(0.999286, 0.972718)
+z_index = 1
+texture = ExtResource("6_v7cmt")
+
+[node name="Smile" parent="." instance=ExtResource("3")]
+position = Vector2(300, 223)
+scale = Vector2(0.999286, 0.972718)
+z_index = 1
+texture = ExtResource("7_ywd35")
+
 [node name="Off" parent="." instance=ExtResource("2")]
-visible = true
 scale = Vector2(1, 1)
 z_index = 1
 
@@ -1879,7 +2229,7 @@ process_priority = -6
 wait_time = 0.1
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-53, -81)
+position = Vector2(1179, 25)
 frames = SubResource("30")
 animation = &"silence"
 playing = true
