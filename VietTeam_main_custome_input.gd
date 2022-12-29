@@ -773,7 +773,7 @@ func voice_cap_audio(_delta):
 		stopped_talking = false
 		if is_talking == false and can_bounce == true:
 #			print("Talk")
-			$AnimationPlayer.play("Smile_Talk")
+			$AnimationPlayer.play("Talk")
 			is_talking = true
 			is_timer = false
 			$Timer.stop()
@@ -921,7 +921,7 @@ func _input(event):
 		$AnimationPlayer.play("Triggered")
 
 	elif not Input.is_action_pressed("shakes") and is_talking == false:
-		$AnimationPlayer.play("Smile")
+		$AnimationPlayer.play("Silence")
 	
 	
 	#Preset Key
@@ -1174,7 +1174,7 @@ func _input(event):
 func _on_Timer_timeout():
 	
 	if stopped_talking == false:
-		$AnimationPlayer.play("Smile")
+		$AnimationPlayer.play("Silence")
 		is_talking = false
 		is_timer = false
 		$Timer.stop()
