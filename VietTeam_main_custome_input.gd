@@ -3,7 +3,6 @@ extends Control
 #var room_id = 0
 #const PORT = 3000
 #const MAX_USERS = 4 #not including host
-
 #onready var prop = preload("res://Prop.tscn")
 
 var power = 0.0
@@ -40,12 +39,12 @@ var is_blinking = false
 var can_bounce = true
 var can_blink = true
 var can_shake = true
-var can_dim 
+var can_dim = true
 var is_talking = false
 var is_timer = false
 var limiter = 0
-var delay = 20
-var sLimiter = 6
+var delay 
+var sLimiter = -7
 var sValue = 0
 
 var is_transparent = false
@@ -318,6 +317,8 @@ var bg_H
 var bg_I 
 var bg_J
 
+var scale_image=1
+
 var micCount
 var rng = RandomNumberGenerator.new()
 
@@ -328,6 +329,7 @@ var displacementX = 0.0
 var displacementY = 0.0
 var displacementAmount = 0.3
 var displacementAmountY = 0.3
+
 var isVibing = false
 var vibeRight = true
 var vibeLeft = false
@@ -375,6 +377,7 @@ var viewport_path = null
 
 
 func _ready():
+	
 #	print("Delay set to: ", $Timer.wait_time)
 #	var image = Image.new()
 #	image.load("image path")
@@ -390,11 +393,11 @@ func _ready():
 #	print("Input arg", input_arg)
 #	print("Load resolution")
 #	load_mic()
-	spectrum = AudioServer.get_bus_effect_instance(1, 1)
+#	spectrum = AudioServer.get_bus_effect_instance(1, 1)
 	
 	limiter = $CanvasLayer/ToHide/LeftPanel/MicSens.get("value")
-	#AudioServer.capture_set_device(AudioServer.capture_get_device_list()[1])
 	
+	#AudioServer.capture_set_device(AudioServer.capture_get_device_list()[1])
 	#$CanvasLayer/ToHide/Report2.text ="Audio Input is " + str(ProjectSettings.get_setting("audio/enable_audio_input"))
 	#$CanvasLayer/ToHide/Report3.text = "Availble mic & audio interface is " + str(Sount)
 	#ProjectSettings.set_setting("audio/enable_audio_input", true)
@@ -409,38 +412,49 @@ func _ready():
 #	load_binding()
 	load_png()
 	load_smile_img()
-	print("Cam ALL: ", cam_all)
+	load_scream()
+#	print("Cam ALL: ", cam_all)
 	load_blink()
-	
 	load_sens()
+	print("Limiter: ", limiter)
 	load_delay()
 	load_amp()
 	load_camzoom()
 	load_options()
 	load_flip()
 	dragndrop()
-	load_scream()
+	
 	load_prop()
 	load_prop_pos()
 	load_prop_zoom()
 	switch_preset()
 	load_hotkeys()
-
+	
+	$On.set_offset(center_w)
+	$Off.set_offset(center_w)
+	$Scream.set_offset(center_w)
+	$Smile.set_offset(center_w)
+	$Smile_Talk.set_offset(center_w)
+	
+	
 	load_audio()
+
+	
+#	$Timer.wait_time = 0.000001
 #	var h_ = $On.texture.get_height()
 	
 	#print(AudioServer.capture_get_device())
-	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide()
+	$CanvasLayer/ToHide/Panel2/VBoxContainer.hide() 
 #	$CanvasLayer.hide()
 	
-#	_on_GreenScreenBtn_pressed()
+	_on_GreenScreenBtn_pressed()
+	
 		#network
 	
 #	get_tree().connect("connected_to_server", self, "enter_room")
 #	get_tree().connect("network_peer_connected", self, "user_entered")
 #	get_tree().connect("network_peer_disconnected", self, "user_exited")
 #	get_tree().connect("server_disconnected", self, "_server_disconnected")
-#
 #
 #	join_room()
 var images = []
@@ -449,24 +463,67 @@ var fps_output =30
 var previous_time = 0
 var start_ = 0
 var delay_count = 0
+var center_w = Vector2(-300,-228)
+var delay_tmp
 
 func _physics_process(delta):
 	count_frame +=1
 #	print("blinking : ", can_blink)
 	voice_cap_audio(delta)
+	########################
+	vibing(isVibing)
+#	isBouncy=true
+#	print("testtttt", isVibing, isBouncy)
+#	$Off.position.x = 100
+#	$Off.position.y = -25
+#	$On.position.x = 100
+#	$On.position.y = -25
+#	if(isShaking || isShakingMore || isBouncy || isExcited || isNervous||isVibing):
+#		$Off.position.x = 100
+#		$Off.position.y = -25
+#		$On.position.x = 100
+#		$On.position.y = -25
+		
+	shaking(isShaking)
+	shakingMore(isShakingMore)
+	bouncy(isBouncy)
+	excited(isExcited)
+	nervous(isNervous)
+	
+	
+	wasVibing = isVibing
+	wasShaking = isShaking
+	wasShakingMore = isShakingMore
+	wasBouncy = isBouncy
+	wasExcited = isExcited
+	wasNervous = isNervous
+	########################
+	_on_Delaysens_value_changed(0.1)
+	delay_tmp = $Timer.wait_time
+	
+#	print("Dela tmp: ",delay_tmp)
+	
+	
+	
+	
+	
+	
+	
 #	print(count_frame," - ",power)
 	#OS.native_video_unpause()
-#		print("Position in audio playing: ",music_player.get_playback_position())
+#	print("Position in audio playing: ",music_player.get_playback_position())
 	#(previous_time - music_player.get_playback_position()) > 0:
+	
 	if music_player.get_playback_position() == 0 and (not music_player.is_playing()) :
 		delay_count +=1
 		if delay_count >= 3:
 			get_tree().quit()
-			var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
-			var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
-			print("Export mp4: ",path_video )
-			OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
-			remove_avi.remove_absolute(path_video)
+			if("output_mp4" in input_arg):
+				var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
+				var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
+				print("Export mp4: ",path_video )
+				OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
+				remove_avi.remove_absolute(path_video)
 
 #	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
@@ -565,7 +622,7 @@ func vibing(isVibing):
 		displacementX += displacementAmount
 		displacementY += displacementAmountY
 
-		var displacement = Vector2(displacementX, displacementY)
+		var displacement = center_w + Vector2(displacementX, displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -584,7 +641,7 @@ func shaking(isShaking):
 		displacementX += displacementAmount
 		displacementY += displacementAmountY
 		
-		var displacement = Vector2(displacementX, displacementY)
+		var displacement = center_w + Vector2(displacementX, displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -597,7 +654,7 @@ func shakingMore(isShakingMore):
 		displacementX += displacementAmount
 		displacementY += displacementAmountY
 		
-		var displacement = Vector2(displacementX, displacementY)
+		var displacement = center_w + Vector2(displacementX, displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -608,7 +665,7 @@ func bouncy(isBouncy):
 		else:
 			bounceRate -= 0.25
 		displacementY += bounceRate
-		var displacement = Vector2(0, -1 * displacementY)
+		var displacement =center_w + Vector2(0, -1 * displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -622,7 +679,7 @@ func excited(isExcited):
 		
 		displacementX += bounceX
 		displacementY += excitedBounceRate
-		var displacement = Vector2(displacementX, -1 * displacementY)
+		var displacement = center_w + Vector2(displacementX, -1 * displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -636,7 +693,7 @@ func nervous(isNervous):
 		
 		displacementX += bounceX
 		displacementY += nervousBounceRate
-		var displacement = Vector2(displacementX, -1 * displacementY)
+		var displacement = center_w + Vector2(displacementX, -1 * displacementY)
 		$Off.set_offset(displacement)
 		$On.set_offset(displacement)
 
@@ -671,6 +728,12 @@ func load_cmd_input():
 		var images_silence = [input_arg["image"].split(",")[0]]
 		print("File silence: ", images_silence)
 		save_silence(images_silence)
+		
+		var images_talk_blink = [input_arg["image"].split(",")[2]]
+		print("images_talk_blink:" ,images_talk_blink)
+		save_talking_blink(images_talk_blink)
+		var images_silence_blink = [input_arg["image"].split(",")[3]]
+		save_silence_blink(images_silence_blink)
 	else:
 		print("Invalid arg: --images_talk")	
 	
@@ -694,6 +757,12 @@ func load_cmd_input():
 			print("Audio converted: ",input_arg["input_audio"])
 	else:
 		print("Invalid arg: --input_audio")	
+	
+	if "scale_image" in input_arg:
+#		print("get image_silence")
+		scale_image = input_arg["scale_image"].to_float()
+		print("scale_image cmd = ",scale_image," ", typeof((scale_image)))
+		
 	
 func line_fix():
 	$Off.texture.set_flags($Off.texture.get_flags() & ~(1 << 1))
@@ -737,7 +806,7 @@ func voice_cap(_delta):
 			$AnimationPlayer.play("Scream")
 		is_talking = true
 		is_timer = false
-		$Timer.wait_time = 0.1/pitch_scale
+		$Timer.wait_time = delay_main #0.1/pitch_scale
 		$Timer.stop()
 	
 	elif power > limiter  and power >= sLimiter and can_shake == false:
@@ -751,7 +820,7 @@ func voice_cap(_delta):
 			$AnimationPlayer.play("ScreamNoShake")
 		is_talking = true
 		is_timer = false
-		$Timer.wait_time = 0.1/pitch_scale
+		$Timer.wait_time = delay_main #0.1/pitch_scale
 		$Timer.stop()
 
 	elif power < limiter:
@@ -762,19 +831,22 @@ func voice_cap(_delta):
 			is_timer = true
 #var min_power 
 #var max_power =
+
 func voice_cap_audio(_delta):
 	power = AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("music"),0) - sValue
 #	power = power*bit_scale
 #	print("Power :", power)
+	
 	
 	$CanvasLayer/ToHide/LeftPanel/AudioMeter.value = power
 	if power > limiter and power < sLimiter:
 		
 		stopped_talking = false
 		if is_talking == false and can_bounce == true:
-#			print("Talk")
 			$AnimationPlayer.play("Talk")
+#			$AnimationPlayer.play("TalkNoBounce")
 			is_talking = true
+#			isBouncy=true
 			is_timer = false
 			$Timer.stop()
 		elif is_talking == false and can_bounce == false:
@@ -785,17 +857,22 @@ func voice_cap_audio(_delta):
 		
 			
 	elif power > limiter  and power >= sLimiter and can_shake == true:
+		
 		stopped_talking = false
-		if $Scream.texture == null:
-			$AnimationPlayer.play("ScreamTalk")
-		elif $Scream.texture != null:
-			$AnimationPlayer.play("Scream")
+#		$AnimationPlayer.play("Talk")
+#		if $Scream.texture == null:
+#			$AnimationPlayer.play("ScreamTalk")
+#		elif $Scream.texture != null:
+#			$AnimationPlayer.play("Scream")
 		is_talking = true
+#		isBouncy=true
+#		isBouncy=true
 		is_timer = false
-		$Timer.wait_time = 0.1/pitch_scale
+		$Timer.wait_time = delay_main #0.1/pitch_scale
 		$Timer.stop()
 	
 	elif power > limiter  and power >= sLimiter and can_shake == false:
+		
 		stopped_talking = false
 #		if is_talking == false and can_bounce == true:
 		if $Scream.texture == null and can_bounce:
@@ -806,15 +883,119 @@ func voice_cap_audio(_delta):
 			$AnimationPlayer.play("ScreamNoShake")
 		is_talking = true
 		is_timer = false
-		$Timer.wait_time = 0.1/pitch_scale
+		$Timer.wait_time = delay_main #0.1/pitch_scale
 		$Timer.stop()
 
-	elif power < limiter:
+	elif power < limiter: # mouth closed
+		
 		is_talking = false
+#		isVibing=true
 		if is_timer == false:
 			$Timer.start()
 			$Timer2.start()
 			is_timer = true
+			
+	
+	var emotion= "angry"
+	if("emotion" in input_arg) :
+		emotion=input_arg["emotion"]
+	
+	if(emotion=="neutral"):
+
+#		isBouncy=true
+#		isShaking=true
+#		isShakingMore=true
+#		isNervous=true
+#		isExcited=true
+
+		if(is_talking==true):
+			$AnimationPlayer.play("TalkNoBounce")
+		isVibing=true
+		if(power > limiter  and power >= sLimiter ): # scream
+			isBouncy=true
+		elif(power > limiter or is_talking==false): #talk or  mouth closed
+			isBouncy=false
+
+
+	elif(emotion=="happy"):
+		if(is_talking==true): #talking
+			$AnimationPlayer.play("TalkNoBounce")
+			isExcited=true
+			isVibing=false
+		else: #no talking
+			isVibing=true
+			isExcited=false
+
+	elif(emotion=="angry" or emotion=="sad"):
+		
+		
+		if(is_talking==true): #talking
+			$AnimationPlayer.play("TalkNoBounce")
+			isShaking=true
+			isShakingMore=false
+		elif(is_talking==false): #no talking
+			isShaking=false
+			isShakingMore=false
+		if(power > limiter  and power >= sLimiter ): # scream
+#			print("screammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+			$AnimationPlayer.play("TalkNoBounce")
+			isShaking=false
+			isShakingMore=true
+
+
+#func voice_cap_audio(_delta):
+#	power = AudioServer.get_bus_peak_volume_left_db(AudioServer.get_bus_index("music"),0) - sValue
+##	power = power*bit_scale
+##	print("Power :", power)
+#
+#	$CanvasLayer/ToHide/LeftPanel/AudioMeter.value = power
+#	if power > limiter and power < sLimiter:
+#
+#		stopped_talking = false
+#		if is_talking == false and can_bounce == true:
+##			print("Talk")
+#			$AnimationPlayer.play("Talk")
+#			is_talking = true
+#			is_timer = false
+#			$Timer.stop()
+#		elif is_talking == false and can_bounce == false:
+#			$AnimationPlayer.play("TalkNoBounce")
+#			is_talking = true
+#			is_timer = false
+#			$Timer.stop()
+#
+#
+#	elif power > limiter  and power >= sLimiter and can_shake == true:
+#		stopped_talking = false
+#		if $Scream.texture == null:
+#			$AnimationPlayer.play("ScreamTalk")
+#		elif $Scream.texture != null:
+#			$AnimationPlayer.play("Scream")
+#		is_talking = true
+#		is_timer = false
+#		$Timer.wait_time = delay_main #0.1/pitch_scale
+#		$Timer.stop()
+#
+#	elif power > limiter  and power >= sLimiter and can_shake == false:
+#		stopped_talking = false
+##		if is_talking == false and can_bounce == true:
+#		if $Scream.texture == null and can_bounce:
+#			$AnimationPlayer.play("Talk")
+#		elif $Scream.texture == null and can_bounce == false:
+#			$AnimationPlayer.play("TalkNoBounce")
+#		else:
+#			$AnimationPlayer.play("ScreamNoShake")
+#		is_talking = true
+#		is_timer = false
+#		$Timer.wait_time = delay_main #0.1/pitch_scale
+#		$Timer.stop()
+#
+#	elif power < limiter:
+#		is_talking = false
+#		if is_timer == false:
+#			$Timer.start()
+#			$Timer2.start()
+#			is_timer = true
 
 func _input(event):
 #	print("Get input event")
@@ -1181,7 +1362,7 @@ func _on_Timer_timeout():
 		stopped_talking = true
 #		$Timer.wait_time = 0.3
 	
-var music_file = "res://input_audio/test_1p_pure.mp3"
+var music_file = "res://audio/emotion/angry/DV28_Emo_Seg_Pulls_14.mp3"
 var music_player = AudioStreamPlayer.new()
 var stream_audio = AudioLoader.new()
 var pitch_scale = 1
@@ -1217,6 +1398,10 @@ func load_audio():
 #		AudioServer.get_bus_effect(1,2).volume_db = 14
 		add_child(music_player)
 		music_player.bus = "music"
+#		var path_video = input_arg["output_mp4"].split(".mp4")[0] +".avi"
+#		var movie_save = MovieWriter.new()
+#		movie_save._write_begin(DisplayServer.window_get_size(),120,path_video)
+
 		music_player.play()
 		print("Play audio!!!")
 	else:
@@ -2036,9 +2221,10 @@ func load_camzoom():
 				var win_h = DisplayServer.window_get_size()
 #				print("auto_focus: ", img_h,win_h)
 				var auto_focus = min(snapped(float(win_h[0])/float(img_h[0]),0.0001),snapped(float(win_h[1])/float(img_h[1]),0.0001))
-				if auto_focus > 1:
-					auto_focus = snapped(float(1)/auto_focus,0.0001)
-				auto_focus = auto_focus*1.26
+				#if auto_focus > 1:
+					#auto_focus = snapped(float(1)/auto_focus,0.0001)
+				auto_focus = auto_focus*scale_image
+				print("************scale_image************=",scale_image)
 				print("auto_focus: ", auto_focus)
 #				var auto_zoom = snapped(float(1)/auto_focus,0.1)
 #				print("auto_zoom: ", auto_zoom)
@@ -2293,7 +2479,7 @@ func load_prop_zoom():
 			save_prop_zoom(prop_zoom[9])
 
 func switch_preset():
-#	print("Switch preset"
+#	print("Switch preset: ",is_preset_A)
 	if can_switch_preset:
 		$Smile_Talk.texture = smile_talk_png
 		$Smile.texture = smile_png
@@ -2309,107 +2495,107 @@ func switch_preset():
 			load_prop_pos()
 			load_prop_zoom()
 			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_B == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_B
-			$Off.texture = silence_png_B
-			$Scream.texture = scream_png_B
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_B
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_C == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_C
-			$Off.texture = silence_png_C
-			$Scream.texture = scream_png_C
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_C
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_D == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_D
-			$Off.texture = silence_png_D
-			$Scream.texture = scream_png_D
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_D
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_E == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_E
-			$Off.texture = silence_png_E
-			$Scream.texture = scream_png_E
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_E
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_F == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_F
-			$Off.texture = silence_png_F
-			$Scream.texture = scream_png_F
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_F
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_G == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_G
-			$Off.texture = silence_png_G
-			$Scream.texture = scream_png_G
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_G
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_H == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_H
-			$Off.texture = silence_png_H
-			$Scream.texture = scream_png_H
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_H
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_I == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_I
-			$Off.texture = silence_png_I
-			$Scream.texture = scream_png_I
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_I
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		elif is_preset_J == true:
-			#$AnimDelay.start()
-			$On.texture = talk_png_J
-			$Off.texture = silence_png_J
-			$Scream.texture = scream_png_J
-			$Scream.flip_h = $On.flip_h
-			$PropContainer/Prop.texture_normal = prop_png_J
-			load_camzoom()
-			load_prop_pos()
-			load_prop_zoom()
-			get_node("/root/Main/Camera2D").load_campos()
-		
-	$AnimDelay.start()
+#		elif is_preset_B == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_B
+#			$Off.texture = silence_png_B
+#			$Scream.texture = scream_png_B
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_B
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_C == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_C
+#			$Off.texture = silence_png_C
+#			$Scream.texture = scream_png_C
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_C
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_D == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_D
+#			$Off.texture = silence_png_D
+#			$Scream.texture = scream_png_D
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_D
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_E == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_E
+#			$Off.texture = silence_png_E
+#			$Scream.texture = scream_png_E
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_E
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_F == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_F
+#			$Off.texture = silence_png_F
+#			$Scream.texture = scream_png_F
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_F
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_G == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_G
+#			$Off.texture = silence_png_G
+#			$Scream.texture = scream_png_G
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_G
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_H == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_H
+#			$Off.texture = silence_png_H
+#			$Scream.texture = scream_png_H
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_H
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_I == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_I
+#			$Off.texture = silence_png_I
+#			$Scream.texture = scream_png_I
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_I
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#		elif is_preset_J == true:
+#			#$AnimDelay.start()
+#			$On.texture = talk_png_J
+#			$Off.texture = silence_png_J
+#			$Scream.texture = scream_png_J
+#			$Scream.flip_h = $On.flip_h
+#			$PropContainer/Prop.texture_normal = prop_png_J
+#			load_camzoom()
+#			load_prop_pos()
+#			load_prop_zoom()
+#			get_node("/root/Main/Camera2D").load_campos()
+#
+#	$AnimDelay.start()
 	load_flip()
 	
 func save_bg(path):
@@ -5143,18 +5329,23 @@ func load_sens():
 	else:
 		print("sens file doesnt exist")
 
+var delay_main 
+
 func load_delay():
 #	var file = File.new()
 	if FileAccess.file_exists(delay_file):
 		var file = FileAccess.open(delay_file, FileAccess.READ)
 		delay = file.get_float()
+#		delay = snapped(delay,0.01)
+		delay_main = delay
 		$Timer.wait_time = delay
 		print("Delay ",delay)
 #		file.close()
 #		$CanvasLayer/ToHide/LeftPanel/DelaySens.value = delay
-		$Timer.wait_time = delay
+#		$Timer.wait_time = delay
 	else:
-		print("delay file doesnt exist")
+		$Timer.wait_time = 0.01
+		print("delay file doesnt exist:0.0 " )
 
 
 func load_amp():
@@ -6782,12 +6973,12 @@ func _on_BlinkingTimer_timeout():
 		blinking_double = false
 		blinking_normal = true
 		blinking_skip = false
-		if $BlinkingTimer.wait_time == 5:
-			$BlinkingTimer.wait_time = 3
-		elif $BlinkingTimer.wait_time == 3:
-			$BlinkingTimer.wait_time = 7
-		elif $BlinkingTimer.wait_time == 7:
-			$BlinkingTimer.wait_time = 5
+#		if $BlinkingTimer.wait_time == 5:
+#			$BlinkingTimer.wait_time = 3
+#		elif $BlinkingTimer.wait_time == 3:
+#			$BlinkingTimer.wait_time = 7
+#		elif $BlinkingTimer.wait_time == 7:
+#			$BlinkingTimer.wait_time = 5
 		pass
 	elif num > 8:
 		blinking_double = false
@@ -7884,8 +8075,9 @@ func _on_SpawnySwitch_toggled(button_pressed):
 
 func _on_Delaysens_value_changed(value):
 	delay = value
+#	delay = snapped(value,0.01)
 	$Timer.wait_time = delay
-	print("Delay set to: ", $Timer.wait_time)
+#	print("Delay set to: ", delay)
 	#save
 	var	file = FileAccess.open(delay_file, FileAccess.WRITE)
 	file.store_float(delay)
