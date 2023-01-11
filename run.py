@@ -1,5 +1,8 @@
+from pathlib import Path
 import sys
 import os
+import cv2
+
 
 CURRENT_PATH=os.path.dirname(os.path.abspath(__file__))
 print(CURRENT_PATH)
@@ -23,7 +26,7 @@ import shutil
 import glob
 import argparse
 import timeit
-
+import PIL.Image
 def getEmotion(text,model_bert):
     return  genEmotion(text,model_bert).lower()
 
@@ -73,6 +76,12 @@ def concat_audio(path_folder_audio,path_save,fps):
         L.append(video)
     final_clip = concatenate_videoclips(L)#.without_audio()
     # path_save = os.path.join(CURRENT_PATH,"final_output",path_save)
+    path_folder = Path(path_save).parent.absolute()
+
+    if(os.path.exists(path_folder)==False):
+        os.mkdir(path_folder)
+
+    print("path_save ",path_save)
     final_clip.write_videofile(path_save, fps=fps, remove_temp=True)
 
 
@@ -111,10 +120,7 @@ def export_mp4_gazo(list_wavs,
 
     for i,name_file in enumerate(list_wavs):
         path=os.path.join(CURRENT_PATH,path_split_audio,name_file)
-        print(f"{path_x86_64} --path {path_source_gazo} --image={path_input_mouth_closed},{path_input_mouth_open},{path_input_blinking_mouth_open},{path_input_blinking_mouth_closed} --output_mp4={os.path.join(path_save_folder_mp4_gazo,name_file)}.mp4 --write-movie {os.path.join(path_save_folder_mp4_gazo,name_file)}.avi --fixed-fps {fps} --input_audio={path}.wav --emotion={list_emotions[i]} --scale_image={scale_image}")
-
         os.system(f"{path_x86_64} --path {path_source_gazo} --image={path_input_mouth_closed},{path_input_mouth_open},{path_input_blinking_mouth_open},{path_input_blinking_mouth_closed} --output_mp4={os.path.join(path_save_folder_mp4_gazo,name_file)}.mp4 --write-movie {os.path.join(path_save_folder_mp4_gazo,name_file)}.avi --fixed-fps {fps} --input_audio={path}.wav --emotion={list_emotions[i]} --scale_image={scale_image}")
-
         put_text(list_emotions[i],os.path.join(path_save_folder_mp4,name_file)+".mp4",os.path.join(path_save_folder_mp4,name_file)+"_put_text.mp4")
         os.remove(os.path.join(path_save_folder_mp4,name_file)+".mp4")
 
@@ -144,11 +150,10 @@ def run_e2e(model_bert,path_x86_64,path_source_gazo,path_input_mouth_closed,path
     path_input_blinking_mouth_open=os.path.join(CURRENT_PATH,path_input_blinking_mouth_open)
     path_input_blinking_mouth_closed=os.path.join(CURRENT_PATH,path_input_blinking_mouth_closed)
 
-
     path_x86_64=os.path.join(CURRENT_PATH,path_x86_64)
     path_source_gazo=os.path.join(CURRENT_PATH,path_source_gazo)
     path_save_sub_audio=os.path.join(CURRENT_PATH,path_save_sub_audio)
-    path_concat_all_sub_audio=os.path.join(CURRENT_PATH,"final_output",path_concat_all_sub_audio)
+    # path_concat_all_sub_audio=os.path.join(CURRENT_PATH,"final_output",path_concat_all_sub_audio)
     path_split_audio=os.path.join(CURRENT_PATH,path_split_audio)
     path_audio=os.path.join(CURRENT_PATH,"input_audio",path_audio)
 
@@ -189,26 +194,48 @@ def run_e2e(model_bert,path_x86_64,path_source_gazo,path_input_mouth_closed,path
         os.remove(f)
 
 
+    files = glob.glob(os.path.join("C:/Users/Administrator/Documents/Gazo_emotion/resize_input",'*'))
+    for f in files:
+        os.remove(f)
+
+
+def save_image_resize(path_image,path_image_resize):
+    SIZE_IMAGE=500
+    img=cv2.imread(path_image)
+    width= img.shape[1]
+    height=img.shape[0]
+    scale= SIZE_IMAGE/max(width,height)
+
+    im = PIL.Image.open(path_image)
+    size = (width,height)
+    im = im.resize(size, PIL.Image.LINEAR)
+    im.save(path_image_resize)
+    # img=cv2.resize(img,(int(scale*width),int(scale*height)))
+    # cv2.imwrite(path_image_resize, img)
+
+
+
+
 if __name__ == "__main__":
+
     if 'DISPLAY' not in os.environ:
         os.environ['DISPLAY'] = ":0"
 
     parser = argparse.ArgumentParser()
-
     parser.add_argument('--model_bert', default='BertGoEmotion/modelBert')
-    parser.add_argument('--path_x86_64', default='Godot_v4.0-beta7_linux.x86_64')
+    parser.add_argument('--path_x86_64', default='Godot_v4.0-beta4_linux.x86_64')
     parser.add_argument('--path_source_gazo', default='Gazor_Vietteam_godot4.0')
 
 
-    parser.add_argument('--path_input_mouth_closed', default='Gazor_Vietteam_godot4.0/input_gazo/closed_mouth.jpg')
-    parser.add_argument('--path_input_mouth_open', default='Gazor_Vietteam_godot4.0/input_gazo/open_mouth.jpg')
-    parser.add_argument('--path_input_blinking_mouth_open', default='Gazor_Vietteam_godot4.0/input_gazo/blinking_open_mouth.jpg')
-    parser.add_argument('--path_input_blinking_mouth_closed', default='Gazor_Vietteam_godot4.0/input_gazo/blinking_closed_mouth.jpg')
+    parser.add_argument('--path_input_mouth_closed', default='/media/anlab/DATA/gazotuber/End2End_gazo/Gazor_Vietteam_godot4.0/frames_for_testing/closedmouthfront.png')
+    parser.add_argument('--path_input_mouth_open', default='/media/anlab/DATA/gazotuber/End2End_gazo/Gazor_Vietteam_godot4.0/frames_for_testing/openmouthfront.png')
+    parser.add_argument('--path_input_blinking_mouth_open', default='')
+    parser.add_argument('--path_input_blinking_mouth_closed', default='')
 
 
 
     parser.add_argument('--fps', default=120)
-    parser.add_argument('--scale_image', default=2)
+    parser.add_argument('--scale_image', default=1.3)
 
     parser.add_argument('--type_model_whisper', default="base")
 
@@ -216,8 +243,7 @@ if __name__ == "__main__":
     parser.add_argument('--path_split_audio', default="save_sub_audio")  # folder contain split audio
 
     parser.add_argument('--path_input_audio', default="doc_27_12_2022TEMP_MPY_wvf_snd.wav") #input audio
-    parser.add_argument('--name_output', default='doc_3_1_2023.mp4')  #name output
-    parser.add_argument('--headless')
+    parser.add_argument('--name_output', default="final_output/result.mp4")  #name output
     a = parser.parse_args()
 
 
@@ -243,6 +269,25 @@ if __name__ == "__main__":
     path_input_audio=a.path_input_audio #input audio
 
 
+    ####change size image input####
+    name_path_input_mouth_closed=path_input_mouth_closed.split(".")[-1]
+    save_image_resize(path_input_mouth_closed,os.path.join(CURRENT_PATH,f"resize_input/mouth_close.{name_path_input_mouth_closed}"))
+    save_image_resize(path_input_mouth_open,os.path.join(CURRENT_PATH,f"resize_input/mouth_open.{name_path_input_mouth_closed}"))
+    if(os.path.exists(path_input_blinking_mouth_open)==True):
+        save_image_resize(path_input_blinking_mouth_open,os.path.join(CURRENT_PATH,f"resize_input/mouth_open_blink.{name_path_input_mouth_closed}"))
+    else:
+        save_image_resize(path_input_mouth_open,os.path.join(CURRENT_PATH,f"resize_input/mouth_open_blink.{name_path_input_mouth_closed}"))
+    if(os.path.exists(path_input_blinking_mouth_closed)==True):
+        save_image_resize(path_input_blinking_mouth_closed,os.path.join(CURRENT_PATH,f"resize_input/mouth_close_blink.{name_path_input_mouth_closed}"))
+    else:
+        save_image_resize(path_input_mouth_closed,os.path.join(CURRENT_PATH,f"resize_input/mouth_close_blink.{name_path_input_mouth_closed}"))
+    
+    path_input_mouth_closed=os.path.join(CURRENT_PATH,f"resize_input/mouth_close.{name_path_input_mouth_closed}")
+    path_input_mouth_open=os.path.join(CURRENT_PATH,f"resize_input/mouth_open.{name_path_input_mouth_closed}")
+    path_input_blinking_mouth_open=os.path.join(CURRENT_PATH,f"resize_input/mouth_open_blink.{name_path_input_mouth_closed}")
+    path_input_blinking_mouth_closed=os.path.join(CURRENT_PATH,f"resize_input/mouth_close_blink.{name_path_input_mouth_closed}")
+    ################################
+
     run_e2e(model_bert,
             path_x86_64,
             path_source_gazo,
@@ -257,3 +302,5 @@ if __name__ == "__main__":
             path_split_audio,
             path_input_audio,
             type_model_whisper)
+     ################################
+    ##################
