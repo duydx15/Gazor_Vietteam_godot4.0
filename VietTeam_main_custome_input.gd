@@ -466,7 +466,7 @@ func _physics_process(delta):
 			var remove_avi = DirAccess.open(input_arg["output_mp4"].get_base_dir())
 			print("Export mp4: ",path_video )
 			OS.execute("ffmpeg", ["-y","-i",path_video, "-i",input_arg["input_audio"],"-crf","15",input_arg["output_mp4"]],[],true)
-			remove_avi.remove_absolute(path_video)
+#			remove_avi.remove_absolute(path_video)
 
 #	previous_time = music_player.get_playback_position()
 #	print(music_player.finished)
